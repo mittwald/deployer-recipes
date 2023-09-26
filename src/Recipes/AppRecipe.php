@@ -1,22 +1,25 @@
 <?php
+
 namespace Mittwald\Deployer\Recipes;
 
+use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallation200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallations200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProject200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
-use Mittwald\ApiClient\Generated\V2\Schemas\Project\Project;
-use Mittwald\ApiClient\MittwaldAPIV2Client;
-use function Deployer\{get, set, Support\starts_with};
+use Mittwald\Deployer\Client\AppClient;
+use function Deployer\{currentHost, desc, get, info, parse, set, Support\starts_with, task, writeln};
 
 class AppRecipe
 {
-    public static function set()
+    public static function setup()
     {
         set('mittwald_token', function (): string {
             $token = getenv('MITTWALD_API_TOKEN');
@@ -39,7 +42,7 @@ class AppRecipe
         });
 
         set('mittwald_project_uuid', function (): string {
-            $client = static::getClient()->project();
+            $client    = BaseRecipe::getClient()->project();
             $projectId = get('mittwald_project_id');
 
             if (!starts_with($projectId, "p-")) {
@@ -61,10 +64,10 @@ class AppRecipe
         });
 
         set('mittwald_project', function (): array {
-            $client = static::getClient();
+            $client    = BaseRecipe::getClient();
             $projectId = get('mittwald_project_uuid');
 
-            $projectRequest = new GetProjectRequest($projectId);
+            $projectRequest  = new GetProjectRequest($projectId);
             $projectResponse = $client->project()->getProject($projectRequest);
             if (!$projectResponse instanceof GetProject200Response) {
                 throw new \Exception('could not get projects');
@@ -74,7 +77,7 @@ class AppRecipe
         });
 
         set('mittwald_app', function (): array {
-            $client = static::getClient()->app();
+            $client = BaseRecipe::getClient()->app();
 
             if ($appID = get('mittwald_app_id')) {
                 $appResponse = $client->getAppinstallation(new GetAppinstallationRequest($appID));
@@ -86,7 +89,7 @@ class AppRecipe
             }
 
             if ($deployPath = get('deploy_path')) {
-                $project = static::getProject();
+                $project = BaseRecipe::getProject();
 
                 $appsResponse = $client->listAppinstallations(new ListAppinstallationsRequest($project->getId()));
                 if (!$appsResponse instanceof ListAppinstallations200Response) {
@@ -97,7 +100,7 @@ class AppRecipe
 
                 foreach ($appsResponse->getBody() as $app) {
                     if ($webBasePath . $app->getInstallationPath() === $deployPath) {
-                        return $app;
+                        return $app->toJson();
                     }
                 }
 
@@ -108,16 +111,22 @@ class AppRecipe
         });
 
         set('mittwald_app_dependencies', [
-            'php' => '{{php_version}}'
+            'php' => '{{php_version}}',
         ]);
-    }
 
-    /**
-     * @deprecated Use BaseRecipe::getClient instead!
-     */
-    public static function getClient(): MittwaldAPIV2Client
-    {
-        return BaseRecipe::getClient();
+        task('mittwald:discover', static::class . '::discover')
+            ->desc('Look up the app installation for the current host');
+
+        task('mittwald:app:docroot', static::class . '::assertDocumentRoot')
+            ->desc('Asserts that the document root of an app is configured correctly');
+
+        task('mittwald:app:dependencies', static::class . '::assertDependencies')
+            ->desc('Make sure that the requested dependencies are installed');
+
+        task('mittwald:app', [
+            'mittwald:app:docroot',
+            'mittwald:app:dependencies',
+        ]);
     }
 
     public static function getAppInstallation(): AppInstallation
@@ -125,11 +134,83 @@ class AppRecipe
         return AppInstallation::buildFromInput(get('mittwald_app'), validate: false);
     }
 
-    /**
-     * @deprecated Use BaseRecipe::getProject instead!
-     */
-    public static function getProject(): Project
+    public static function discover(): void
     {
-        return BaseRecipe::getProject();
+        if (!get('mittwald_autoprovision')) {
+            return;
+        }
+
+        if ($app = AppRecipe::getAppInstallation()) {
+            $project    = BaseRecipe::getProject();
+            $deployPath = $project->getDirectories()["Web"] . $app->getInstallationPath();
+
+            currentHost()->set('deploy_path', $deployPath);
+            info("setting deployment path to <fg=magenta;options=bold>{{deploy_path}}</>");
+        } else if ($deployPath = get('deploy_path')) {
+            writeln("searching for app deployed at {$deployPath}");
+
+            $app = AppRecipe::getAppInstallation();
+
+            writeln("app uuid: {$app->getId()}");
+        }
+
+        $project        = BaseRecipe::getProject();
+        $projectSSHHost = "ssh.{$project->getClusterID()}.{$project->getClusterDomain()}";
+
+        currentHost()->set('mittwald_internal_hostname', $projectSSHHost);
+
+        info("setting hostname to <fg=magenta;options=bold>{{hostname}}</>");
+
+        // Override the default setting, which might try to respect the {{php_version}} setting.
+        currentHost()->set('bin/php', '/usr/bin/php');
     }
+
+    public static function assertDocumentRoot(): void
+    {
+        $app    = AppRecipe::getAppInstallation();
+        $client = BaseRecipe::getClient()->app();
+
+        $relativeCurrentPath = str_replace(get('deploy_path'), '', get('current_path'));
+        $relativeCurrentPath = trim($relativeCurrentPath, '/');
+
+        $desiredDocumentRoot = "/{$relativeCurrentPath}";
+        if ($publicPath = get("public_path")) {
+            $desiredDocumentRoot .= '/' . ltrim($publicPath, '/');
+        }
+
+        if ($app->getCustomDocumentRoot() === $desiredDocumentRoot) {
+            info("document root already set to <fg=magenta;options=bold>{$desiredDocumentRoot}</>");
+            return;
+        }
+
+        info("setting document root to <fg=magenta;options=bold>{$desiredDocumentRoot}</>");
+
+        $appPatchRequest = new PatchAppinstallationRequest(
+            $app->getId(),
+            (new PatchAppinstallationRequestBody())
+                ->withCustomDocumentRoot($desiredDocumentRoot),
+        );
+
+        $appPatchResponse = $client->patchAppinstallation($appPatchRequest);
+        if (!$appPatchResponse instanceof EmptyResponse) {
+            throw new \Exception('Could not patch app');
+        }
+    }
+
+    public static function assertDependencies(): void
+    {
+        $dependencies = get('mittwald_app_dependencies', []);
+        $client       = new AppClient(BaseRecipe::getClient()->app());
+
+        foreach ($dependencies as $key => $value) {
+            $dependencies[$key] = parse($value);
+            info("setting dependency {$key} to <fg=magenta;options=bold>{$dependencies[$key]}</>");
+        }
+
+        $client->setSystemSoftwareVersions(
+            AppRecipe::getAppInstallation()->getId(),
+            $dependencies
+        );
+    }
+
 }

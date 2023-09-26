@@ -1,4 +1,5 @@
 <?php
+
 namespace Mittwald\Deployer\Recipes;
 
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUser201Response;
@@ -9,18 +10,40 @@ use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUser
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser;
-use function Deployer\{get, has, info, runLocally, set};
+use function Deployer\{after, currentHost, desc, get, has, info, runLocally, selectedHosts, set, task};
 
 class SSHUserRecipe
 {
-    public static function set()
+    public static function setup()
     {
         set('mittwald_ssh_key', '~/.ssh/deployer');
+
+        task('mittwald:sshconfig', static::class . '::assertSSHConfig')
+            ->once()
+            ->desc('Asserts that a local SSH configuration is present for the mittwald platform');
+
+        task('mittwald:sshuser', static::class . '::assertSSHUser')
+            ->desc('Asserts that the SSH user for the mittwald platform is configured correctly');
+
+        after('mittwald:sshuser', 'mittwald:sshconfig');
+
     }
 
-    public static function assertSSHUser(): SshUser
+    public static function assertSSHUser(): void
     {
-        $client = BaseRecipe::getClient()->sSHSFTPUser();
+        $app     = AppRecipe::getAppInstallation();
+        $sshUser = self::lookupOrCreateSSHUser();
+
+        $remoteUser = "{$sshUser->getUserName()}@app-{$app->getId()}";
+
+        info("setting SSH user to <fg=magenta;options=bold>{$remoteUser}</>");
+
+        currentHost()->set('remote_user', $remoteUser);
+    }
+
+    private static function lookupOrCreateSSHUser(): SshUser
+    {
+        $client  = BaseRecipe::getClient()->sSHSFTPUser();
         $project = BaseRecipe::getProject();
 
         $sshUsersReq = new ListSshUsersRequest($project->getId());
@@ -38,7 +61,7 @@ class SSHUserRecipe
             }
         }
 
-        $sshPublicKey = (function(): string {
+        $sshPublicKey = (function (): string {
             if (has('mittwald_ssh_key_contents')) {
                 return get('mittwald_ssh_key_contents');
             } else {
@@ -50,7 +73,7 @@ class SSHUserRecipe
         info("creating SSH user <fg=magenta;options=bold>deployer</>");
 
         $createUserAuth = new AuthenticationAlternative2([
-            new PublicKey("deployer", $sshPublicKey)
+            new PublicKey("deployer", $sshPublicKey),
         ]);
 
         $createUserReq = new CreateSshUserRequest($project->getId(), (new CreateSshUserRequestBody($createUserAuth, 'deployer')));
@@ -61,5 +84,29 @@ class SSHUserRecipe
         }
 
         return $createUserRes->getBody();
+    }
+
+    public static function assertSSHConfig(): void
+    {
+        $config = "";
+
+        foreach (selectedHosts() as $host) {
+            if ($internal = $host->get('mittwald_internal_hostname')) {
+                $name   = $host->getAlias() ?? $host->getHostname();
+                $config .= "Host {$name}\n\tHostName {$internal}\n\n";
+            }
+        }
+
+        if (!is_dir('./.mw-deployer')) {
+            mkdir('./.mw-deployer', permissions: 0755, recursive: true);
+        }
+
+        file_put_contents('./.mw-deployer/sshconfig', $config);
+
+        foreach (selectedHosts() as $host) {
+            if ($host->has('mittwald_internal_hostname')) {
+                $host->set('config_file', './.mw-deployer/sshconfig');
+            }
+        }
     }
 }
