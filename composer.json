@@ -1,23 +1,25 @@
 {
-    "name": "mittwald/deployer-recipes",
-    "description": "A collection of Deployer recipies for easily deploying your applications onto the mittwald platform",
-    "type": "library",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Mittwald\\DeployerRecipes\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Martin Helmich",
-            "email": "m.helmich@mittwald.de"
-        }
-    ],
-    "require": {
-        "mittwald/api-client": "^1.0"
-    },
-    "require-dev": {
-        "deployer/deployer": "^7.3"
+  "name": "mittwald/deployer-recipes",
+  "description": "A collection of Deployer recipies for easily deploying your applications onto the mittwald platform",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Mittwald\\Deployer\\": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "Martin Helmich",
+      "email": "m.helmich@mittwald.de"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "mittwald/api-client": "^1.0",
+    "composer/semver": "^3.4"
+  },
+  "require-dev": {
+    "deployer/deployer": "^7.3"
+  }
 }
