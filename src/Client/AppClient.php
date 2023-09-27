@@ -27,7 +27,7 @@ class AppClient
 
     /**
      * @param string $appInstallationId
-     * @param array $systemSoftwareConstraints
+     * @param array<non-empty-string, string> $systemSoftwareConstraints
      * @return void
      * @throws Throwable
      */

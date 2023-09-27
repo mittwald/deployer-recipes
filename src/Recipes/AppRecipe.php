@@ -136,10 +136,6 @@ class AppRecipe
 
     public static function discover(): void
     {
-        if (!get('mittwald_autoprovision')) {
-            return;
-        }
-
         if ($app = AppRecipe::getAppInstallation()) {
             $project    = BaseRecipe::getProject();
             $deployPath = $project->getDirectories()["Web"] . $app->getInstallationPath();
