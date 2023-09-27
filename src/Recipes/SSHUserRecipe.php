@@ -16,8 +16,6 @@ class SSHUserRecipe
 {
     public static function setup()
     {
-        set('mittwald_ssh_key', '~/.ssh/deployer');
-
         task('mittwald:sshconfig', static::class . '::assertSSHConfig')
             ->once()
             ->desc('Asserts that a local SSH configuration is present for the mittwald platform');
