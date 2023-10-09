@@ -59,7 +59,8 @@ More precisely, the recipe will:
 
 - Look up the deployment directory for the given application ID and set it as the `deploy_path` for deployer.
 - Correctly configure a virtual host for the domain configured in `domain`
-- Create and manage an SSH user that will be used for deployment
+- Look up the necessary SSH connection data, create and manage an SSH user for
+  the deployment, and configure the deployer host accordingly.
 - Make sure that the app's system environment matches the one configured in `mittwald_app_dependencies`
 
 ## Configuration options
