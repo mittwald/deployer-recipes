@@ -1,13 +1,15 @@
-# mittwald deployer recipe collection
+# mittwald Deployer Recipe Collection
 
 > [!IMPORTANT]
 > This library is currently in an experimental state. We welcome any feedback and contributions.
 
-This repository contains a set of mittwald-specific helper functions and recipes for [deployer](https://deployer.org/).
+This repository contains a set of mittwald-specific helper functions and
+recipes for [Deployer](https://deployer.org/).
 
 ## Installation
 
-In order to use this recipe collection, you need to install it via composer:
+In order to use this recipe collection, you need to install it via
+[Composer](https://getcomposer.org):
 
 ```bash
 composer require --dev mittwald/deployer-recipes
