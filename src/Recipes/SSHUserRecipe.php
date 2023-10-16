@@ -10,7 +10,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUser
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser;
-use function Deployer\{after, currentHost, get, has, info, parse, runLocally, selectedHosts, task};
+use function Deployer\{after, currentHost, get, has, info, parse, runLocally, selectedHosts, task, warning};
 
 class SSHUserRecipe
 {
@@ -73,17 +73,23 @@ class SSHUserRecipe
             }
         })();
 
+        $sshPublicKeyParts = explode(" ", $sshPublicKey);
+        $sshPublicKeyPartsWithoutComment = array_slice($sshPublicKeyParts, 0, 2);
+        $sshPublicKeyWithoutComment = implode(" ", $sshPublicKeyPartsWithoutComment);
+
         info("creating SSH user <fg=magenta;options=bold>deployer</>");
 
         $createUserAuth = new AuthenticationAlternative2([
-            new PublicKey("deployer", $sshPublicKey),
+            new PublicKey("deployer", $sshPublicKeyWithoutComment),
         ]);
 
         $createUserReq = new CreateSshUserRequest($project->getId(), (new CreateSshUserRequestBody($createUserAuth, 'deployer')));
         $createUserRes = $client->createSshUser($createUserReq);
 
         if (!$createUserRes instanceof CreateSshUser201Response) {
-            throw new \Exception('could not create SSH user');
+            warning("http response status: {$createUserRes->httpResponse->getStatusCode()}");
+            warning("http response body: " . json_encode($createUserRes->getBody()->toJson()));
+            throw new \Exception('could not create SSH user; received ' . $createUserRes->httpResponse->getStatusCode() . ' status.');
         }
 
         return $createUserRes->getBody();
