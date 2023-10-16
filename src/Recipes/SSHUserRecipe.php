@@ -116,7 +116,7 @@ class SSHUserRecipe
         foreach (selectedHosts() as $host) {
             if ($internal = $host->get('mittwald_internal_hostname')) {
                 $name   = $host->getAlias() ?? $host->getHostname();
-                $config .= "Host {$name}\n\tHostName {$internal}\n";
+                $config .= "Host {$name}\n\tHostName {$internal}\nStrictHostKeyChecking accept-new\n";
 
                 if (has('mittwald_ssh_private_key_file')) {
                     $config .= parse("\tIdentityFile {{mittwald_ssh_private_key_file}}\n");
@@ -128,11 +128,6 @@ class SSHUserRecipe
                 }
 
                 $config .= "\n";
-
-                info("adding host key of <fg=magenta;options=bold>{$internal}</> to known hosts");
-
-                static::assertUserSSHDirectory();
-                runLocally("ssh-keyscan {$internal} >> ~/.ssh/known_hosts");
             }
 
         }
