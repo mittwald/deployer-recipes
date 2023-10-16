@@ -76,7 +76,7 @@ class SSHUserRecipe
 
         $sshPublicKey = (function (): string {
             if (has('mittwald_ssh_public_key_file')) {
-                return parse_home_dir(get('mittwald_ssh_public_key_file'));
+                return file_get_contents(parse_home_dir(get('mittwald_ssh_public_key_file')));
             } else if (has('mittwald_ssh_public_key')) {
                 return get('mittwald_ssh_public_key');
             } else {
