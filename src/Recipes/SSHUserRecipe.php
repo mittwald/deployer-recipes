@@ -129,6 +129,8 @@ class SSHUserRecipe
 
                 $config .= "\n";
 
+                info("adding host key of <fg=magenta;options=bold>{$internal}</> to known hosts");
+
                 static::assertUserSSHDirectory();
                 runLocally("ssh-keyscan {$internal} >> ~/.ssh/known_hosts");
             }
