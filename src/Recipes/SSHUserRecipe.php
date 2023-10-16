@@ -149,12 +149,4 @@ class SSHUserRecipe
             mkdir('./.mw-deployer', permissions: 0755, recursive: true);
         }
     }
-
-    private static function assertUserSSHDirectory(): void
-    {
-        $userSSHDir = parse_home_dir("~/.ssh");
-        if (!is_dir($userSSHDir)) {
-            mkdir($userSSHDir, permissions: 0755, recursive: true);
-        }
-    }
 }
