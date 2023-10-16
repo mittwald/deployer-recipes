@@ -78,6 +78,7 @@ class SSHUserRecipe
         $sshPublicKeyWithoutComment = implode(" ", $sshPublicKeyPartsWithoutComment);
 
         info("creating SSH user <fg=magenta;options=bold>deployer</>");
+        info("using SSH public key <fg=magenta;options=bold>{$sshPublicKeyWithoutComment}</>");
 
         $createUserAuth = new AuthenticationAlternative2([
             new PublicKey("deployer", $sshPublicKeyWithoutComment),
