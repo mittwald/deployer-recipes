@@ -10,7 +10,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUser
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser;
-use function Deployer\{after, currentHost, desc, get, has, info, runLocally, selectedHosts, set, task};
+use function Deployer\{after, currentHost, get, has, info, parse, runLocally, selectedHosts, task};
 
 class SSHUserRecipe
 {
@@ -59,9 +59,14 @@ class SSHUserRecipe
             }
         }
 
+        if (has('mittwald_ssh_private_key')) {
+            static::assertLocalSSHDirectory();
+            file_put_contents('./.mw-deployer/id_rsa', get('mittwald_ssh_private_key'));
+        }
+
         $sshPublicKey = (function (): string {
-            if (has('mittwald_ssh_key_contents')) {
-                return get('mittwald_ssh_key_contents');
+            if (has('mittwald_ssh_public_key')) {
+                return get('mittwald_ssh_public_key');
             } else {
                 // Need to do this in case `ssh_copy_id` contains a tilde that needs to be expanded
                 return runLocally('cat {{ssh_copy_id}}');
@@ -91,13 +96,19 @@ class SSHUserRecipe
         foreach (selectedHosts() as $host) {
             if ($internal = $host->get('mittwald_internal_hostname')) {
                 $name   = $host->getAlias() ?? $host->getHostname();
-                $config .= "Host {$name}\n\tHostName {$internal}\n\n";
+                $config .= "Host {$name}\n\tHostName {$internal}\n";
+
+                if (has('mittwald_ssh_private_key')) {
+                    $config .= "\tIdentityFile ./.mw-deployer/id_rsa\n";
+                } else {
+                    $config .= parse("\tIdentityFile {{ssh_copy_id}}\n");
+                }
+
+                $config .= "\n";
             }
         }
 
-        if (!is_dir('./.mw-deployer')) {
-            mkdir('./.mw-deployer', permissions: 0755, recursive: true);
-        }
+        static::assertLocalSSHDirectory();
 
         file_put_contents('./.mw-deployer/sshconfig', $config);
 
@@ -105,6 +116,13 @@ class SSHUserRecipe
             if ($host->has('mittwald_internal_hostname')) {
                 $host->set('config_file', './.mw-deployer/sshconfig');
             }
+        }
+    }
+
+    private static function assertLocalSSHDirectory(): void
+    {
+        if (!is_dir('./.mw-deployer')) {
+            mkdir('./.mw-deployer', permissions: 0755, recursive: true);
         }
     }
 }

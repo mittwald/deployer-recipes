@@ -67,23 +67,16 @@ More precisely, the recipe will:
 
 ## Configuration options
 
-- `mittwald_app_id`: The ID of the mittwald application you want to deploy to. 
-  This is the only required option, and should be set per host.
+- `mittwald_app_id`: The ID of the mittwald application you want to deploy to. This is the only required option, and should be set per host.
  
-- `mittwald_app_dependencies`: A map of system dependencies that should be
-  installed on the mittwald application. The recipe will make sure that the
-  app's system environment matches the one configured here.
+- `mittwald_app_dependencies`: A map of system dependencies that should be installed on the mittwald application. The recipe will make sure that the app's system environment matches the one configured here.
  
-  The expected format is a map, using system package names as keys and semver
-  compatible version constraints as values.
+  The expected format is a map, using system package names as keys and semver compatible version constraints as values.
 
   Defaults to `["php" => "{{php_version}}", "composer" => "*"]`.
 
-- `mittwald_domains` may be used to override the domains that should be
-  configured. Defaults to `["{{domain}}"]`.
+- `mittwald_domains` may be used to override the domains that should be configured. Defaults to `["{{domain}}"]`.
  
-- `mittwald_domain_path_prefix` can be used to configure a prefix for the
-  domain path. Defaults to `"/"`.
+- `mittwald_domain_path_prefix` can be used to configure a prefix for the domain path. Defaults to `"/"`.
 
-- `mittwald_ssh_key_contents` may contain an SSH public key that should be
-  used for deployment. If not set, the `ssh_copy_id` variable will be used.
+- `mittwald_ssh_public_key` and `mittwald_ssh_private_key` may contain an SSH public/private key pair that should be used for deployment. If not set, the `ssh_copy_id` variable will be used.
