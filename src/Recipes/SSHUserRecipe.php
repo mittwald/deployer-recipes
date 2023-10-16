@@ -87,6 +87,7 @@ class SSHUserRecipe
         $createUserRes = $client->createSshUser($createUserReq);
 
         if (!$createUserRes instanceof CreateSshUser201Response) {
+            warning("http request body: " . json_encode($createUserReq->getBody()->toJson()));
             warning("http response status: {$createUserRes->httpResponse->getStatusCode()}");
             warning("http response body: " . json_encode($createUserRes->getBody()->toJson()));
             throw new \Exception('could not create SSH user; received ' . $createUserRes->httpResponse->getStatusCode() . ' status.');
