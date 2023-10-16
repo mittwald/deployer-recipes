@@ -128,7 +128,10 @@ class SSHUserRecipe
                 }
 
                 $config .= "\n";
+
+                runLocally("ssh-keyscan {$internal} >> ~/.ssh/known_hosts");
             }
+
         }
 
         static::assertLocalSSHDirectory();
