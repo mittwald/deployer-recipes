@@ -22,5 +22,14 @@
   "require-dev": {
     "deployer/deployer": "^7.3",
     "vimeo/psalm": "^5.15"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Deployer\\": "vendor/deployer/deployer/src"
+    },
+    "files": [
+      "vendor/deployer/deployer/src/functions.php",
+      "vendor/deployer/deployer/src/Support/helpers.php"
+    ]
   }
 }

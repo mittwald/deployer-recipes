@@ -19,7 +19,7 @@ use function Deployer\{currentHost, desc, get, info, parse, set, Support\starts_
 
 class AppRecipe
 {
-    public static function setup()
+    public static function setup(): void
     {
         set('mittwald_token', function (): string {
             $token = getenv('MITTWALD_API_TOKEN');
