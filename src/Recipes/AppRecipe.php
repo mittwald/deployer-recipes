@@ -15,7 +15,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects200
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
 use Mittwald\Deployer\Client\AppClient;
-use function Deployer\{currentHost, desc, get, info, parse, set, Support\starts_with, task, writeln};
+use function Deployer\{currentHost, get, info, parse, set, Support\starts_with, task};
 
 class AppRecipe
 {
@@ -31,11 +31,9 @@ class AppRecipe
         });
 
         set('mittwald_project_id', function (): string {
-            if ($app = static::getAppInstallation()) {
-                if ($projectId = $app->getProjectId()) {
-                    set('mittwald_project_id', $projectId);
-                    return $projectId;
-                }
+            if ($projectId = static::getAppInstallation()->getProjectId()) {
+                set('mittwald_project_id', $projectId);
+                return $projectId;
             }
 
             throw new \Exception('please set mittwald_project_id when mittwald_app_id is _not_ set');
@@ -114,13 +112,19 @@ class AppRecipe
             'php' => '{{php_version}}',
         ]);
 
-        task('mittwald:discover', function(): void { static::discover(); })
+        task('mittwald:discover', function (): void {
+            static::discover();
+        })
             ->desc('Look up the app installation for the current host');
 
-        task('mittwald:app:docroot', function(): void { static::assertDocumentRoot(); })
+        task('mittwald:app:docroot', function (): void {
+            static::assertDocumentRoot();
+        })
             ->desc('Asserts that the document root of an app is configured correctly');
 
-        task('mittwald:app:dependencies', function(): void { static::assertDependencies(); })
+        task('mittwald:app:dependencies', function (): void {
+            static::assertDependencies();
+        })
             ->desc('Make sure that the requested dependencies are installed');
 
         task('mittwald:app', [
@@ -136,19 +140,12 @@ class AppRecipe
 
     public static function discover(): void
     {
-        if ($app = AppRecipe::getAppInstallation()) {
-            $project    = BaseRecipe::getProject();
-            $deployPath = $project->getDirectories()["Web"] . $app->getInstallationPath();
+        $app        = AppRecipe::getAppInstallation();
+        $project    = BaseRecipe::getProject();
+        $deployPath = $project->getDirectories()["Web"] . $app->getInstallationPath();
 
-            currentHost()->set('deploy_path', $deployPath);
-            info("setting deployment path to <fg=magenta;options=bold>{{deploy_path}}</>");
-        } else if ($deployPath = get('deploy_path')) {
-            writeln("searching for app deployed at {$deployPath}");
-
-            $app = AppRecipe::getAppInstallation();
-
-            writeln("app uuid: {$app->getId()}");
-        }
+        currentHost()->set('deploy_path', $deployPath);
+        info("setting deployment path to <fg=magenta;options=bold>{{deploy_path}}</>");
 
         $project        = BaseRecipe::getProject();
         $projectSSHHost = "ssh.{$project->getClusterID()}.{$project->getClusterDomain()}";
