@@ -26,11 +26,11 @@ class SSHUserRecipe
 {
     public static function setup()
     {
-        task('mittwald:sshconfig', static::class . '::assertSSHConfig')
+        task('mittwald:sshconfig', function(): void { static::assertSSHConfig(); })
             ->once()
             ->desc('Asserts that a local SSH configuration is present for the mittwald platform');
 
-        task('mittwald:sshuser', static::class . '::assertSSHUser')
+        task('mittwald:sshuser', function(): void { static::assertSSHUser(); })
             ->desc('Asserts that the SSH user for the mittwald platform is configured correctly');
 
         after('mittwald:sshuser', 'mittwald:sshconfig');

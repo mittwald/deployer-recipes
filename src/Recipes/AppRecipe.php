@@ -114,13 +114,13 @@ class AppRecipe
             'php' => '{{php_version}}',
         ]);
 
-        task('mittwald:discover', static::class . '::discover')
+        task('mittwald:discover', function(): void { static::discover(); })
             ->desc('Look up the app installation for the current host');
 
-        task('mittwald:app:docroot', static::class . '::assertDocumentRoot')
+        task('mittwald:app:docroot', function(): void { static::assertDocumentRoot(); })
             ->desc('Asserts that the document root of an app is configured correctly');
 
-        task('mittwald:app:dependencies', static::class . '::assertDependencies')
+        task('mittwald:app:dependencies', function(): void { static::assertDependencies(); })
             ->desc('Make sure that the requested dependencies are installed');
 
         task('mittwald:app', [
