@@ -16,16 +16,18 @@ use function Deployer\info;
 use function Deployer\parse;
 use function Deployer\set;
 use function Deployer\task;
+use function Mittwald\Deployer\get_array;
+use function Mittwald\Deployer\get_str;
 
 class DomainRecipe
 {
     private const DOMAIN_PATH_PREFIX = 'mittwald_domain_path_prefix';
     private const DOMAINS = 'mittwald_domains';
 
-    public static function setup()
+    public static function setup(): void
     {
-        set(static::DOMAIN_PATH_PREFIX, '/');
-        set(static::DOMAINS, ['{{domain}}']);
+        set(DomainRecipe::DOMAIN_PATH_PREFIX, '/');
+        set(DomainRecipe::DOMAINS, ['{{domain}}']);
 
         task('mittwald:domain', [static::class, 'assertVirtualHosts'])
             ->desc('Assert that the domain is configured correctly on the mittwald platform');
@@ -33,8 +35,9 @@ class DomainRecipe
 
     public static function assertVirtualHosts(): void
     {
-        $domains = get(static::DOMAINS);
-        $domains = array_map(fn($domain) => parse($domain), $domains);
+        /** @var string[] $domains */
+        $domains = get_array(DomainRecipe::DOMAINS);
+        $domains = array_map(fn(string $domain): string => parse($domain), $domains);
 
         foreach ($domains as $domain) {
             static::assertVirtualHost($domain);
@@ -43,7 +46,7 @@ class DomainRecipe
 
     private static function assertVirtualHost(string $domain): void
     {
-        $domainPathPrefix = get(static::DOMAIN_PATH_PREFIX);
+        $domainPathPrefix = get_str(DomainRecipe::DOMAIN_PATH_PREFIX);
         $client           = BaseRecipe::getClient()->domain();
         $project          = BaseRecipe::getProject();
         $app              = AppRecipe::getAppInstallation();
