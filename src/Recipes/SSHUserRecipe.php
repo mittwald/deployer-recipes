@@ -101,9 +101,9 @@ class SSHUserRecipe
 
         if (!$createUserRes instanceof CreateSshUser201Response) {
             warning("http request body: " . json_encode($createUserReq->getBody()->toJson()));
-            warning("http response status: {$createUserRes->httpResponse->getStatusCode()}");
+            warning("http response status: {$createUserRes->httpResponse?->getStatusCode()}");
             warning("http response body: " . json_encode($createUserRes->getBody()->toJson()));
-            throw new \Exception('could not create SSH user; received ' . $createUserRes->httpResponse->getStatusCode() . ' status.');
+            throw new \Exception('could not create SSH user; received ' . $createUserRes->httpResponse?->getStatusCode() . ' status.');
         }
 
         return $createUserRes->getBody();
@@ -123,6 +123,7 @@ class SSHUserRecipe
                 } else if (has('mittwald_ssh_private_key')) {
                     $config .= "\tIdentityFile ./.mw-deployer/id_rsa\n";
                 } else {
+                    /** @var string $privateKeyFile */
                     $privateKeyFile = str_replace('.pub', '', get('ssh_copy_id'));
                     $config .= "\tIdentityFile {$privateKeyFile}\n";
                 }

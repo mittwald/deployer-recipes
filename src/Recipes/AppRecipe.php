@@ -163,6 +163,7 @@ class AppRecipe
         $app    = AppRecipe::getAppInstallation();
         $client = BaseRecipe::getClient()->app();
 
+        /** @var string $relativeCurrentPath */
         $relativeCurrentPath = str_replace(get('deploy_path'), '', get('current_path'));
         $relativeCurrentPath = trim($relativeCurrentPath, '/');
 
