@@ -6,7 +6,9 @@
   "autoload": {
     "psr-4": {
       "Mittwald\\Deployer\\": "src/"
-    }
+    },
+    "files": [
+      "src/Util/functions.php"]
   },
   "authors": [
     {

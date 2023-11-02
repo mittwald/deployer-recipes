@@ -21,6 +21,7 @@ use function Deployer\{after,
     Support\parse_home_dir,
     task,
     warning};
+use function Mittwald\Deployer\get_str;
 
 class SSHUserRecipe
 {
@@ -71,14 +72,14 @@ class SSHUserRecipe
 
         if (has('mittwald_ssh_private_key')) {
             static::assertLocalSSHDirectory();
-            file_put_contents('./.mw-deployer/id_rsa', get('mittwald_ssh_private_key'));
+            file_put_contents('./.mw-deployer/id_rsa', get_str('mittwald_ssh_private_key'));
         }
 
         $sshPublicKey = (function (): string {
             if (has('mittwald_ssh_public_key_file')) {
-                return file_get_contents(parse_home_dir(get('mittwald_ssh_public_key_file')));
+                return file_get_contents(parse_home_dir(get_str('mittwald_ssh_public_key_file')));
             } else if (has('mittwald_ssh_public_key')) {
-                return get('mittwald_ssh_public_key');
+                return get_str('mittwald_ssh_public_key');
             } else {
                 // Need to do this in case `ssh_copy_id` contains a tilde that needs to be expanded
                 return runLocally('cat {{ssh_copy_id}}');
@@ -103,7 +104,7 @@ class SSHUserRecipe
             warning("http request body: " . json_encode($createUserReq->getBody()->toJson()));
             warning("http response status: {$createUserRes->httpResponse?->getStatusCode()}");
             warning("http response body: " . json_encode($createUserRes->getBody()->toJson()));
-            throw new \Exception('could not create SSH user; received ' . $createUserRes->httpResponse?->getStatusCode() . ' status.');
+            throw new \Exception('could not create SSH user; received ' . ($createUserRes->httpResponse?->getStatusCode() ?? "no") . ' status.');
         }
 
         return $createUserRes->getBody();
@@ -114,7 +115,9 @@ class SSHUserRecipe
         $config = "";
 
         foreach (selectedHosts() as $host) {
-            if ($internal = $host->get('mittwald_internal_hostname')) {
+            /** @var string|null $internal */
+            $internal = $host->get('mittwald_internal_hostname');
+            if ($internal) {
                 $name   = $host->getAlias() ?? $host->getHostname();
                 $config .= "Host {$name}\n\tHostName {$internal}\nStrictHostKeyChecking accept-new\n";
 
@@ -124,7 +127,7 @@ class SSHUserRecipe
                     $config .= "\tIdentityFile ./.mw-deployer/id_rsa\n";
                 } else {
                     /** @var string $privateKeyFile */
-                    $privateKeyFile = str_replace('.pub', '', get('ssh_copy_id'));
+                    $privateKeyFile = str_replace('.pub', '', get_str('ssh_copy_id'));
                     $config .= "\tIdentityFile {$privateKeyFile}\n";
                 }
 
