@@ -24,7 +24,7 @@ use function Deployer\{after,
 
 class SSHUserRecipe
 {
-    public static function setup()
+    public static function setup(): void
     {
         task('mittwald:sshconfig', function(): void { static::assertSSHConfig(); })
             ->once()

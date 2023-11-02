@@ -22,7 +22,7 @@ class DomainRecipe
     private const DOMAIN_PATH_PREFIX = 'mittwald_domain_path_prefix';
     private const DOMAINS = 'mittwald_domains';
 
-    public static function setup()
+    public static function setup(): void
     {
         set(static::DOMAIN_PATH_PREFIX, '/');
         set(static::DOMAINS, ['{{domain}}']);
@@ -34,7 +34,7 @@ class DomainRecipe
     public static function assertVirtualHosts(): void
     {
         $domains = get(static::DOMAINS);
-        $domains = array_map(fn($domain) => parse($domain), $domains);
+        $domains = array_map(fn(string $domain): string => parse($domain), $domains);
 
         foreach ($domains as $domain) {
             static::assertVirtualHost($domain);
