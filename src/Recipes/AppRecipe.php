@@ -159,6 +159,11 @@ class AppRecipe
 
         // Override the default setting, which might try to respect the {{php_version}} setting.
         currentHost()->set('bin/php', '/usr/bin/php');
+
+        // Set the http_user to the project user name, as Deployer might not be able
+        // to figure it out on its own.
+        currentHost()->set('http_user', $project->getShortId());
+        currentHost()->set('writable_mode', 'chmod');
     }
 
     public static function assertDocumentRoot(): void
