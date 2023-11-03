@@ -15,7 +15,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects200
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
 use Mittwald\Deployer\Client\AppClient;
-use function Deployer\{currentHost, get, info, parse, set, Support\starts_with, task};
+use function Deployer\{after, currentHost, get, info, parse, run, set, Support\starts_with, task};
 use function Mittwald\Deployer\get_array;
 use function Mittwald\Deployer\get_str;
 use function Mittwald\Deployer\get_str_nullable;
@@ -134,6 +134,10 @@ class AppRecipe
             'mittwald:app:docroot',
             'mittwald:app:dependencies',
         ]);
+
+        task('mittwald:opcache:flush', function (): void { static::flushOpcache(); });
+
+        after('deploy:symlink', 'mittwald:opcache:flush');
     }
 
     public static function getAppInstallation(): AppInstallation
@@ -214,6 +218,11 @@ class AppRecipe
             AppRecipe::getAppInstallation()->getId(),
             $dependencies
         );
+    }
+
+    public static function flushOpcache(): void
+    {
+        run('touch /etc/php/php.ini');
     }
 
 }
