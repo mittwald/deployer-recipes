@@ -163,6 +163,7 @@ class AppRecipe
         // Set the http_user to the project user name, as Deployer might not be able
         // to figure it out on its own.
         currentHost()->set('http_user', $project->getShortId());
+        currentHost()->set('writable_mode', 'chmod');
     }
 
     public static function assertDocumentRoot(): void
