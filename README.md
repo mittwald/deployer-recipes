@@ -1,5 +1,14 @@
 # mittwald Deployer Recipe Collection
 
+<p align="center">
+    <a href="#installation">⚒️ Installation instructions</a> |
+    <a href="#usage">🙆 Usage</a> |
+    <a href="#configuration-options">📖 Configuration options</a> |
+    <a href="#ci-usage-examples">🤖 CI usage examples</a>
+</p>
+
+---
+
 > [!IMPORTANT]
 > This library is currently in an beta state. We welcome any feedback and contributions.
 
@@ -17,7 +26,8 @@ composer require --dev mittwald/deployer-recipes
 
 ## Usage
 
-> [!NOTE] Find configuration examples for common CI/CD tools like Github Actions and Gitlab CI at the bottom of this document.
+> [!NOTE]
+> Find configuration examples for common CI/CD tools like Github Actions and Gitlab CI at the bottom of this document.
 
 This recipe needs a [mittwald API token](https://developer.mittwald.de/docs/v2/api/intro/) to work. It can be either provided via the `MITTWALD_API_TOKEN` environment variable, or by setting the `mittwald_token` value in your Deployer configuration.
 
