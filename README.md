@@ -17,6 +17,12 @@ composer require --dev mittwald/deployer-recipes
 
 ## Usage
 
+This recipe needs a [mittwald API token](https://developer.mittwald.de/docs/v2/api/intro/) to work. It can be either provided via the `MITTWALD_API_TOKEN` environment variable, or by setting the `mittwald_token` value in your Deployer configuration.
+
+```
+$ export MITTWALD_API_TOKEN=...
+```
+
 In order to use the recipes provided by this library, you need to include them in your `deploy.php` file:
 
 ```php
@@ -80,3 +86,49 @@ More precisely, the recipe will:
 - `mittwald_domain_path_prefix` can be used to configure a prefix for the domain path. Defaults to `"/"`.
 
 - `mittwald_ssh_public_key` and `mittwald_ssh_private_key` may contain an SSH public/private key pair that should be used for deployment. If not set, the `ssh_copy_id` variable will be used.
+
+## CI usage examples
+
+### Github actions
+
+To use this recipe in a Github actions workflow, you should first configure the following secrets in your repository settings:
+
+- `MITTWALD_API_TOKEN` should contain your mittwald API token
+- `MITTWALD_APP_ID` should contain the ID of the mittwald application you want to deploy to.
+- `MITTWALD_SSH_PRIVATE_KEY` should contain the private key of the SSH key pair that should be used for deployment.
+- `MITTWALD_SSH_PUBLIC_KEY` should contain the public key of the SSH key pair that should be used for deployment.
+
+Then, you can use the following workflow to deploy your application:
+
+```yaml
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+        
+      - name: Deploy SSH keys
+        env:
+          MITTWALD_SSH_PRIVATE_KEY: ${{ secrets.MITTWALD_SSH_PRIVATE_KEY }}
+          MITTWALD_SSH_PUBLIC_KEY: ${{ secrets.MITTWALD_SSH_PUBLIC_KEY }}
+        run: |
+          mkdir -p .mw-deploy
+          echo "${MITTWALD_SSH_PRIVATE_KEY}" > .mw-deploy/id_rsa
+          echo "${MITTWALD_SSH_PUBLIC_KEY}" > .mw-deploy/id_rsa.pub
+          chmod 600 .mw-deploy/id_rsa*
+
+      - name: Run deployer
+        run: |
+          ./vendor/bin/dep deploy \
+            -o mittwald_app_id={{ secrets.MITTWALD_APP_ID }} \
+            -o mittwald_ssh_public_key_file=.mw-deploy/id_rsa.pub \
+            -o mittwald_ssh_private_key_file=.mw-deploy/id_rsa
+        env:
+          MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
+
+```
