@@ -1,7 +1,7 @@
 # mittwald Deployer Recipe Collection
 
 > [!IMPORTANT]
-> This library is currently in an experimental state. We welcome any feedback and contributions.
+> This library is currently in an beta state. We welcome any feedback and contributions.
 
 This repository contains a set of mittwald-specific helper functions and
 recipes for [Deployer](https://deployer.org/).
@@ -16,6 +16,8 @@ composer require --dev mittwald/deployer-recipes
 ```
 
 ## Usage
+
+> [!NOTE] Find configuration examples for common CI/CD tools like Github Actions and Gitlab CI at the bottom of this document.
 
 This recipe needs a [mittwald API token](https://developer.mittwald.de/docs/v2/api/intro/) to work. It can be either provided via the `MITTWALD_API_TOKEN` environment variable, or by setting the `mittwald_token` value in your Deployer configuration.
 
@@ -130,5 +132,28 @@ Then, you can use the following workflow to deploy your application:
             -o mittwald_ssh_private_key_file=.mw-deploy/id_rsa
         env:
           MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
+```
 
+## Gitlab CI
+
+This Gitlab CI workflow uses the same repository variables as the Github actions example above:
+
+```yaml
+deploy:
+  image: php:8.2-cli
+  stage: deploy
+  before_script:
+    - wget https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902cd7576b67264ad91c8a2700e2/web/installer -O - -q | php -- --quiet
+    - apt-get update && apt-get install -y git openssh-client
+    - mkdir -p .mw-deploy
+    - echo "$MITTWALD_SSH_PRIVATE_KEY" > .mw-deploy/id_rsa
+    - echo "$MITTWALD_SSH_PUBLIC_KEY" > .mw-deploy/id_rsa.pub
+    - chmod 600 .mw-deploy/id_rsa*
+  script:
+    - ./vendor/bin/dep deploy \
+        -o mittwald_app_id=$MITTWALD_APP_ID \
+        -o mittwald_ssh_public_key_file=.mw-deploy/id_rsa.pub \
+        -o mittwald_ssh_private_key_file=.mw-deploy/id_rsa
+  environment:
+    name: production
 ```
