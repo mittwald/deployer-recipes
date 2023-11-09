@@ -144,7 +144,7 @@ Then, you can use the following workflow to deploy your application:
           MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
 ```
 
-## Gitlab CI
+### Gitlab CI
 
 This Gitlab CI workflow uses the same repository variables as the Github actions example above:
 
