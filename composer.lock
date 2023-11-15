@@ -484,16 +484,16 @@
         },
         {
             "name": "mittwald/api-client",
-            "version": "v1.0.29",
+            "version": "v1.0.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mittwald/api-client-php.git",
-                "reference": "a6b84eed034a2134ff354e99f97d1699ec32395a"
+                "reference": "39c535539caae2835cd46b094b57a4dd889f052c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/a6b84eed034a2134ff354e99f97d1699ec32395a",
-                "reference": "a6b84eed034a2134ff354e99f97d1699ec32395a",
+                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/39c535539caae2835cd46b094b57a4dd889f052c",
+                "reference": "39c535539caae2835cd46b094b57a4dd889f052c",
                 "shasum": ""
             },
             "require": {
@@ -524,9 +524,9 @@
             "description": "Client library for the mittwald mStudio v2 API",
             "support": {
                 "issues": "https://github.com/mittwald/api-client-php/issues",
-                "source": "https://github.com/mittwald/api-client-php/tree/v1.0.29"
+                "source": "https://github.com/mittwald/api-client-php/tree/v1.0.30"
             },
-            "time": "2023-11-10T00:14:19+00:00"
+            "time": "2023-11-15T14:13:26+00:00"
         },
         {
             "name": "psr/http-client",
@@ -734,7 +734,7 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.3.0",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
@@ -781,7 +781,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.3.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.4.0"
             },
             "funding": [
                 {
