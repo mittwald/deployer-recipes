@@ -3,15 +3,14 @@
 namespace Mittwald\Deployer\Recipes;
 
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreate201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreateRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreateRequestBody;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListForProject\IngressListForProject200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListForProject\IngressListForProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPaths\IngressPathsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngress201Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressRequestBody;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngresses200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest;
 use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path;
 use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation;
-use function Deployer\get;
 use function Deployer\info;
 use function Deployer\parse;
 use function Deployer\set;
@@ -51,8 +50,8 @@ class DomainRecipe
         $project          = BaseRecipe::getProject();
         $app              = AppRecipe::getAppInstallation();
 
-        $virtualHostResponse = $client->ingressListForProject(new IngressListForProjectRequest($project->getId()));
-        if (!$virtualHostResponse instanceof IngressListForProject200Response) {
+        $virtualHostResponse = $client->ingressListIngresses((new IngressListIngressesRequest())->withProjectId($project->getId()));
+        if (!$virtualHostResponse instanceof IngressListIngresses200Response) {
             throw new \Exception('could not list virtual hosts');
         }
 
@@ -68,14 +67,14 @@ class DomainRecipe
         if ($virtualHost === null) {
             info("virtual host <fg=magenta;options=bold>{$domain}</> does not exist, creating it");
 
-            $request  = new IngressCreateRequest((new IngressCreateRequestBody(
+            $request  = new IngressCreateIngressRequest((new IngressCreateIngressRequestBody(
                 $domain,
                 [new Path($domainPathPrefix, new TargetInstallation($app->getId()))],
                 $project->getId(),
             )));
-            $response = $client->ingressCreate($request);
+            $response = $client->ingressCreateIngress($request);
 
-            if (!$response instanceof IngressCreate201Response) {
+            if (!$response instanceof IngressCreateIngress201Response) {
                 throw new \Exception('could not create virtual host');
             }
         } else {
@@ -104,8 +103,8 @@ class DomainRecipe
             if ($updateRequired) {
                 info("virtual host <fg=magenta;options=bold>{$domain}</> exists, updating it");
 
-                $request  = new IngressPathsRequest($virtualHost->getId(), $updatedPaths);
-                $response = $client->ingressPaths($request);
+                $request  = new IngressUpdateIngressPathsRequest($virtualHost->getId(), $updatedPaths);
+                $response = $client->ingressUpdateIngressPaths($request);
 
                 if (!$response instanceof EmptyResponse) {
                     throw new \Exception('could not update virtual host');
