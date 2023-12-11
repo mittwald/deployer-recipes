@@ -21,6 +21,7 @@ use Mittwald\Deployer\Error\UnexpectedResponseException;
 use Mittwald\Deployer\Util\SSH\SSHConfig;
 use Mittwald\Deployer\Util\SSH\SSHConfigRenderer;
 use Mittwald\Deployer\Util\SSH\SSHHost;
+use Mittwald\Deployer\Util\SSH\SSHPublicKey;
 use function Deployer\{after, currentHost, has, info, runLocally, selectedHosts, set, Support\parse_home_dir, task};
 use function Mittwald\Deployer\get_str;
 
@@ -81,34 +82,45 @@ class SSHUserRecipe
             if ($sshUser->getDescription() === 'deployer') {
                 info("using existing SSH user <fg=magenta;options=bold>deployer</>");
 
-                return static::assertPublicKeyOnExistingSSHUser($sshUser);
+                return static::assertSSHUserHasPublicKey($sshUser);
             }
         }
 
         return static::createSSHUser($project);
     }
 
-    private static function assertPublicKeyOnExistingSSHUser(SshUser $sshUser): SshUser
+    private static function assertSSHUserHasPublicKey(SshUser $sshUser): SshUser
     {
-        $client = BaseRecipe::getClient()->sSHSFTPUser();
+        $sshPublicKey = SSHPublicKey::fromString(get_str('mittwald_ssh_public_key'));
 
-        $sshPublicKey                    = get_str('mittwald_ssh_public_key');
-        $sshPublicKeyParts               = explode(" ", $sshPublicKey);
-        $sshPublicKeyPartsWithoutComment = array_slice($sshPublicKeyParts, 0, 2);
-        $sshPublicKeyWithoutComment      = implode(" ", $sshPublicKeyPartsWithoutComment);
+        if (static::hasSSHUserPublicKey($sshUser, $sshPublicKey)) {
+            info("SSH user <fg=magenta;options=bold>deployer</> already has the correct SSH public key");
+            return $sshUser;
+        }
 
+        static::addPublicKeyToSSHUser($sshUser, $sshPublicKey);
+
+        return static::getSSHUser($sshUser->getId());
+    }
+
+    private static function hasSSHUserPublicKey(SshUser $sshUser, SSHPublicKey $publicKey): bool
+    {
         $existingPublicKeys = $sshUser->getPublicKeys() ?? [];
-
         foreach ($existingPublicKeys as $existingPublicKey) {
-            if ($existingPublicKey->getKey() === $sshPublicKeyWithoutComment) {
-                info("SSH user <fg=magenta;options=bold>deployer</> already has the correct SSH public key");
-                return $sshUser;
+            if ($existingPublicKey->getKey() === $publicKey->publicKey) {
+                return true;
             }
         }
 
+        return false;
+    }
+
+    private static function addPublicKeyToSSHUser(SshUser $sshUser, SSHPublicKey $publicKey): void
+    {
+        $client        = BaseRecipe::getClient()->sSHSFTPUser();
         $newPublicKeys = [
-            ...$existingPublicKeys,
-            new PublicKey("deployer", $sshPublicKeyWithoutComment),
+            ...$sshUser->getPublicKeys() ?? [],
+            new PublicKey("deployer", $publicKey->publicKey),
         ];
 
         $updateReq = new UpdateSshUserRequest(
@@ -120,8 +132,13 @@ class SSHUserRecipe
         if (!$updateRes instanceof EmptyResponse) {
             throw new UnexpectedResponseException('could not update SSH user', $updateRes);
         }
+    }
 
-        $getReq = new GetSshUserRequest($sshUser->getId());
+    private static function getSSHUser(string $id): SshUser
+    {
+        $client = BaseRecipe::getClient()->sSHSFTPUser();
+
+        $getReq = new GetSshUserRequest($id);
         $getRes = $client->getSshUser($getReq);
 
         if (!$getRes instanceof GetSshUser200Response) {
