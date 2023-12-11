@@ -30,3 +30,6 @@ jobs:
 
       - name: Run type checker
         run: ./vendor/bin/psalm --php-version=${{ matrix.php-versions }}
+
+      - name: Run unit tests
+        run: ./vendor/bin/phpunit

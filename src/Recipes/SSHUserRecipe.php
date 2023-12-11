@@ -10,28 +10,23 @@ use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUser
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser;
-use function Deployer\{after,
-    currentHost,
-    get,
-    has,
-    info,
-    parse,
-    runLocally,
-    selectedHosts,
-    Support\parse_home_dir,
-    task,
-    warning};
+use Mittwald\Deployer\Error\UnexpectedResponseException;
+use function Deployer\{after, currentHost, has, info, parse, runLocally, selectedHosts, Support\parse_home_dir, task};
 use function Mittwald\Deployer\get_str;
 
 class SSHUserRecipe
 {
     public static function setup(): void
     {
-        task('mittwald:sshconfig', function(): void { static::assertSSHConfig(); })
+        task('mittwald:sshconfig', function (): void {
+            static::assertSSHConfig();
+        })
             ->once()
             ->desc('Asserts that a local SSH configuration is present for the mittwald platform');
 
-        task('mittwald:sshuser', function(): void { static::assertSSHUser(); })
+        task('mittwald:sshuser', function (): void {
+            static::assertSSHUser();
+        })
             ->desc('Asserts that the SSH user for the mittwald platform is configured correctly');
 
         after('mittwald:sshuser', 'mittwald:sshconfig');
@@ -59,7 +54,7 @@ class SSHUserRecipe
         $sshUsersRes = $client->listSshUsers($sshUsersReq);
 
         if (!$sshUsersRes instanceof ListSshUsers200Response) {
-            throw new \Exception('could not list SSH users');
+            throw new UnexpectedResponseException('could not list SSH users', $sshUsersRes);
         }
 
         $sshUsers = $sshUsersRes->getBody();
@@ -86,9 +81,9 @@ class SSHUserRecipe
             }
         })();
 
-        $sshPublicKeyParts = explode(" ", $sshPublicKey);
+        $sshPublicKeyParts               = explode(" ", $sshPublicKey);
         $sshPublicKeyPartsWithoutComment = array_slice($sshPublicKeyParts, 0, 2);
-        $sshPublicKeyWithoutComment = implode(" ", $sshPublicKeyPartsWithoutComment);
+        $sshPublicKeyWithoutComment      = implode(" ", $sshPublicKeyPartsWithoutComment);
 
         info("creating SSH user <fg=magenta;options=bold>deployer</>");
         info("using SSH public key <fg=magenta;options=bold>{$sshPublicKeyWithoutComment}</>");
@@ -101,10 +96,7 @@ class SSHUserRecipe
         $createUserRes = $client->createSshUser($createUserReq);
 
         if (!$createUserRes instanceof CreateSshUser201Response) {
-            warning("http request body: " . json_encode($createUserReq->getBody()->toJson()));
-            warning("http response status: {$createUserRes->httpResponse?->getStatusCode()}");
-            warning("http response body: " . json_encode($createUserRes->getBody()->toJson()));
-            throw new \Exception('could not create SSH user; received ' . ($createUserRes->httpResponse?->getStatusCode() ?? "no") . ' status.');
+            throw new UnexpectedResponseException('could not create SSH user', $createUserRes);
         }
 
         return $createUserRes->getBody();
@@ -117,23 +109,24 @@ class SSHUserRecipe
         foreach (selectedHosts() as $host) {
             /** @var string|null $internal */
             $internal = $host->get('mittwald_internal_hostname');
-            if ($internal) {
-                $name   = $host->getAlias() ?? $host->getHostname();
-                $config .= "Host {$name}\n\tHostName {$internal}\nStrictHostKeyChecking accept-new\n";
-
-                if (has('mittwald_ssh_private_key_file')) {
-                    $config .= parse("\tIdentityFile {{mittwald_ssh_private_key_file}}\n");
-                } else if (has('mittwald_ssh_private_key')) {
-                    $config .= "\tIdentityFile ./.mw-deployer/id_rsa\n";
-                } else {
-                    /** @var string $privateKeyFile */
-                    $privateKeyFile = str_replace('.pub', '', get_str('ssh_copy_id'));
-                    $config .= "\tIdentityFile {$privateKeyFile}\n";
-                }
-
-                $config .= "\n";
+            if ($internal === null) {
+                continue;
             }
 
+            $name   = $host->getAlias() ?? $host->getHostname();
+            $config .= "Host {$name}\n\tHostName {$internal}\nStrictHostKeyChecking accept-new\n";
+
+            if (has('mittwald_ssh_private_key_file')) {
+                $config .= parse("\tIdentityFile {{mittwald_ssh_private_key_file}}\n");
+            } else if (has('mittwald_ssh_private_key')) {
+                $config .= "\tIdentityFile ./.mw-deployer/id_rsa\n";
+            } else {
+                /** @var string $privateKeyFile */
+                $privateKeyFile = str_replace('.pub', '', get_str('ssh_copy_id'));
+                $config         .= "\tIdentityFile {$privateKeyFile}\n";
+            }
+
+            $config .= "\n";
         }
 
         static::assertLocalSSHDirectory();
