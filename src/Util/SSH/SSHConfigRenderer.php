@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Mittwald\Deployer\Util\SSH;
 
-class SSHConfigRenderer
+readonly class SSHConfigRenderer
 {
     public function __construct(private SSHConfig $config)
     {
@@ -16,6 +16,7 @@ class SSHConfigRenderer
         foreach ($this->config->hosts as $host) {
             $output .= "Host {$host->name}\n";
             $output .= "    HostName {$host->hostname}\n";
+            $output .= "    StrictHostKeyChecking accept-new\n";
 
             if ($host->identityFile !== null) {
                 $output .= "    IdentityFile {$host->identityFile}\n";

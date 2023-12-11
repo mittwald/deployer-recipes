@@ -22,6 +22,7 @@ class SSHConfigRendererTest extends TestCase
         $expected = <<<SSHCONFIG
 Host test
     HostName test.example.com
+    StrictHostKeyChecking accept-new
     IdentityFile ~/.ssh/id_rsa
 SSHCONFIG;
 
@@ -37,10 +38,12 @@ SSHCONFIG;
         $expected = <<<SSHCONFIG
 Host test
     HostName test.example.com
+    StrictHostKeyChecking accept-new
     IdentityFile ~/.ssh/id_rsa
 
 Host test2
     HostName test2.example.com
+    StrictHostKeyChecking accept-new
     IdentityFile ~/.ssh/id_rsa
 SSHCONFIG;
 
