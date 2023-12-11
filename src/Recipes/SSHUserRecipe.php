@@ -2,6 +2,7 @@
 
 namespace Mittwald\Deployer\Recipes;
 
+use Deployer\Host\Host;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUser201Response;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequestBody;
@@ -11,8 +12,12 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser;
 use Mittwald\Deployer\Error\UnexpectedResponseException;
+use Mittwald\Deployer\Util\SSH\SSHConfig;
+use Mittwald\Deployer\Util\SSH\SSHConfigRenderer;
+use Mittwald\Deployer\Util\SSH\SSHHost;
 use function Deployer\{after, currentHost, has, info, parse, runLocally, selectedHosts, Support\parse_home_dir, task};
 use function Mittwald\Deployer\get_str;
+use function Mittwald\Deployer\get_str_nullable;
 
 class SSHUserRecipe
 {
@@ -65,11 +70,6 @@ class SSHUserRecipe
             }
         }
 
-        if (has('mittwald_ssh_private_key')) {
-            static::assertLocalSSHDirectory();
-            file_put_contents('./.mw-deployer/id_rsa', get_str('mittwald_ssh_private_key'));
-        }
-
         $sshPublicKey = (function (): string {
             if (has('mittwald_ssh_public_key_file')) {
                 return file_get_contents(parse_home_dir(get_str('mittwald_ssh_public_key_file')));
@@ -104,7 +104,7 @@ class SSHUserRecipe
 
     public static function assertSSHConfig(): void
     {
-        $config = "";
+        $sshConfig = new SSHConfig('./.mw-deployer/sshconfig');
 
         foreach (selectedHosts() as $host) {
             /** @var string|null $internal */
@@ -113,30 +113,57 @@ class SSHUserRecipe
                 continue;
             }
 
-            $name   = $host->getAlias() ?? $host->getHostname();
-            $config .= "Host {$name}\n\tHostName {$internal}\nStrictHostKeyChecking accept-new\n";
+            $sshHost = new SSHHost(name: $host->getAlias() ?? $host->getHostname() ?? "unknown", hostname: $internal);
+            $sshHost = $sshHost->withIdentityFile(static::determineSSHPrivateKeyForHost($host));
 
-            if (has('mittwald_ssh_private_key_file')) {
-                $config .= parse("\tIdentityFile {{mittwald_ssh_private_key_file}}\n");
-            } else if (has('mittwald_ssh_private_key')) {
-                $config .= "\tIdentityFile ./.mw-deployer/id_rsa\n";
-            } else {
-                /** @var string $privateKeyFile */
-                $privateKeyFile = str_replace('.pub', '', get_str('ssh_copy_id'));
-                $config         .= "\tIdentityFile {$privateKeyFile}\n";
-            }
-
-            $config .= "\n";
+            $sshConfig = $sshConfig->withHost($sshHost);
         }
 
         static::assertLocalSSHDirectory();
 
-        file_put_contents('./.mw-deployer/sshconfig', $config);
+        $renderer = new SSHConfigRenderer($sshConfig);
+        $renderer->renderToFile();
+
+        static::assertLocalSSHPrivateKey();
 
         foreach (selectedHosts() as $host) {
             if ($host->has('mittwald_internal_hostname')) {
-                $host->set('config_file', './.mw-deployer/sshconfig');
+                $host->set('config_file', $sshConfig->filename);
             }
+        }
+    }
+
+    private static function determineSSHPrivateKeyForHost(Host $host): string {
+        /** @var mixed $privateKeyFile */
+        $privateKeyFile = $host->get('mittwald_ssh_private_key_file');
+        if (is_string($privateKeyFile)) {
+            return $privateKeyFile;
+        }
+
+        /** @var mixed $privateKeyContents */
+        $privateKeyContents = $host->get('mittwald_ssh_private_key');
+        if (is_string($privateKeyContents)) {
+            return './.mw-deployer/id_rsa';
+        }
+
+        /** @var mixed $publicKeyFile */
+        $publicKeyFile = $host->get('ssh_copy_id');
+        if (is_string($publicKeyFile)) {
+            /** @var string $privateKeyFile */
+            $privateKeyFile = str_replace('.pub', '', $publicKeyFile);
+
+            return $privateKeyFile;
+        }
+
+        throw new \InvalidArgumentException('could not determine SSH private key for host; please set one of "mittwald_ssh_private_key_file", "mittwald_ssh_private_key", or "ssh_copy_id".');
+    }
+
+    private static function assertLocalSSHPrivateKey(): void
+    {
+        static::assertLocalSSHDirectory();
+
+        if (has('mittwald_ssh_private_key')) {
+            file_put_contents('./.mw-deployer/id_rsa', get_str('mittwald_ssh_private_key'));
         }
     }
 
