@@ -15,6 +15,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects200
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
 use Mittwald\Deployer\Client\AppClient;
+use Mittwald\Deployer\Error\UnexpectedResponseException;
+use Mittwald\Deployer\Util\SanityCheck;
 use function Deployer\{after, currentHost, get, info, parse, run, set, Support\starts_with, task};
 use function Mittwald\Deployer\get_array;
 use function Mittwald\Deployer\get_str;
@@ -52,7 +54,7 @@ class AppRecipe
 
             $projectResponse = $client->listProjects(new ListProjectsRequest());
             if (!$projectResponse instanceof ListProjects200Response) {
-                throw new \Exception('Could not list projects');
+                throw new UnexpectedResponseException('Could not list projects', $projectResponse);
             }
 
             foreach ($projectResponse->getBody() as $project) {
@@ -71,7 +73,7 @@ class AppRecipe
             $projectRequest  = new GetProjectRequest($projectId);
             $projectResponse = $client->project()->getProject($projectRequest);
             if (!$projectResponse instanceof GetProject200Response) {
-                throw new \Exception('could not get projects');
+                throw new UnexpectedResponseException('could not get projects', $projectResponse);
             }
 
             return $projectResponse->getBody()->toJson();
@@ -81,9 +83,11 @@ class AppRecipe
             $client = BaseRecipe::getClient()->app();
 
             if ($appID = get_str_nullable('mittwald_app_id')) {
+                SanityCheck::assertAppInstallationID($appID);
+
                 $appResponse = $client->getAppinstallation(new GetAppinstallationRequest($appID));
                 if (!$appResponse instanceof GetAppinstallation200Response) {
-                    throw new \Exception('could not get app');
+                    throw new UnexpectedResponseException('could not get app', $appResponse);
                 }
 
                 return $appResponse->getBody()->toJson();
@@ -94,7 +98,7 @@ class AppRecipe
 
                 $appsResponse = $client->listAppinstallations(new ListAppinstallationsRequest($project->getId()));
                 if (!$appsResponse instanceof ListAppinstallations200Response) {
-                    throw new \Exception('could not list apps');
+                    throw new UnexpectedResponseException('could not list apps', $appsResponse);
                 }
 
                 $webBasePath = $project->getDirectories()["Web"];

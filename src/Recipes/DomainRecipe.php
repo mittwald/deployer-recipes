@@ -11,6 +11,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressL
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest;
 use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path;
 use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation;
+use Mittwald\Deployer\Error\UnexpectedResponseException;
 use function Deployer\info;
 use function Deployer\parse;
 use function Deployer\set;
@@ -52,7 +53,7 @@ class DomainRecipe
 
         $virtualHostResponse = $client->ingressListIngresses((new IngressListIngressesRequest())->withProjectId($project->getId()));
         if (!$virtualHostResponse instanceof IngressListIngresses200Response) {
-            throw new \Exception('could not list virtual hosts');
+            throw new UnexpectedResponseException('could not list virtual hosts', $virtualHostResponse);
         }
 
         $virtualHost = (function () use ($virtualHostResponse, $domain) {
@@ -75,7 +76,7 @@ class DomainRecipe
             $response = $client->ingressCreateIngress($request);
 
             if (!$response instanceof IngressCreateIngress201Response) {
-                throw new \Exception('could not create virtual host');
+                throw new UnexpectedResponseException('could not create virtual host', $response);
             }
         } else {
 
@@ -107,7 +108,7 @@ class DomainRecipe
                 $response = $client->ingressUpdateIngressPaths($request);
 
                 if (!$response instanceof EmptyResponse) {
-                    throw new \Exception('could not update virtual host');
+                    throw new UnexpectedResponseException('could not update virtual host', $response);
                 }
             } else {
                 info("virtual host <fg=magenta;options=bold>{$domain}</> exists, no update required");
