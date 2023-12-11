@@ -67,8 +67,20 @@ class SSHUserRecipe
 
     private static function lookupOrCreateSSHUser(): SshUser
     {
-        $client  = BaseRecipe::getClient()->sSHSFTPUser();
         $project = BaseRecipe::getProject();
+        $existingUser = static::findExistingUser($project);
+
+        if ($existingUser !== null) {
+            info("using existing SSH user <fg=magenta;options=bold>deployer</>");
+            return static::assertSSHUserHasPublicKey($existingUser);
+        }
+
+        return static::createSSHUser($project);
+    }
+
+    private static function findExistingUser(Project $project): SshUser|null
+    {
+        $client = BaseRecipe::getClient()->sSHSFTPUser();
 
         $sshUsersReq = new ListSshUsersRequest($project->getId());
         $sshUsersRes = $client->listSshUsers($sshUsersReq);
@@ -80,13 +92,11 @@ class SSHUserRecipe
         $sshUsers = $sshUsersRes->getBody();
         foreach ($sshUsers as $sshUser) {
             if ($sshUser->getDescription() === 'deployer') {
-                info("using existing SSH user <fg=magenta;options=bold>deployer</>");
-
-                return static::assertSSHUserHasPublicKey($sshUser);
+                return $sshUser;
             }
         }
 
-        return static::createSSHUser($project);
+        return null;
     }
 
     private static function assertSSHUserHasPublicKey(SshUser $sshUser): SshUser
