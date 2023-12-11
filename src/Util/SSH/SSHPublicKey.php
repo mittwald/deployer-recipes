@@ -12,13 +12,13 @@ readonly class SSHPublicKey
     public static function fromString(string $publicKey): self
     {
         $sshPublicKeyParts               = explode(" ", $publicKey, limit: 3);
-        if (count($sshPublicKeyParts) !== 3) {
+        if (count($sshPublicKeyParts) < 2) {
             throw new \InvalidArgumentException("Invalid SSH public key");
         }
 
         $sshPublicKeyPartsWithoutComment = array_slice($sshPublicKeyParts, offset: 0, length: 2);
         $sshPublicKeyWithoutComment      = implode(" ", $sshPublicKeyPartsWithoutComment);
 
-        return new self($sshPublicKeyWithoutComment, $sshPublicKeyParts[2]);
+        return new self($sshPublicKeyWithoutComment, $sshPublicKeyParts[2] ?? "");
     }
 }
