@@ -5,11 +5,7 @@ namespace Mittwald\Deployer\Client;
 use Composer\Semver\Comparator;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient as GeneratedAppClient;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallation200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwares\ListSystemsoftwares200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwares\ListSystemsoftwaresRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversions200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody;
@@ -33,11 +29,6 @@ class AppClient
      */
     public function setSystemSoftwareVersions(string $appInstallationId, array $systemSoftwareConstraints): void
     {
-        $appInstallationResponse = $this->inner->getAppinstallation(new GetAppinstallationRequest($appInstallationId));
-        if (!$appInstallationResponse instanceof GetAppinstallation200Response) {
-            throw new \Exception('could not get app installation');
-        }
-
         $systemSoftwareSpec = [];
 
         foreach ($systemSoftwareConstraints as $name => $constraint) {
@@ -70,10 +61,6 @@ class AppClient
         $systemSoftwareVersionConstraint = static::normalizeVersionConstraint($systemSoftwareVersionConstraint);
 
         $systemSoftwareResponse = $this->inner->listSystemsoftwares(new ListSystemsoftwaresRequest());
-        if (!$systemSoftwareResponse instanceof ListSystemsoftwares200Response) {
-            throw new \Exception('could not list system software');
-        }
-
         $systemSoftware = (function () use ($systemSoftwareResponse, $systemSoftwareName): SystemSoftware {
             foreach ($systemSoftwareResponse->getBody() as $systemSoftware) {
                 if (strtolower($systemSoftware->getName()) === strtolower($systemSoftwareName)) {
@@ -87,9 +74,6 @@ class AppClient
             (new ListSystemsoftwareversionsRequest($systemSoftware->getId()))
                 ->withVersionRange($systemSoftwareVersionConstraint)
         );
-        if (!$versionResponse instanceof ListSystemsoftwareVersions200Response) {
-            throw new \Exception('could not list system software versions');
-        }
 
         $newest = null;
 

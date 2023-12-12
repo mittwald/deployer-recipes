@@ -4,12 +4,9 @@ namespace Mittwald\Deployer\Recipes;
 
 use Deployer\Host\Host;
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUser201Response;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequestBody;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUser200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsers200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequestBody;
@@ -29,6 +26,8 @@ class SSHUserRecipe
 {
     public static function setup(): void
     {
+        set('mittwald_ssh_username', 'deployer');
+
         set('mittwald_ssh_public_key', function (): string {
             if (has('mittwald_ssh_public_key_file')) {
                 return file_get_contents(parse_home_dir(get_str('mittwald_ssh_public_key_file')));
@@ -68,7 +67,7 @@ class SSHUserRecipe
     private static function lookupOrCreateSSHUser(): SshUser
     {
         $project = BaseRecipe::getProject();
-        $existingUser = static::findExistingUser($project);
+        $existingUser = static::findExistingSSHUserByName($project);
 
         if ($existingUser !== null) {
             info("using existing SSH user <fg=magenta;options=bold>deployer</>");
@@ -78,20 +77,16 @@ class SSHUserRecipe
         return static::createSSHUser($project);
     }
 
-    private static function findExistingUser(Project $project): SshUser|null
+    private static function findExistingSSHUserByName(Project $project): SshUser|null
     {
         $client = BaseRecipe::getClient()->sSHSFTPUser();
+        $username = get_str('mittwald_ssh_username');
 
         $sshUsersReq = new ListSshUsersRequest($project->getId());
-        $sshUsersRes = $client->listSshUsers($sshUsersReq);
+        $sshUsers = $client->listSshUsers($sshUsersReq)->getBody();
 
-        if (!$sshUsersRes instanceof ListSshUsers200Response) {
-            throw new UnexpectedResponseException('could not list SSH users', $sshUsersRes);
-        }
-
-        $sshUsers = $sshUsersRes->getBody();
         foreach ($sshUsers as $sshUser) {
-            if ($sshUser->getDescription() === 'deployer') {
+            if ($sshUser->getDescription() === $username) {
                 return $sshUser;
             }
         }
@@ -148,44 +143,46 @@ class SSHUserRecipe
     {
         $client = BaseRecipe::getClient()->sSHSFTPUser();
 
-        $getReq = new GetSshUserRequest($id);
-        $getRes = $client->getSshUser($getReq);
-
-        if (!$getRes instanceof GetSshUser200Response) {
-            throw new UnexpectedResponseException('could not get SSH user', $getRes);
-        }
-
-        return $getRes->getBody();
+        return $client->getSshUser(new GetSshUserRequest($id))->getBody();
     }
 
     private static function createSSHUser(Project $project): SshUser
     {
         $client = BaseRecipe::getClient()->sSHSFTPUser();
 
-        $sshPublicKey = get_str('mittwald_ssh_public_key');
-
-        $sshPublicKeyParts               = explode(" ", $sshPublicKey);
-        $sshPublicKeyPartsWithoutComment = array_slice($sshPublicKeyParts, 0, 2);
-        $sshPublicKeyWithoutComment      = implode(" ", $sshPublicKeyPartsWithoutComment);
+        $sshPublicKey = SSHPublicKey::fromString(get_str('mittwald_ssh_public_key'));
 
         info("creating SSH user <fg=magenta;options=bold>deployer</>");
-        info("using SSH public key <fg=magenta;options=bold>{$sshPublicKeyWithoutComment}</>");
+        info("using SSH public key <fg=magenta;options=bold>{$sshPublicKey->publicKey}</>");
 
         $createUserAuth = new AuthenticationAlternative2([
-            new PublicKey("deployer", $sshPublicKeyWithoutComment),
+            new PublicKey("deployer", $sshPublicKey->publicKey),
         ]);
 
-        $createUserReq = new CreateSshUserRequest($project->getId(), (new CreateSshUserRequestBody($createUserAuth, 'deployer')));
-        $createUserRes = $client->createSshUser($createUserReq);
+        $createUserReq = new CreateSshUserRequest($project->getId(), (new CreateSshUserRequestBody($createUserAuth, get_str('mittwald_ssh_username'))));
 
-        if (!$createUserRes instanceof CreateSshUser201Response) {
-            throw new UnexpectedResponseException('could not create SSH user', $createUserRes);
-        }
-
-        return $createUserRes->getBody();
+        return $client->createSshUser($createUserReq)->getBody();
     }
 
     public static function assertSSHConfig(): void
+    {
+        static::assertLocalSSHDirectory();
+
+        $sshConfig = static::buildSSHConfigForSelectedHosts();
+
+        $renderer = new SSHConfigRenderer($sshConfig);
+        $renderer->renderToFile();
+
+        static::assertLocalSSHPrivateKey();
+
+        foreach (selectedHosts() as $host) {
+            if ($host->has('mittwald_internal_hostname')) {
+                $host->set('config_file', $sshConfig->filename);
+            }
+        }
+    }
+
+    private static function buildSSHConfigForSelectedHosts(): SSHConfig
     {
         $sshConfig = new SSHConfig('./.mw-deployer/sshconfig');
 
@@ -202,18 +199,7 @@ class SSHUserRecipe
             $sshConfig = $sshConfig->withHost($sshHost);
         }
 
-        static::assertLocalSSHDirectory();
-
-        $renderer = new SSHConfigRenderer($sshConfig);
-        $renderer->renderToFile();
-
-        static::assertLocalSSHPrivateKey();
-
-        foreach (selectedHosts() as $host) {
-            if ($host->has('mittwald_internal_hostname')) {
-                $host->set('config_file', $sshConfig->filename);
-            }
-        }
+        return $sshConfig;
     }
 
     private static function determineSSHPrivateKeyForHost(Host $host): string
