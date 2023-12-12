@@ -18,7 +18,7 @@
   ],
   "require": {
     "php": "^8.2",
-    "mittwald/api-client": "^1.0",
+    "mittwald/api-client": "^1.0 || ^2.0",
     "composer/semver": "^3.4"
   },
   "require-dev": {
