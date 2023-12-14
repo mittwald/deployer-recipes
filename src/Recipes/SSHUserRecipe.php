@@ -132,11 +132,7 @@ class SSHUserRecipe
             $sshUser->getId(),
             (new UpdateSshUserRequestBody())->withPublicKeys($newPublicKeys),
         );
-        $updateRes = $client->updateSshUser($updateReq);
-
-        if (!$updateRes instanceof EmptyResponse) {
-            throw new UnexpectedResponseException('could not update SSH user', $updateRes);
-        }
+        $client->updateSshUser($updateReq);
     }
 
     private static function getSSHUser(string $id): SshUser
