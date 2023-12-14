@@ -1,10 +1,7 @@
 <?php
 
-namespace Util\SSH;
+namespace Mittwald\Deployer\Util\SSH;
 
-use Mittwald\Deployer\Util\SSH\SSHConfig;
-use Mittwald\Deployer\Util\SSH\SSHConfigRenderer;
-use Mittwald\Deployer\Util\SSH\SSHHost;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 

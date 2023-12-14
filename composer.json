@@ -8,7 +8,8 @@
       "Mittwald\\Deployer\\": "src/"
     },
     "files": [
-      "src/Util/functions.php"]
+      "src/Util/functions.php"
+    ]
   },
   "authors": [
     {
@@ -28,7 +29,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Deployer\\": "vendor/deployer/deployer/src"
+      "Deployer\\": "vendor/deployer/deployer/src",
+      "Mittwald\\Deployer\\": "tests/"
     },
     "files": [
       "vendor/deployer/deployer/src/functions.php",

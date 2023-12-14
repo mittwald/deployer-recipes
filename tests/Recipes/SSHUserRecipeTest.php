@@ -1,12 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace Recipes;
+namespace Mittwald\Deployer\Recipes;
 
-use Deployer\Component\ProcessRunner\ProcessRunner;
-use Deployer\Deployer;
-use Deployer\Host\Host;
-use Deployer\Task\Context;
 use GuzzleHttp\Psr7\Response;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationOKResponse;
@@ -24,45 +20,27 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser;
-use Mittwald\Deployer\Client\MockClient;
-use Mittwald\Deployer\Recipes\AppRecipe;
-use Mittwald\Deployer\Recipes\SSHUserRecipe;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Output\NullOutput;
-use function Deployer\task;
 
 #[CoversClass(SSHUserRecipe::class)]
 class SSHUserRecipeTest extends TestCase
 {
-    private MockClient $mockClient;
+    private TestFixture $fixture;
 
     protected function setUp(): void
     {
-        $processRunner = $this->getMockBuilder(ProcessRunner::class)->disableOriginalConstructor()->getMock();
-        $processRunner->expects($this->any())
+        $this->fixture = new TestFixture($this);
+        $this->fixture->processRunner->expects($this->any())
             ->method('run')
             ->with($this->anything(), 'cat ~/.ssh/id_rsa.pub', $this->anything())
             ->willReturn('ssh-rsa FOOBAR test@local');
 
-        // The constructor also resets the Deployer singleton, so we only need
-        // to instantiate it once.
-        $depl                = new Deployer(new Application());
-        $depl->processRunner = $processRunner;
-        $depl->output        = new NullOutput();
-
-        Context::push(new Context(new Host('test')));
-
-        task('deploy:symlink', function () {
-        });
-
         AppRecipe::setup();
         SSHUserRecipe::setup();
 
-        $this->mockClient = new MockClient($this);
-        $this->mockClient->app->expects($this->any())
+        $this->fixture->client->app->expects($this->any())
             ->method('getAppinstallation')
             ->willReturnCallback(function (GetAppinstallationRequest $req): GetAppinstallationOKResponse {
                 return new GetAppinstallationOKResponse(
@@ -78,7 +56,7 @@ class SSHUserRecipeTest extends TestCase
                         ->withProjectId('PROJECT_ID'),
                 );
             });
-        $this->mockClient->project->expects($this->any())
+        $this->fixture->client->project->expects($this->any())
             ->method('getProject')
             ->willReturnCallback(fn(GetProjectRequest $req): GetProjectOKResponse => new GetProjectOKResponse(
                 new Project(
@@ -93,19 +71,14 @@ class SSHUserRecipeTest extends TestCase
                     'p-XXXXXX',
                 ),
             ));
-
-        $depl->config->set('mittwald_client', $this->mockClient);
-        $depl->config->set('mittwald_token', 'TOKEN');
-        $depl->config->set('mittwald_app_id', 'INSTALLATION_ID');
-        $depl->config->set('ssh_copy_id', '~/.ssh/id_rsa.pub');
     }
 
     public function testAssertSSHUserCreatesSSHUserWhenItDoesNotExist(): void
     {
-        $this->mockClient->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects($this->once())
             ->method('listSshUsers')
             ->willReturn(new ListSshUsersOKResponse([]));
-        $this->mockClient->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects($this->once())
             ->method('createSshUser')
             ->with(new Callback(function (CreateSshUserRequest $request): bool {
                 $sshUser = $request->getBody();
@@ -140,7 +113,7 @@ class SSHUserRecipeTest extends TestCase
 
     public function testAssertSSHUserUsesExistingSSHUser(): void
     {
-        $this->mockClient->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects($this->once())
             ->method('listSshUsers')
             ->willReturn(new ListSshUsersOKResponse([
                 (new SshUser(
@@ -155,9 +128,9 @@ class SSHUserRecipeTest extends TestCase
                     new PublicKey('deployer', 'ssh-rsa FOOBAR'),
                 ])
             ]));
-        $this->mockClient->sshSFTPUser->expects($this->never())
+        $this->fixture->client->sshSFTPUser->expects($this->never())
             ->method('createSshUser');
-        $this->mockClient->sshSFTPUser->expects($this->never())
+        $this->fixture->client->sshSFTPUser->expects($this->never())
             ->method('updateSshUser');
 
         SSHUserRecipe::assertSSHUser();
@@ -165,7 +138,7 @@ class SSHUserRecipeTest extends TestCase
 
     public function testAssertSSHUserUpdatesExistingPublicKeys(): void
     {
-        $this->mockClient->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects($this->once())
             ->method('listSshUsers')
             ->willReturn(new ListSshUsersOKResponse([
                 (new SshUser(
@@ -180,9 +153,9 @@ class SSHUserRecipeTest extends TestCase
                     new PublicKey('deployer', 'ssh-rsa BAR'),
                 ])
             ]));
-        $this->mockClient->sshSFTPUser->expects($this->never())
+        $this->fixture->client->sshSFTPUser->expects($this->never())
             ->method('createSshUser');
-        $this->mockClient->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects($this->once())
             ->method('updateSshUser')
             ->with(new Callback(function (UpdateSshUserRequest $req): bool {
                 $keys = $req->getBody()->getPublicKeys();

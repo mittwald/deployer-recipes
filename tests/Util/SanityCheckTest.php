@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Util;
+namespace Mittwald\Deployer\Util;
 
 use InvalidArgumentException;
-use Mittwald\Deployer\Util\SanityCheck;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
