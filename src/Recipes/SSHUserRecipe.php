@@ -2,22 +2,42 @@
 
 namespace Mittwald\Deployer\Recipes;
 
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUser201Response;
+use Deployer\Host\Host;
+use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequestBody;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsers200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequestBody;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\Project;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser;
 use Mittwald\Deployer\Error\UnexpectedResponseException;
-use function Deployer\{after, currentHost, has, info, parse, runLocally, selectedHosts, Support\parse_home_dir, task};
+use Mittwald\Deployer\Util\SSH\SSHConfig;
+use Mittwald\Deployer\Util\SSH\SSHConfigRenderer;
+use Mittwald\Deployer\Util\SSH\SSHHost;
+use Mittwald\Deployer\Util\SSH\SSHPublicKey;
+use function Deployer\{after, currentHost, has, info, runLocally, selectedHosts, set, Support\parse_home_dir, task};
 use function Mittwald\Deployer\get_str;
+use function Mittwald\Deployer\get_str_nullable;
 
 class SSHUserRecipe
 {
     public static function setup(): void
     {
+        set('mittwald_ssh_username', 'deployer');
+
+        set('mittwald_ssh_public_key', function (): string {
+            if (has('mittwald_ssh_public_key_file')) {
+                return BaseRecipe::getFilesystem()->read(parse_home_dir(get_str('mittwald_ssh_public_key_file')));
+            }
+
+            // Need to do this in case `ssh_copy_id` contains a tilde that needs to be expanded
+            return runLocally('cat {{ssh_copy_id}}');
+        });
+
         task('mittwald:sshconfig', function (): void {
             static::assertSSHConfig();
         })
@@ -47,64 +67,121 @@ class SSHUserRecipe
 
     private static function lookupOrCreateSSHUser(): SshUser
     {
-        $client  = BaseRecipe::getClient()->sSHSFTPUser();
         $project = BaseRecipe::getProject();
+        $existingUser = static::findExistingSSHUserByName($project);
 
-        $sshUsersReq = new ListSshUsersRequest($project->getId());
-        $sshUsersRes = $client->listSshUsers($sshUsersReq);
-
-        if (!$sshUsersRes instanceof ListSshUsers200Response) {
-            throw new UnexpectedResponseException('could not list SSH users', $sshUsersRes);
+        if ($existingUser !== null) {
+            info("using existing SSH user <fg=magenta;options=bold>deployer</>");
+            return static::assertSSHUserHasPublicKey($existingUser);
         }
 
-        $sshUsers = $sshUsersRes->getBody();
+        return static::createSSHUser($project);
+    }
+
+    private static function findExistingSSHUserByName(Project $project): SshUser|null
+    {
+        $client = BaseRecipe::getClient()->sSHSFTPUser();
+        $username = get_str('mittwald_ssh_username');
+
+        $sshUsersReq = new ListSshUsersRequest($project->getId());
+        $sshUsers = $client->listSshUsers($sshUsersReq)->getBody();
+
         foreach ($sshUsers as $sshUser) {
-            if ($sshUser->getDescription() === 'deployer') {
-                info("using existing SSH user <fg=magenta;options=bold>deployer</>");
+            if ($sshUser->getDescription() === $username) {
                 return $sshUser;
             }
         }
 
-        if (has('mittwald_ssh_private_key')) {
-            static::assertLocalSSHDirectory();
-            file_put_contents('./.mw-deployer/id_rsa', get_str('mittwald_ssh_private_key'));
+        return null;
+    }
+
+    private static function assertSSHUserHasPublicKey(SshUser $sshUser): SshUser
+    {
+        $sshPublicKey = SSHPublicKey::fromString(get_str('mittwald_ssh_public_key'));
+
+        if (static::hasSSHUserPublicKey($sshUser, $sshPublicKey)) {
+            info("SSH user <fg=magenta;options=bold>deployer</> already has the correct SSH public key");
+            return $sshUser;
         }
 
-        $sshPublicKey = (function (): string {
-            if (has('mittwald_ssh_public_key_file')) {
-                return file_get_contents(parse_home_dir(get_str('mittwald_ssh_public_key_file')));
-            } else if (has('mittwald_ssh_public_key')) {
-                return get_str('mittwald_ssh_public_key');
-            } else {
-                // Need to do this in case `ssh_copy_id` contains a tilde that needs to be expanded
-                return runLocally('cat {{ssh_copy_id}}');
-            }
-        })();
+        static::addPublicKeyToSSHUser($sshUser, $sshPublicKey);
 
-        $sshPublicKeyParts               = explode(" ", $sshPublicKey);
-        $sshPublicKeyPartsWithoutComment = array_slice($sshPublicKeyParts, 0, 2);
-        $sshPublicKeyWithoutComment      = implode(" ", $sshPublicKeyPartsWithoutComment);
+        return static::getSSHUser($sshUser->getId());
+    }
+
+    private static function hasSSHUserPublicKey(SshUser $sshUser, SSHPublicKey $publicKey): bool
+    {
+        $existingPublicKeys = $sshUser->getPublicKeys() ?? [];
+        foreach ($existingPublicKeys as $existingPublicKey) {
+            if ($existingPublicKey->getKey() === $publicKey->publicKey) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static function addPublicKeyToSSHUser(SshUser $sshUser, SSHPublicKey $publicKey): void
+    {
+        $client        = BaseRecipe::getClient()->sSHSFTPUser();
+        $newPublicKeys = [
+            ...$sshUser->getPublicKeys() ?? [],
+            new PublicKey("deployer", $publicKey->publicKey),
+        ];
+
+        $updateReq = new UpdateSshUserRequest(
+            $sshUser->getId(),
+            (new UpdateSshUserRequestBody())->withPublicKeys($newPublicKeys),
+        );
+        $client->updateSshUser($updateReq);
+    }
+
+    private static function getSSHUser(string $id): SshUser
+    {
+        $client = BaseRecipe::getClient()->sSHSFTPUser();
+
+        return $client->getSshUser(new GetSshUserRequest($id))->getBody();
+    }
+
+    private static function createSSHUser(Project $project): SshUser
+    {
+        $client = BaseRecipe::getClient()->sSHSFTPUser();
+
+        $sshPublicKey = SSHPublicKey::fromString(get_str('mittwald_ssh_public_key'));
 
         info("creating SSH user <fg=magenta;options=bold>deployer</>");
-        info("using SSH public key <fg=magenta;options=bold>{$sshPublicKeyWithoutComment}</>");
+        info("using SSH public key <fg=magenta;options=bold>{$sshPublicKey->publicKey}</>");
 
         $createUserAuth = new AuthenticationAlternative2([
-            new PublicKey("deployer", $sshPublicKeyWithoutComment),
+            new PublicKey("deployer", $sshPublicKey->publicKey),
         ]);
 
-        $createUserReq = new CreateSshUserRequest($project->getId(), (new CreateSshUserRequestBody($createUserAuth, 'deployer')));
-        $createUserRes = $client->createSshUser($createUserReq);
+        $createUserReq = new CreateSshUserRequest($project->getId(), (new CreateSshUserRequestBody($createUserAuth, get_str('mittwald_ssh_username'))));
 
-        if (!$createUserRes instanceof CreateSshUser201Response) {
-            throw new UnexpectedResponseException('could not create SSH user', $createUserRes);
-        }
-
-        return $createUserRes->getBody();
+        return $client->createSshUser($createUserReq)->getBody();
     }
 
     public static function assertSSHConfig(): void
     {
-        $config = "";
+        static::assertLocalSSHDirectory();
+
+        $sshConfig = static::buildSSHConfigForSelectedHosts();
+
+        $renderer = new SSHConfigRenderer($sshConfig);
+        $renderer->renderToFile(BaseRecipe::getFilesystem());
+
+        static::assertLocalSSHPrivateKey();
+
+        foreach (selectedHosts() as $host) {
+            if ($host->has('mittwald_internal_hostname')) {
+                $host->set('config_file', $sshConfig->filename);
+            }
+        }
+    }
+
+    private static function buildSSHConfigForSelectedHosts(): SSHConfig
+    {
+        $sshConfig = new SSHConfig('./.mw-deployer/sshconfig');
 
         foreach (selectedHosts() as $host) {
             /** @var string|null $internal */
@@ -113,37 +190,51 @@ class SSHUserRecipe
                 continue;
             }
 
-            $name   = $host->getAlias() ?? $host->getHostname();
-            $config .= "Host {$name}\n\tHostName {$internal}\nStrictHostKeyChecking accept-new\n";
+            $sshHost = new SSHHost(name: $host->getAlias() ?? $host->getHostname() ?? "unknown", hostname: $internal);
+            $sshHost = $sshHost->withIdentityFile(static::determineSSHPrivateKeyForHost($host));
 
-            if (has('mittwald_ssh_private_key_file')) {
-                $config .= parse("\tIdentityFile {{mittwald_ssh_private_key_file}}\n");
-            } else if (has('mittwald_ssh_private_key')) {
-                $config .= "\tIdentityFile ./.mw-deployer/id_rsa\n";
-            } else {
-                /** @var string $privateKeyFile */
-                $privateKeyFile = str_replace('.pub', '', get_str('ssh_copy_id'));
-                $config         .= "\tIdentityFile {$privateKeyFile}\n";
-            }
-
-            $config .= "\n";
+            $sshConfig = $sshConfig->withHost($sshHost);
         }
 
+        return $sshConfig;
+    }
+
+    private static function determineSSHPrivateKeyForHost(Host $host): string
+    {
+        $privateKeyFile = get_str_nullable('mittwald_ssh_private_key_file');
+        if (is_string($privateKeyFile)) {
+            return $privateKeyFile;
+        }
+
+        $privateKeyContents = get_str_nullable('mittwald_ssh_private_key');
+        if (is_string($privateKeyContents)) {
+            return './.mw-deployer/id_rsa';
+        }
+
+        $publicKeyFile = get_str_nullable('ssh_copy_id');
+        if (is_string($publicKeyFile)) {
+            /** @var string $privateKeyFile */
+            $privateKeyFile = str_replace('.pub', '', $publicKeyFile);
+
+            return $privateKeyFile;
+        }
+
+        throw new \InvalidArgumentException('could not determine SSH private key for host; please set one of "mittwald_ssh_private_key_file", "mittwald_ssh_private_key", or "ssh_copy_id".');
+    }
+
+    private static function assertLocalSSHPrivateKey(): void
+    {
         static::assertLocalSSHDirectory();
 
-        file_put_contents('./.mw-deployer/sshconfig', $config);
-
-        foreach (selectedHosts() as $host) {
-            if ($host->has('mittwald_internal_hostname')) {
-                $host->set('config_file', './.mw-deployer/sshconfig');
-            }
+        if (has('mittwald_ssh_private_key')) {
+            BaseRecipe::getFilesystem()->write('./.mw-deployer/id_rsa', get_str('mittwald_ssh_private_key'));
         }
     }
 
     private static function assertLocalSSHDirectory(): void
     {
         if (!is_dir('./.mw-deployer')) {
-            mkdir('./.mw-deployer', permissions: 0755, recursive: true);
+            BaseRecipe::getFilesystem()->createDirectory('./.mw-deployer');
         }
     }
 }

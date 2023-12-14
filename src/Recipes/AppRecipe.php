@@ -3,19 +3,14 @@
 namespace Mittwald\Deployer\Recipes;
 
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallation200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallations200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProject200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
 use Mittwald\Deployer\Client\AppClient;
-use Mittwald\Deployer\Error\UnexpectedResponseException;
 use Mittwald\Deployer\Util\SanityCheck;
 use function Deployer\{after, currentHost, get, info, parse, run, set, Support\starts_with, task};
 use function Mittwald\Deployer\get_array;
@@ -53,9 +48,6 @@ class AppRecipe
             }
 
             $projectResponse = $client->listProjects(new ListProjectsRequest());
-            if (!$projectResponse instanceof ListProjects200Response) {
-                throw new UnexpectedResponseException('Could not list projects', $projectResponse);
-            }
 
             foreach ($projectResponse->getBody() as $project) {
                 if ($project->getShortId() === get('mittwald_project_id') || $project->getId() === get('mittwald_project_id')) {
@@ -72,9 +64,6 @@ class AppRecipe
 
             $projectRequest  = new GetProjectRequest($projectId);
             $projectResponse = $client->project()->getProject($projectRequest);
-            if (!$projectResponse instanceof GetProject200Response) {
-                throw new UnexpectedResponseException('could not get projects', $projectResponse);
-            }
 
             return $projectResponse->getBody()->toJson();
         });
@@ -85,22 +74,16 @@ class AppRecipe
             if ($appID = get_str_nullable('mittwald_app_id')) {
                 SanityCheck::assertAppInstallationID($appID);
 
-                $appResponse = $client->getAppinstallation(new GetAppinstallationRequest($appID));
-                if (!$appResponse instanceof GetAppinstallation200Response) {
-                    throw new UnexpectedResponseException('could not get app', $appResponse);
-                }
-
-                return $appResponse->getBody()->toJson();
+                return $client
+                    ->getAppinstallation(new GetAppinstallationRequest($appID))
+                    ->getBody()
+                    ->toJson();
             }
 
             if ($deployPath = get_str_nullable('deploy_path')) {
                 $project = BaseRecipe::getProject();
 
                 $appsResponse = $client->listAppinstallations(new ListAppinstallationsRequest($project->getId()));
-                if (!$appsResponse instanceof ListAppinstallations200Response) {
-                    throw new UnexpectedResponseException('could not list apps', $appsResponse);
-                }
-
                 $webBasePath = $project->getDirectories()["Web"];
 
                 foreach ($appsResponse->getBody() as $app) {
