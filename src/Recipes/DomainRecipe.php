@@ -65,7 +65,7 @@ class DomainRecipe
                 [new Path($domainPathPrefix, new TargetInstallation($app->getId()))],
                 $project->getId(),
             )));
-            $response = $client->ingressCreateIngress($request);
+            $client->ingressCreateIngress($request);
         } else {
 
             $updatedPaths   = (clone $virtualHost)->getPaths();

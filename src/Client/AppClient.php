@@ -3,7 +3,7 @@
 namespace Mittwald\Deployer\Client;
 
 use Composer\Semver\Comparator;
-use Mittwald\ApiClient\Client\EmptyResponse;
+use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient as GeneratedAppClient;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwares\ListSystemsoftwaresRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsRequest;
@@ -44,10 +44,22 @@ class AppClient
                 ->withSystemSoftware($systemSoftwareSpec)
         );
 
-        $patchAppInstallationResponse = $this->inner->patchAppinstallation($appInstallationRequest);
-        if (!$patchAppInstallationResponse instanceof EmptyResponse) {
-            throw new \Exception('could not patch app installation');
-        }
+        $this->inner->patchAppinstallation($appInstallationRequest);
+    }
+
+    /**
+     * @param string $appInstallationId
+     * @param string $documentRoot
+     * @return void
+     * @throws UnexpectedResponseException
+     */
+    public function setDocumentRoot(string $appInstallationId, string $documentRoot): void
+    {
+        $this->inner->patchAppinstallation(new PatchAppinstallationRequest(
+            $appInstallationId,
+            (new PatchAppinstallationRequestBody)
+                ->withCustomDocumentRoot($documentRoot),
+        ));
     }
 
     /**
@@ -61,7 +73,7 @@ class AppClient
         $systemSoftwareVersionConstraint = static::normalizeVersionConstraint($systemSoftwareVersionConstraint);
 
         $systemSoftwareResponse = $this->inner->listSystemsoftwares(new ListSystemsoftwaresRequest());
-        $systemSoftware = (function () use ($systemSoftwareResponse, $systemSoftwareName): SystemSoftware {
+        $systemSoftware         = (function () use ($systemSoftwareResponse, $systemSoftwareName): SystemSoftware {
             foreach ($systemSoftwareResponse->getBody() as $systemSoftware) {
                 if (strtolower($systemSoftware->getName()) === strtolower($systemSoftwareName)) {
                     return $systemSoftware;

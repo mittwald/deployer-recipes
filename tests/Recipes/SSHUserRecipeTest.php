@@ -24,6 +24,11 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
 use function Deployer\set;
+use function PHPUnit\Framework\assertThat;
+use function PHPUnit\Framework\equalTo;
+use function PHPUnit\Framework\isTrue;
+use function PHPUnit\Framework\never;
+use function PHPUnit\Framework\once;
 
 #[CoversClass(SSHUserRecipe::class)]
 class SSHUserRecipeTest extends TestCase
@@ -33,6 +38,7 @@ class SSHUserRecipeTest extends TestCase
     protected function setUp(): void
     {
         $this->fixture = new TestFixture($this);
+        $this->fixture->setupDefaultAppInstallation();
         $this->fixture->processRunner->expects($this->any())
             ->method('run')
             ->with($this->anything(), 'cat ~/.ssh/id_rsa.pub', $this->anything())
@@ -40,46 +46,14 @@ class SSHUserRecipeTest extends TestCase
 
         AppRecipe::setup();
         SSHUserRecipe::setup();
-
-        $this->fixture->client->app->expects($this->any())
-            ->method('getAppinstallation')
-            ->willReturnCallback(function (GetAppinstallationRequest $req): GetAppinstallationOKResponse {
-                return new GetAppinstallationOKResponse(
-                    (new AppInstallation(
-                        'APP_ID',
-                        new VersionStatus('1.0.0'),
-                        'description',
-                        false,
-                        $req->getAppInstallationId(),
-                        '/foo',
-                        'a-XXXXXX',
-                    ))
-                        ->withProjectId('PROJECT_ID'),
-                );
-            });
-        $this->fixture->client->project->expects($this->any())
-            ->method('getProject')
-            ->willReturnCallback(fn(GetProjectRequest $req): GetProjectOKResponse => new GetProjectOKResponse(
-                new Project(
-                    new \DateTime(),
-                    'CUSTOMER_ID',
-                    'Description',
-                    ['Web' => '/html'],
-                    true,
-                    $req->getProjectId(),
-                    true,
-                    ProjectReadinessStatus::ready,
-                    'p-XXXXXX',
-                ),
-            ));
     }
 
     public function testAssertSSHUserCreatesSSHUserWhenItDoesNotExist(): void
     {
-        $this->fixture->client->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects(once())
             ->method('listSshUsers')
             ->willReturn(new ListSshUsersOKResponse([]));
-        $this->fixture->client->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects(once())
             ->method('createSshUser')
             ->with(new Callback(function (CreateSshUserRequest $request): bool {
                 $sshUser = $request->getBody();
@@ -117,10 +91,10 @@ class SSHUserRecipeTest extends TestCase
         set('mittwald_ssh_public_key_file', '/foo/id_rsa.pub');
         $this->fixture->fs->write('/foo/id_rsa.pub', 'ssh-rsa BARBAZ test@local');
 
-        $this->fixture->client->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects(once())
             ->method('listSshUsers')
             ->willReturn(new ListSshUsersOKResponse([]));
-        $this->fixture->client->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects(once())
             ->method('createSshUser')
             ->with(new Callback(function (CreateSshUserRequest $request): bool {
                 $sshUser = $request->getBody();
@@ -155,7 +129,7 @@ class SSHUserRecipeTest extends TestCase
 
     public function testAssertSSHUserUsesExistingSSHUser(): void
     {
-        $this->fixture->client->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects(once())
             ->method('listSshUsers')
             ->willReturn(new ListSshUsersOKResponse([
                 (new SshUser(
@@ -170,9 +144,9 @@ class SSHUserRecipeTest extends TestCase
                     new PublicKey('deployer', 'ssh-rsa FOOBAR'),
                 ])
             ]));
-        $this->fixture->client->sshSFTPUser->expects($this->never())
+        $this->fixture->client->sshSFTPUser->expects(never())
             ->method('createSshUser');
-        $this->fixture->client->sshSFTPUser->expects($this->never())
+        $this->fixture->client->sshSFTPUser->expects(never())
             ->method('updateSshUser');
 
         SSHUserRecipe::assertSSHUser();
@@ -180,7 +154,7 @@ class SSHUserRecipeTest extends TestCase
 
     public function testAssertSSHUserUpdatesExistingPublicKeys(): void
     {
-        $this->fixture->client->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects(once())
             ->method('listSshUsers')
             ->willReturn(new ListSshUsersOKResponse([
                 (new SshUser(
@@ -195,9 +169,9 @@ class SSHUserRecipeTest extends TestCase
                     new PublicKey('deployer', 'ssh-rsa BAR'),
                 ])
             ]));
-        $this->fixture->client->sshSFTPUser->expects($this->never())
+        $this->fixture->client->sshSFTPUser->expects(never())
             ->method('createSshUser');
-        $this->fixture->client->sshSFTPUser->expects($this->once())
+        $this->fixture->client->sshSFTPUser->expects(once())
             ->method('updateSshUser')
             ->with(new Callback(function (UpdateSshUserRequest $req): bool {
                 $keys = $req->getBody()->getPublicKeys();
@@ -217,13 +191,13 @@ class SSHUserRecipeTest extends TestCase
     {
         SSHUserRecipe::assertSSHConfig();
 
-        $this->assertTrue($this->fixture->fs->has('.mw-deployer/sshconfig'));
-        $this->assertEquals('Host test
+        assertThat($this->fixture->fs->has('.mw-deployer/sshconfig'), isTrue());
+        assertThat($this->fixture->fs->read('.mw-deployer/sshconfig'), equalTo('Host test
     HostName test.internal
     StrictHostKeyChecking accept-new
     IdentityFile ~/.ssh/id_rsa
 
-', $this->fixture->fs->read('.mw-deployer/sshconfig'));
+'));
     }
 
     public function testAssertSSHConfigWritesSSHConfigWithPrivateKeyFile(): void
@@ -232,13 +206,13 @@ class SSHUserRecipeTest extends TestCase
 
         SSHUserRecipe::assertSSHConfig();
 
-        $this->assertTrue($this->fixture->fs->has('.mw-deployer/sshconfig'));
-        $this->assertEquals('Host test
+        assertThat($this->fixture->fs->has('.mw-deployer/sshconfig'), isTrue());
+        assertThat($this->fixture->fs->read('.mw-deployer/sshconfig'), equalTo('Host test
     HostName test.internal
     StrictHostKeyChecking accept-new
     IdentityFile /foo/id_rsa
 
-', $this->fixture->fs->read('.mw-deployer/sshconfig'));
+'));
     }
 
     public function testAssertSSHConfigWritesSSHConfigWithPrivateKeyContents(): void
@@ -247,15 +221,15 @@ class SSHUserRecipeTest extends TestCase
 
         SSHUserRecipe::assertSSHConfig();
 
-        $this->assertTrue($this->fixture->fs->has('.mw-deployer/sshconfig'));
-        $this->assertEquals('Host test
+        assertThat($this->fixture->fs->has('.mw-deployer/sshconfig'), isTrue());
+        assertThat($this->fixture->fs->read('.mw-deployer/sshconfig'), equalTo('Host test
     HostName test.internal
     StrictHostKeyChecking accept-new
     IdentityFile ./.mw-deployer/id_rsa
 
-', $this->fixture->fs->read('.mw-deployer/sshconfig'));
+'));
 
-        $this->assertTrue($this->fixture->fs->has('.mw-deployer/id_rsa'));
-        $this->assertEquals('PRIVATE KEY CONTENTS', $this->fixture->fs->read('.mw-deployer/id_rsa'));
+        assertThat($this->fixture->fs->has('.mw-deployer/id_rsa'), isTrue());
+        assertThat($this->fixture->fs->read('.mw-deployer/id_rsa'), equalTo('PRIVATE KEY CONTENTS'));
     }
 }
