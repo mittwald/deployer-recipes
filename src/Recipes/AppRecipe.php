@@ -2,11 +2,8 @@
 
 namespace Mittwald\Deployer\Recipes;
 
-use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
@@ -84,7 +81,7 @@ class AppRecipe
                 $project = BaseRecipe::getProject();
 
                 $appsResponse = $client->listAppinstallations(new ListAppinstallationsRequest($project->getId()));
-                $webBasePath = $project->getDirectories()["Web"];
+                $webBasePath  = $project->getDirectories()["Web"];
 
                 foreach ($appsResponse->getBody() as $app) {
                     if ($webBasePath . $app->getInstallationPath() === $deployPath) {
@@ -122,7 +119,9 @@ class AppRecipe
             'mittwald:app:dependencies',
         ]);
 
-        task('mittwald:opcache:flush', function (): void { static::flushOpcache(); });
+        task('mittwald:opcache:flush', function (): void {
+            static::flushOpcache();
+        });
 
         after('deploy:symlink', 'mittwald:opcache:flush');
     }
@@ -157,11 +156,8 @@ class AppRecipe
         currentHost()->set('writable_mode', 'chmod');
     }
 
-    public static function assertDocumentRoot(): void
+    private static function getDesiredDocumentRoot(): string
     {
-        $app    = AppRecipe::getAppInstallation();
-        $client = BaseRecipe::getClient()->app();
-
         /** @var string $relativeCurrentPath */
         $relativeCurrentPath = str_replace(get_str('deploy_path'), '', get_str('current_path'));
         $relativeCurrentPath = trim($relativeCurrentPath, '/');
@@ -171,23 +167,22 @@ class AppRecipe
             $desiredDocumentRoot .= '/' . ltrim($publicPath, '/');
         }
 
-        if ($app->getCustomDocumentRoot() === $desiredDocumentRoot) {
+        return $desiredDocumentRoot;
+    }
+
+    public static function assertDocumentRoot(): void
+    {
+        $client              = new AppClient(BaseRecipe::getClient()->app());
+        $appInstallation     = AppRecipe::getAppInstallation();
+        $desiredDocumentRoot = static::getDesiredDocumentRoot();
+
+        if ($appInstallation->getCustomDocumentRoot() === $desiredDocumentRoot) {
             info("document root already set to <fg=magenta;options=bold>{$desiredDocumentRoot}</>");
             return;
         }
 
         info("setting document root to <fg=magenta;options=bold>{$desiredDocumentRoot}</>");
-
-        $appPatchRequest = new PatchAppinstallationRequest(
-            $app->getId(),
-            (new PatchAppinstallationRequestBody())
-                ->withCustomDocumentRoot($desiredDocumentRoot),
-        );
-
-        $appPatchResponse = $client->patchAppinstallation($appPatchRequest);
-        if (!$appPatchResponse instanceof EmptyResponse) {
-            throw new \Exception('Could not patch app');
-        }
+        $client->setDocumentRoot($appInstallation->getId(), $desiredDocumentRoot);
     }
 
     public static function assertDependencies(): void
