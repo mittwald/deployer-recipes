@@ -23,6 +23,7 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
+use function Deployer\set;
 
 #[CoversClass(SSHUserRecipe::class)]
 class SSHUserRecipeTest extends TestCase
@@ -111,6 +112,47 @@ class SSHUserRecipeTest extends TestCase
         SSHUserRecipe::assertSSHUser();
     }
 
+    public function testAssertSSHUserCreatesSSHUserWithPublicKeyFromDefinedFile(): void
+    {
+        set('mittwald_ssh_public_key_file', '/foo/id_rsa.pub');
+        $this->fixture->fs->write('/foo/id_rsa.pub', 'ssh-rsa BARBAZ test@local');
+
+        $this->fixture->client->sshSFTPUser->expects($this->once())
+            ->method('listSshUsers')
+            ->willReturn(new ListSshUsersOKResponse([]));
+        $this->fixture->client->sshSFTPUser->expects($this->once())
+            ->method('createSshUser')
+            ->with(new Callback(function (CreateSshUserRequest $request): bool {
+                $sshUser = $request->getBody();
+                $auth    = $sshUser->getAuthentication();
+
+                $this->assertEquals('deployer', $sshUser->getDescription());
+                $this->assertInstanceOf(AuthenticationAlternative2::class, $auth);
+
+                $publicKeys = $auth->getPublicKeys();
+
+                $this->assertCount(1, $publicKeys);
+                $this->assertEquals('ssh-rsa BARBAZ', $publicKeys[0]->getKey());
+                $this->assertEquals('deployer', $publicKeys[0]->getComment());
+                return true;
+            }))
+            ->willReturnCallback(function (CreateSshUserRequest $req): CreateSshUserCreatedResponse {
+                return new CreateSshUserCreatedResponse(
+                    (new SshUser(
+                        new \DateTime(),
+                        new \DateTime(),
+                        $req->getBody()->getDescription(),
+                        false,
+                        'SSH_USER_ID',
+                        $req->getProjectId(),
+                        'ssh-YYYYYY'
+                    )),
+                );
+            });
+
+        SSHUserRecipe::assertSSHUser();
+    }
+
     public function testAssertSSHUserUsesExistingSSHUser(): void
     {
         $this->fixture->client->sshSFTPUser->expects($this->once())
@@ -169,5 +211,51 @@ class SSHUserRecipeTest extends TestCase
             ->willReturn(new EmptyResponse(new Response()));
 
         SSHUserRecipe::assertSSHUser();
+    }
+
+    public function testAssertSSHConfigWritesSSHConfigWithDefaultPrivateKey(): void
+    {
+        SSHUserRecipe::assertSSHConfig();
+
+        $this->assertTrue($this->fixture->fs->has('.mw-deployer/sshconfig'));
+        $this->assertEquals('Host test
+    HostName test.internal
+    StrictHostKeyChecking accept-new
+    IdentityFile ~/.ssh/id_rsa
+
+', $this->fixture->fs->read('.mw-deployer/sshconfig'));
+    }
+
+    public function testAssertSSHConfigWritesSSHConfigWithPrivateKeyFile(): void
+    {
+        set('mittwald_ssh_private_key_file', '/foo/id_rsa');
+
+        SSHUserRecipe::assertSSHConfig();
+
+        $this->assertTrue($this->fixture->fs->has('.mw-deployer/sshconfig'));
+        $this->assertEquals('Host test
+    HostName test.internal
+    StrictHostKeyChecking accept-new
+    IdentityFile /foo/id_rsa
+
+', $this->fixture->fs->read('.mw-deployer/sshconfig'));
+    }
+
+    public function testAssertSSHConfigWritesSSHConfigWithPrivateKeyContents(): void
+    {
+        set('mittwald_ssh_private_key', 'PRIVATE KEY CONTENTS');
+
+        SSHUserRecipe::assertSSHConfig();
+
+        $this->assertTrue($this->fixture->fs->has('.mw-deployer/sshconfig'));
+        $this->assertEquals('Host test
+    HostName test.internal
+    StrictHostKeyChecking accept-new
+    IdentityFile ./.mw-deployer/id_rsa
+
+', $this->fixture->fs->read('.mw-deployer/sshconfig'));
+
+        $this->assertTrue($this->fixture->fs->has('.mw-deployer/id_rsa'));
+        $this->assertEquals('PRIVATE KEY CONTENTS', $this->fixture->fs->read('.mw-deployer/id_rsa'));
     }
 }

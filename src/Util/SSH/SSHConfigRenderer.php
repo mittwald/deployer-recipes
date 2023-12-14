@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Mittwald\Deployer\Util\SSH;
 
+use League\Flysystem\Filesystem;
+
 readonly class SSHConfigRenderer
 {
     public function __construct(private SSHConfig $config)
@@ -28,8 +30,8 @@ readonly class SSHConfigRenderer
         return $output;
     }
 
-    public function renderToFile(): void
+    public function renderToFile(Filesystem $fs): void
     {
-        file_put_contents($this->config->filename, $this->render());
+        $fs->write($this->config->filename, $this->render());
     }
 }
