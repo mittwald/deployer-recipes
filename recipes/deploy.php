@@ -3,6 +3,7 @@
 namespace Deployer;
 
 use Deployer\Host\Host;
+use Deployer\Support\ObjectProxy;
 use Mittwald\Deployer\Recipes\AppRecipe;
 use Mittwald\Deployer\Recipes\DomainRecipe;
 use Mittwald\Deployer\Recipes\SSHUserRecipe;
@@ -25,9 +26,10 @@ before('deploy:setup', 'mittwald:setup');
  * Shorthand function for defining a host with a preconfigured mittwald App.
  *
  * @param ?string $appId
- * @return Host
+ * @param ?string $hostname An optional hostname to use instead of the default one
+ * @return Host|ObjectProxy
  */
-function mittwald_app(string $appId = null): Host {
-    return host('mittwald')
+function mittwald_app(string $appId = null, ?string $hostname = null): Host|ObjectProxy {
+    return host($hostname ?? 'mittwald')
         ->set('mittwald_app_id', $appId ?? getenv("MITTWALD_APP_ID"));
 }
