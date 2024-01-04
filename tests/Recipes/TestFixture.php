@@ -2,7 +2,6 @@
 
 namespace Mittwald\Deployer\Recipes;
 
-use Composer\Semver\Constraint\Constraint;
 use Composer\Semver\Semver;
 use Deployer\Component\ProcessRunner\ProcessRunner;
 use Deployer\Deployer;
@@ -22,8 +21,9 @@ use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftware;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\VersionStatus;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\DeprecatedProjectReadinessStatus;
 use Mittwald\ApiClient\Generated\V2\Schemas\Project\Project;
-use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectStatus;
 use Mittwald\Deployer\Client\MockClient;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -94,8 +94,9 @@ class TestFixture
             true,
             'PROJECT_ID',
             true,
-            ProjectReadinessStatus::ready,
+            DeprecatedProjectReadinessStatus::ready,
             'p-XXXXXX',
+            ProjectStatus::ready,
         ))
             ->withClusterDomain('project.host')
             ->withClusterID('testing');

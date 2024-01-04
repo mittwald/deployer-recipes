@@ -5,18 +5,10 @@ namespace Mittwald\Deployer\Recipes;
 
 use GuzzleHttp\Psr7\Response;
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequest;
-use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
-use Mittwald\ApiClient\Generated\V2\Schemas\App\VersionStatus;
-use Mittwald\ApiClient\Generated\V2\Schemas\Project\Project;
-use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
 use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser;
