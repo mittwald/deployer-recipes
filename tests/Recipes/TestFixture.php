@@ -87,16 +87,17 @@ class TestFixture
             ->withProjectId('PROJECT_ID');
 
         $this->project = (new Project(
-            new \DateTime(),
-            'CUSTOMER_ID',
-            'Description',
-            ['Web' => '/html'],
-            true,
-            'PROJECT_ID',
-            true,
-            DeprecatedProjectReadinessStatus::ready,
-            'p-XXXXXX',
-            ProjectStatus::ready,
+            createdAt: new \DateTime(),
+            customerId: 'CUSTOMER_ID',
+            description: 'Description',
+            directories: ['Web' => '/html'],
+            enabled: true,
+            id: 'PROJECT_ID',
+            isReady: true,
+            readiness: DeprecatedProjectReadinessStatus::ready,
+            shortId: 'p-XXXXXX',
+            status: ProjectStatus::ready,
+            statusSetAt: new \DateTime(),
         ))
             ->withClusterDomain('project.host')
             ->withClusterID('testing');
