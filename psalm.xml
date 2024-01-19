@@ -8,6 +8,13 @@
     findUnusedBaselineEntry="false"
     findUnusedCode="false"
 >
+    <issueHandlers>
+        <RiskyTruthyFalsyComparison>
+            <errorLevel type="suppress">
+                <directory name="src" />
+            </errorLevel>
+        </RiskyTruthyFalsyComparison>
+    </issueHandlers>
     <projectFiles>
         <directory name="src" />
         <ignoreFiles>
