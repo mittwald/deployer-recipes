@@ -9,7 +9,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsReq
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
 use Mittwald\Deployer\Client\AppClient;
 use Mittwald\Deployer\Util\SanityCheck;
-use function Deployer\{after, commandExist, currentHost, get, info, parse, run, set, Support\starts_with, task, test};
+use function Deployer\{after, currentHost, get, info, parse, run, set, Support\starts_with, task, test};
 use function Mittwald\Deployer\get_array;
 use function Mittwald\Deployer\get_str;
 use function Mittwald\Deployer\get_str_nullable;
