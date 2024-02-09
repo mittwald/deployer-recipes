@@ -10,9 +10,9 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(SanityCheck::class)]
 class SanityCheckTest extends TestCase
 {
-    public function testAppShortIDTriggersException(): void
+    public function testAppShortIDDoesNotTriggersException(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectNotToPerformAssertions();
         SanityCheck::assertAppInstallationID("a-123456");
     }
 

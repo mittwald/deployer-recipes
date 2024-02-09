@@ -58,7 +58,7 @@ class SSHUserRecipe
         $app     = AppRecipe::getAppInstallation();
         $sshUser = self::lookupOrCreateSSHUser();
 
-        $remoteUser = "{$sshUser->getUserName()}@app-{$app->getId()}";
+        $remoteUser = "{$sshUser->getUserName()}@{$app->getShortId()}";
 
         info("setting SSH user to <fg=magenta;options=bold>{$remoteUser}</>");
 
