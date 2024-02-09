@@ -9,7 +9,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsReq
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
 use Mittwald\Deployer\Client\AppClient;
 use Mittwald\Deployer\Util\SanityCheck;
-use function Deployer\{after, currentHost, get, info, parse, run, set, Support\starts_with, task};
+use function Deployer\{after, commandExist, currentHost, get, info, parse, run, set, Support\starts_with, task, test};
 use function Mittwald\Deployer\get_array;
 use function Mittwald\Deployer\get_str;
 use function Mittwald\Deployer\get_str_nullable;
@@ -204,7 +204,12 @@ class AppRecipe
 
     public static function flushOpcache(): void
     {
-        run('touch /etc/php/php.ini');
+        if (!test("-x cachetool.phar")) {
+            run("curl -sLO https://github.com/gordalina/cachetool/releases/latest/download/cachetool.phar");
+            run("chmod +x cachetool.phar");
+        }
+
+        run('./cachetool.phar opcache:invalidate:scripts --fcgi=127.0.0.1:9000 {{ deploy_path }}');
     }
 
 }
