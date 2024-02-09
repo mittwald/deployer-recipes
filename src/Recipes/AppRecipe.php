@@ -99,6 +99,8 @@ class AppRecipe
             'php' => '{{php_version}}',
         ]);
 
+        set('mittwald_local_bin', '{{ deploy_path }}/bin');
+
         task('mittwald:discover', function (): void {
             static::discover();
         })
@@ -204,14 +206,15 @@ class AppRecipe
 
     public static function flushOpcache(): void
     {
-        if (!test("[ -x cachetool.phar ]")) {
+        if (!test("[ -x {{ mittwald_local_bin }}/cachetool.phar ]")) {
             info("downloading cachetool");
 
-            run("curl -sLO https://github.com/gordalina/cachetool/releases/latest/download/cachetool.phar");
-            run("chmod +x cachetool.phar");
+            run("mkdir -p {{ mittwald_local_bin }}");
+            run("curl -sL https://github.com/gordalina/cachetool/releases/latest/download/cachetool.phar > {{ mittwald_local_bin }}/cachetool.phar");
+            run("chmod +x {{ mittwald_local_bin }}/cachetool.phar");
         }
 
-        run('./cachetool.phar opcache:invalidate:scripts --fcgi=127.0.0.1:9000 {{ deploy_path }}');
+        run('{{ mittwald_local_bin }}//cachetool.phar opcache:invalidate:scripts --fcgi=127.0.0.1:9000 {{ deploy_path }}');
         info("opcache flushed");
     }
 
