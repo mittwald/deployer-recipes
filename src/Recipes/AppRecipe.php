@@ -204,7 +204,7 @@ class AppRecipe
 
     public static function flushOpcache(): void
     {
-        if (!test("-x cachetool.phar")) {
+        if (!test("[ -x cachetool.phar ]")) {
             info("downloading cachetool");
 
             run("curl -sLO https://github.com/gordalina/cachetool/releases/latest/download/cachetool.phar");
