@@ -9,7 +9,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsReq
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
 use Mittwald\Deployer\Client\AppClient;
 use Mittwald\Deployer\Util\SanityCheck;
-use function Deployer\{after, currentHost, get, info, parse, run, set, Support\starts_with, task};
+use function Deployer\{after, currentHost, get, info, parse, run, set, Support\starts_with, task, test};
 use function Mittwald\Deployer\get_array;
 use function Mittwald\Deployer\get_str;
 use function Mittwald\Deployer\get_str_nullable;
@@ -98,6 +98,8 @@ class AppRecipe
         set('mittwald_app_dependencies', [
             'php' => '{{php_version}}',
         ]);
+
+        set('mittwald_local_bin', '{{ deploy_path }}/bin');
 
         task('mittwald:discover', function (): void {
             static::discover();
@@ -204,7 +206,16 @@ class AppRecipe
 
     public static function flushOpcache(): void
     {
-        run('touch /etc/php/php.ini');
+        if (!test("[ -x {{ mittwald_local_bin }}/cachetool.phar ]")) {
+            info("downloading cachetool");
+
+            run("mkdir -p {{ mittwald_local_bin }}");
+            run("curl -sL https://github.com/gordalina/cachetool/releases/latest/download/cachetool.phar > {{ mittwald_local_bin }}/cachetool.phar");
+            run("chmod +x {{ mittwald_local_bin }}/cachetool.phar");
+        }
+
+        run('{{ mittwald_local_bin }}//cachetool.phar opcache:invalidate:scripts --fcgi=127.0.0.1:9000 {{ deploy_path }}');
+        info("opcache flushed");
     }
 
 }
