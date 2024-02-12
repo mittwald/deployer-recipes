@@ -58,8 +58,13 @@ class SSHUserRecipe
         })
             ->desc('Asserts that the SSH user for the mittwald platform is configured correctly');
 
-        after('mittwald:sshuser', 'mittwald:sshconfig');
+        task('mittwald:sshuser-ready', function (): void {
+            static::assertSSHAvailable();
+        })
+            ->desc('Asserts that the SSH user for the mittwald platform is available');
 
+        after('mittwald:sshuser', 'mittwald:sshconfig');
+        after('mittwald:sshconfig', 'mittwald:sshuser-ready');
     }
 
     public static function assertSSHUser(): void
@@ -72,15 +77,20 @@ class SSHUserRecipe
         info("setting SSH user to <fg=magenta;options=bold>{$remoteUser}</>");
 
         currentHost()->set('remote_user', $remoteUser);
+    }
 
+    public static function assertSSHAvailable(): void
+    {
+        $remoteUser = get_str('remote_user');
         $backoff = 5;
+
         for ($attempts = 10; $attempts > 0; $attempts--) {
             try {
                 run("/bin/true");
+                break;
             } catch (\Exception $e) {
                 info("SSH user <fg=magenta;options=bold>{$remoteUser}</> not yet available, retrying in {$backoff} seconds... ({$e->getMessage()})");
                 sleep($backoff);
-                continue;
             }
         }
     }
