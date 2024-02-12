@@ -76,7 +76,7 @@ class SSHUserRecipe
         $backoff = 5;
         for ($attempts = 10; $attempts > 0; $attempts--) {
             try {
-                run("true");
+                run("/bin/true");
             } catch (\Exception $e) {
                 info("SSH user <fg=magenta;options=bold>{$remoteUser}</> not yet available, retrying in {$backoff} seconds... ({$e->getMessage()})");
                 sleep($backoff);
