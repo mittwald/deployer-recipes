@@ -19,7 +19,16 @@ use Mittwald\Deployer\Util\SSH\SSHConfig;
 use Mittwald\Deployer\Util\SSH\SSHConfigRenderer;
 use Mittwald\Deployer\Util\SSH\SSHHost;
 use Mittwald\Deployer\Util\SSH\SSHPublicKey;
-use function Deployer\{after, currentHost, has, info, runLocally, selectedHosts, set, Support\parse_home_dir, task};
+use function Deployer\{after,
+    currentHost,
+    has,
+    info,
+    run,
+    runLocally,
+    selectedHosts,
+    set,
+    Support\parse_home_dir,
+    task};
 use function Mittwald\Deployer\get_str;
 use function Mittwald\Deployer\get_str_nullable;
 
@@ -63,6 +72,17 @@ class SSHUserRecipe
         info("setting SSH user to <fg=magenta;options=bold>{$remoteUser}</>");
 
         currentHost()->set('remote_user', $remoteUser);
+
+        $backoff = 3;
+        for ($attempts = 10; $attempts > 0; $attempts--) {
+            try {
+                run("true");
+            } catch (\Exception $e) {
+                info("SSH user <fg=magenta;options=bold>{$remoteUser}</> not yet available, retrying in {$backoff} seconds...");
+                sleep($backoff);
+                continue;
+            }
+        }
     }
 
     private static function lookupOrCreateSSHUser(): SshUser
