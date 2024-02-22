@@ -1,4 +1,4 @@
-# mittwald Deployer Recipe Collection
+<h1 align="center">mittwald Deployer Recipe Collection</h1>
 
 <p align="center">
     <a href="#installation">⚒️ Installation instructions</a> |
@@ -17,11 +17,21 @@ recipes for [Deployer](https://deployer.org/).
 
 ## Installation
 
+### Via Composer
+
 In order to use this recipe collection, you need to install it via
 [Composer](https://getcomposer.org):
 
 ```bash
 composer require --dev mittwald/deployer-recipes
+```
+
+### Using Docker
+
+There is also a pre-built docker image, providing both deployer and the mittwald deployer recipes. You can use it like this:
+
+```bash
+docker run --rm -it -v $(pwd):/app -w /app mittwald/deployer:latest deploy
 ```
 
 ## Usage
