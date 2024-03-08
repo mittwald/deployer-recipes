@@ -7,6 +7,78 @@
     "content-hash": "f133c263572d992378650f8f65883052",
     "packages": [
         {
+            "name": "caseyamcl/guzzle_retry_middleware",
+            "version": "v2.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/caseyamcl/guzzle_retry_middleware.git",
+                "reference": "cbec4ce59c2dbd200a11aed19e7c26c37e50e535"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/caseyamcl/guzzle_retry_middleware/zipball/cbec4ce59c2dbd200a11aed19e7c26c37e50e535",
+                "reference": "cbec4ce59c2dbd200a11aed19e7c26c37e50e535",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3|^7.0",
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "jaschilz/php-coverage-badger": "^2.0",
+                "nesbot/carbon": "^2.0",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^1.0",
+                "phpunit/phpunit": "^7.5|^8.0|^9.0",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleRetry\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Casey McLaughlin",
+                    "email": "caseyamcl@gmail.com",
+                    "homepage": "https://caseymclaughlin.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Guzzle v6+ retry middleware that handles 429/503 status codes and connection timeouts",
+            "homepage": "https://github.com/caseyamcl/guzzle_retry_middleware",
+            "keywords": [
+                "Guzzle",
+                "back-off",
+                "caseyamcl",
+                "guzzle_retry_middleware",
+                "middleware",
+                "retry",
+                "retry-after"
+            ],
+            "support": {
+                "issues": "https://github.com/caseyamcl/guzzle_retry_middleware/issues",
+                "source": "https://github.com/caseyamcl/guzzle_retry_middleware/tree/v2.9.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/caseyamcl",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-08-30T18:02:31+00:00"
+        },
+        {
             "name": "composer/semver",
             "version": "3.4.0",
             "source": {
@@ -690,19 +762,20 @@
         },
         {
             "name": "mittwald/api-client",
-            "version": "v2.0.39",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mittwald/api-client-php.git",
-                "reference": "947b9db5edf1ce1a1e89c2245cff2e544ab10a72"
+                "reference": "8893219f685904cf19ac09f40f39ee171620585e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/947b9db5edf1ce1a1e89c2245cff2e544ab10a72",
-                "reference": "947b9db5edf1ce1a1e89c2245cff2e544ab10a72",
+                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/8893219f685904cf19ac09f40f39ee171620585e",
+                "reference": "8893219f685904cf19ac09f40f39ee171620585e",
                 "shasum": ""
             },
             "require": {
+                "caseyamcl/guzzle_retry_middleware": "^2.9",
                 "guzzlehttp/guzzle": "^7.8",
                 "justinrainbow/json-schema": "^5.2"
             },
@@ -730,9 +803,9 @@
             "description": "Client library for the mittwald mStudio v2 API",
             "support": {
                 "issues": "https://github.com/mittwald/api-client-php/issues",
-                "source": "https://github.com/mittwald/api-client-php/tree/v2.0.39"
+                "source": "https://github.com/mittwald/api-client-php/tree/v2.1.0"
             },
-            "time": "2024-03-05T00:13:52+00:00"
+            "time": "2024-03-08T17:47:01+00:00"
         },
         {
             "name": "psr/http-client",
