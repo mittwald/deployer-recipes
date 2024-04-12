@@ -15,6 +15,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient;
 use Mittwald\ApiClient\Generated\V2\Clients\File\FileClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient;
@@ -46,6 +47,7 @@ class MockClient implements Client
     public ContainerClient&MockObject $container;
     public PageInsightsClient&MockObject $pageInsights;
     public RelocationClient&MockObject $relocation;
+    public MarketplaceClient&MockObject $marketplace;
 
     public function __construct(TestCase $test)
     {
@@ -68,6 +70,7 @@ class MockClient implements Client
         $this->container = $test->getMockBuilder(ContainerClient::class)->getMock();
         $this->pageInsights = $test->getMockBuilder(PageInsightsClient::class)->getMock();
         $this->relocation = $test->getMockBuilder(RelocationClient::class)->getMock();
+        $this->marketplace = $test->getMockBuilder(MarketplaceClient::class)->getMock();
     }
 
     public function project(): ProjectClient
@@ -163,6 +166,11 @@ class MockClient implements Client
     public function relocation(): RelocationClient
     {
         return $this->relocation;
+    }
+
+    public function marketplace(): MarketplaceClient
+    {
+        return $this->marketplace;
     }
 
 }
