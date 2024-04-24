@@ -33,6 +33,15 @@ jobs:
           composer require --dev mittwald/deployer-recipes:dev-${GITHUB_SHA}
           cp git/mittwald-recipe/functionaltest/deploy.php deploy.php
 
+      - name: Deploy testing SSH key
+        run: |
+          mkdir ~/.ssh
+          echo -n "${MITTWALD_SSH_PRIVATE_KEY}" | base64 -d > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keygen -f ~/.ssh/id_rsa -y > ~/.ssh/id_rsa.pub
+        env:
+          MITTWALD_SSH_PRIVATE_KEY: ${{ secrets.MITTWALD_SSH_PRIVATE_KEY }}
+
       - name: Run test deployment
         run: |
           ./vendor/bin/dep deploy -vvv
