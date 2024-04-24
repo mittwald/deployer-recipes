@@ -8,11 +8,11 @@ on:
 jobs:
   build:
     strategy:
+      max-parallel: 1
       matrix:
         php-versions: ['8.2', '8.3']
         deployer-version: ['7.3', '7.4']
     runs-on: ubuntu-latest
-    concurrency: foo
 
     steps:
       - uses: actions/checkout@v4
