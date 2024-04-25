@@ -29,7 +29,7 @@ jobs:
       - name: Setup test project with composer
         run: |
           composer init --name mittwald/deployer-recipes-test --type project --repository '{"type":"path","url":"git/mittwald-recipe"}'
-          composer require --dev deployer/deployer:~${{ matrix.deployer-version }}
+          composer require --dev 'deployer/deployer:${{ matrix.deployer-version }}.*'
           composer require --dev mittwald/deployer-recipes:dev-${GITHUB_SHA}
           cp git/mittwald-recipe/functionaltest/deploy.php deploy.php
 
