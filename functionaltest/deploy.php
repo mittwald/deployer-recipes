@@ -9,7 +9,6 @@ require __DIR__ . '/vendor/mittwald/deployer-recipes/recipes/deploy.php';
 
 // Config
 
-set('repository', 'https://github.com/martin-helmich/t3crr23-deployer-demo.git');
 set('rsync_src', __DIR__);
 set('php_version', '8.2');
 set('domain', getenv("MITTWALD_APP_DOMAIN"));
