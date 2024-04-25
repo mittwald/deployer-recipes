@@ -17,7 +17,7 @@ set('domain', getenv("MITTWALD_APP_DOMAIN"));
 // Hosts
 
 mittwald_app(getenv("MITTWALD_APP_ID"))
-    ->set('public_path', '{{typo3_webroot}}');
+    ->set('public_path', '/');
 
 // Hooks
 
