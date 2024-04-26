@@ -1,0 +1,68 @@
+name: Functional testing
+
+on:
+  push:
+    branches: [ master ]
+  pull_request: {}
+
+jobs:
+  build:
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        php-versions: ['8.2', '8.3']
+        deployer-version: ['7.3']
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: 'git/mittwald-recipe'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, intl, json
+          coverage: pcov
+
+      - name: Setup test project with composer
+        run: |
+          composer init --name mittwald/deployer-recipes-test --type project --repository '{"type":"path","url":"git/mittwald-recipe"}'
+          composer require --dev 'deployer/deployer:${{ matrix.deployer-version }}.*'
+          composer require --dev mittwald/deployer-recipes:dev-${GITHUB_SHA}
+          cp git/mittwald-recipe/functionaltest/deploy.php deploy.php
+
+      - name: Deploy testing SSH key
+        run: |
+          mkdir ~/.ssh
+          echo -n "${MITTWALD_SSH_PRIVATE_KEY}" | base64 -d > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keygen -f ~/.ssh/id_rsa -y > ~/.ssh/id_rsa.pub
+        env:
+          MITTWALD_SSH_PRIVATE_KEY: ${{ secrets.MITTWALD_SSH_PRIVATE_KEY }}
+
+      - name: Generate unique test file
+        run: |
+          openssl rand -hex 32 > testing.txt
+
+      - name: Run test deployment
+        run: |
+          ./vendor/bin/dep deploy -vvv
+        env:
+          MITTWALD_APP_ID: ${{ secrets.MITTWALD_APP_ID }}
+          MITTWALD_APP_DOMAIN: ${{ secrets.MITTWALD_APP_DOMAIN }}
+          MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
+
+      - name: Assert deployment was successful
+        run: |
+          deployed=$(curl -f -s https://${MITTWALD_APP_DOMAIN}/testing.txt)
+          expected=$(< testing.txt)
+          
+          echo "::debug::got output: ${deployed}"
+          echo "::debug::expected: ${expected}"
+          
+          test "${deployed}" = "${expected}"
+        env:
+          MITTWALD_APP_DOMAIN: ${{ secrets.MITTWALD_APP_DOMAIN }}
