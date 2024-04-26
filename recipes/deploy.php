@@ -20,7 +20,7 @@ task('mittwald:setup', [
     'mittwald:domain',
 ]);
 
-before('deploy:setup', 'mittwald:setup');
+before('deploy:info', 'mittwald:setup');
 
 /**
  * Shorthand function for defining a host with a preconfigured mittwald App.

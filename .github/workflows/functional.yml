@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: ['8.2', '8.3']
-        deployer-version: ['7.3']
+        deployer-version: ['7.3.*', '7.4.*', '*']
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +30,7 @@ jobs:
       - name: Setup test project with composer
         run: |
           composer init --name mittwald/deployer-recipes-test --type project --repository '{"type":"path","url":"git/mittwald-recipe"}'
-          composer require --dev 'deployer/deployer:${{ matrix.deployer-version }}.*'
+          composer require --dev 'deployer/deployer:${{ matrix.deployer-version }}'
           composer require --dev mittwald/deployer-recipes:dev-${GITHUB_SHA}
           cp git/mittwald-recipe/functionaltest/deploy.php deploy.php
 
