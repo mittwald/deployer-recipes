@@ -31,7 +31,13 @@ jobs:
         run: |
           composer init --name mittwald/deployer-recipes-test --type project --repository '{"type":"path","url":"git/mittwald-recipe"}'
           composer require --dev 'deployer/deployer:${{ matrix.deployer-version }}'
-          composer require --dev mittwald/deployer-recipes:dev-${GITHUB_SHA}
+          
+          if [[ "${GITHUB_REF}" == "refs/heads/master" ]]; then
+            composer require --dev mittwald/deployer-recipes:dev-master
+          else
+            composer require --dev mittwald/deployer-recipes:dev-${GITHUB_SHA}
+          fi
+          
           cp git/mittwald-recipe/functionaltest/deploy.php deploy.php
 
       - name: Deploy testing SSH key
