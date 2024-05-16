@@ -14,6 +14,11 @@
                 <directory name="src" />
             </errorLevel>
         </RiskyTruthyFalsyComparison>
+        <MissingClassConstType>
+            <errorLevel type="suppress">
+                <directory name="src" />
+            </errorLevel>
+        </MissingClassConstType>
     </issueHandlers>
     <projectFiles>
         <directory name="src" />
