@@ -761,16 +761,16 @@
         },
         {
             "name": "mittwald/api-client",
-            "version": "v2.1.25",
+            "version": "v2.1.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mittwald/api-client-php.git",
-                "reference": "2750ecd1321bc6444152b4e75388fc9f37d0ca60"
+                "reference": "a11b781de41f622421d6843fd0410dac64f7e8cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/2750ecd1321bc6444152b4e75388fc9f37d0ca60",
-                "reference": "2750ecd1321bc6444152b4e75388fc9f37d0ca60",
+                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/a11b781de41f622421d6843fd0410dac64f7e8cc",
+                "reference": "a11b781de41f622421d6843fd0410dac64f7e8cc",
                 "shasum": ""
             },
             "require": {
@@ -804,9 +804,9 @@
             "description": "Client library for the mittwald mStudio v2 API",
             "support": {
                 "issues": "https://github.com/mittwald/api-client-php/issues",
-                "source": "https://github.com/mittwald/api-client-php/tree/v2.1.25"
+                "source": "https://github.com/mittwald/api-client-php/tree/v2.1.26"
             },
-            "time": "2024-05-17T00:09:27+00:00"
+            "time": "2024-05-18T00:09:48+00:00"
         },
         {
             "name": "psr/http-client",
