@@ -489,12 +489,12 @@
             "version": "v5.2.13",
             "source": {
                 "type": "git",
-                "url": "https://github.com/justinrainbow/json-schema.git",
+                "url": "https://github.com/jsonrainbow/json-schema.git",
                 "reference": "fbbe7e5d79f618997bc3332a6f49246036c45793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/fbbe7e5d79f618997bc3332a6f49246036c45793",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/fbbe7e5d79f618997bc3332a6f49246036c45793",
                 "reference": "fbbe7e5d79f618997bc3332a6f49246036c45793",
                 "shasum": ""
             },
@@ -549,8 +549,8 @@
                 "schema"
             ],
             "support": {
-                "issues": "https://github.com/justinrainbow/json-schema/issues",
-                "source": "https://github.com/justinrainbow/json-schema/tree/v5.2.13"
+                "issues": "https://github.com/jsonrainbow/json-schema/issues",
+                "source": "https://github.com/jsonrainbow/json-schema/tree/v5.2.13"
             },
             "time": "2023-09-26T02:20:38+00:00"
         },
@@ -761,16 +761,16 @@
         },
         {
             "name": "mittwald/api-client",
-            "version": "v2.1.26",
+            "version": "v2.1.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mittwald/api-client-php.git",
-                "reference": "a11b781de41f622421d6843fd0410dac64f7e8cc"
+                "reference": "d13c12302c5677f9fccb562ca06bf6930fc16976"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/a11b781de41f622421d6843fd0410dac64f7e8cc",
-                "reference": "a11b781de41f622421d6843fd0410dac64f7e8cc",
+                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/d13c12302c5677f9fccb562ca06bf6930fc16976",
+                "reference": "d13c12302c5677f9fccb562ca06bf6930fc16976",
                 "shasum": ""
             },
             "require": {
@@ -804,9 +804,9 @@
             "description": "Client library for the mittwald mStudio v2 API",
             "support": {
                 "issues": "https://github.com/mittwald/api-client-php/issues",
-                "source": "https://github.com/mittwald/api-client-php/tree/v2.1.26"
+                "source": "https://github.com/mittwald/api-client-php/tree/v2.1.27"
             },
-            "time": "2024-05-18T00:09:48+00:00"
+            "time": "2024-05-25T00:09:51+00:00"
         },
         {
             "name": "psr/http-client",
