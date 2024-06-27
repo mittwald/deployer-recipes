@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "caseyamcl/guzzle_retry_middleware",
-            "version": "v2.9.0",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caseyamcl/guzzle_retry_middleware.git",
-                "reference": "cbec4ce59c2dbd200a11aed19e7c26c37e50e535"
+                "reference": "e2ddb58a3d88ed120eb9c4739d72680ed6b3d55c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caseyamcl/guzzle_retry_middleware/zipball/cbec4ce59c2dbd200a11aed19e7c26c37e50e535",
-                "reference": "cbec4ce59c2dbd200a11aed19e7c26c37e50e535",
+                "url": "https://api.github.com/repos/caseyamcl/guzzle_retry_middleware/zipball/e2ddb58a3d88ed120eb9c4739d72680ed6b3d55c",
+                "reference": "e2ddb58a3d88ed120eb9c4739d72680ed6b3d55c",
                 "shasum": ""
             },
             "require": {
@@ -26,11 +26,12 @@
             },
             "require-dev": {
                 "jaschilz/php-coverage-badger": "^2.0",
-                "nesbot/carbon": "^2.0",
+                "nesbot/carbon": "^2.0|^3.0",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^1.0",
                 "phpunit/phpunit": "^7.5|^8.0|^9.0",
-                "squizlabs/php_codesniffer": "^3.5"
+                "squizlabs/php_codesniffer": "^3.5",
+                "symfony/var-dumper": "^5.0|^6.0|^7.0"
             },
             "type": "library",
             "extra": {
@@ -68,7 +69,7 @@
             ],
             "support": {
                 "issues": "https://github.com/caseyamcl/guzzle_retry_middleware/issues",
-                "source": "https://github.com/caseyamcl/guzzle_retry_middleware/tree/v2.9.0"
+                "source": "https://github.com/caseyamcl/guzzle_retry_middleware/tree/v2.10.0"
             },
             "funding": [
                 {
@@ -76,7 +77,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-30T18:02:31+00:00"
+            "time": "2024-06-19T23:03:14+00:00"
         },
         {
             "name": "composer/semver",
@@ -744,16 +745,16 @@
         },
         {
             "name": "mittwald/api-client",
-            "version": "v2.1.31",
+            "version": "v2.1.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mittwald/api-client-php.git",
-                "reference": "43506e9424b02563524ffe1dee06642accbe946b"
+                "reference": "edf09c14ac8635487afaeb93b0d94e2a19820ddc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/43506e9424b02563524ffe1dee06642accbe946b",
-                "reference": "43506e9424b02563524ffe1dee06642accbe946b",
+                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/edf09c14ac8635487afaeb93b0d94e2a19820ddc",
+                "reference": "edf09c14ac8635487afaeb93b0d94e2a19820ddc",
                 "shasum": ""
             },
             "require": {
@@ -787,9 +788,9 @@
             "description": "Client library for the mittwald mStudio v2 API",
             "support": {
                 "issues": "https://github.com/mittwald/api-client-php/issues",
-                "source": "https://github.com/mittwald/api-client-php/tree/v2.1.31"
+                "source": "https://github.com/mittwald/api-client-php/tree/v2.1.32"
             },
-            "time": "2024-06-01T00:09:42+00:00"
+            "time": "2024-06-26T00:11:17+00:00"
         },
         {
             "name": "psr/http-client",
@@ -4030,16 +4031,16 @@
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
-            "version": "v1.29.0",
+            "version": "v1.30.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
-                "reference": "bc45c394692b948b4d383a08d7753968bed9a83d"
+                "reference": "a95281b0be0d9ab48050ebd988b967875cdb9fdb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/bc45c394692b948b4d383a08d7753968bed9a83d",
-                "reference": "bc45c394692b948b4d383a08d7753968bed9a83d",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/a95281b0be0d9ab48050ebd988b967875cdb9fdb",
+                "reference": "a95281b0be0d9ab48050ebd988b967875cdb9fdb",
                 "shasum": ""
             },
             "require": {
@@ -4091,7 +4092,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.29.0"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.30.0"
             },
             "funding": [
                 {
@@ -4107,20 +4108,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-29T20:11:03+00:00"
+            "time": "2024-05-31T15:07:36+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.29.0",
+            "version": "v1.30.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "9773676c8a1bb1f8d4340a62efe641cf76eda7ec"
+                "reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9773676c8a1bb1f8d4340a62efe641cf76eda7ec",
-                "reference": "9773676c8a1bb1f8d4340a62efe641cf76eda7ec",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fd22ab50000ef01661e2a31d850ebaa297f8e03c",
+                "reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c",
                 "shasum": ""
             },
             "require": {
@@ -4171,7 +4172,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.29.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.30.0"
             },
             "funding": [
                 {
@@ -4187,7 +4188,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-29T20:11:03+00:00"
+            "time": "2024-06-19T12:30:46+00:00"
         },
         {
             "name": "symfony/process",
