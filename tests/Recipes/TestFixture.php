@@ -98,6 +98,8 @@ class TestFixture
             shortId: 'p-XXXXXX',
             status: ProjectStatus::ready,
             statusSetAt: new \DateTime(),
+            webStorageUsageInBytes: 0,
+            webStorageUsageInBytesSetAt: new \DateTime(),
         ))
             ->withClusterDomain('project.host')
             ->withClusterID('testing');
