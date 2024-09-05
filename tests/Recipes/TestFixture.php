@@ -76,13 +76,12 @@ class TestFixture
         $this->depl->config->set('current_path', 'current');
 
         $this->appInstallation = (new AppInstallation(
-            'APP_ID',
-            new VersionStatus('1.0.0'),
-            'description',
-            false,
-            'INSTALLATION_ID',
-            '/foo',
-            'a-XXXXXX',
+            appId: 'APP_ID',
+            appVersion: new VersionStatus('1.0.0'),
+            description: 'description',
+            id: 'INSTALLATION_ID',
+            installationPath: '/foo',
+            shortId: 'a-XXXXXX',
         ))
             ->withProjectId('PROJECT_ID');
 
