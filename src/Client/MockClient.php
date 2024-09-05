@@ -6,7 +6,6 @@ use Mittwald\ApiClient\Generated\V2\Client;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient;
@@ -16,6 +15,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient;
 use Mittwald\ApiClient\Generated\V2\Clients\File\FileClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient;
@@ -44,10 +44,10 @@ class MockClient implements Client
     public FileClient&MockObject $file;
     public MailClient&MockObject $mail;
     public ArticleClient&MockObject $article;
-    public ContainerClient&MockObject $container;
     public PageInsightsClient&MockObject $pageInsights;
     public RelocationClient&MockObject $relocation;
     public MarketplaceClient&MockObject $marketplace;
+    public MiscClient&MockObject $misc;
 
     public function __construct(TestCase $test)
     {
@@ -67,10 +67,10 @@ class MockClient implements Client
         $this->file = $test->getMockBuilder(FileClient::class)->getMock();
         $this->mail = $test->getMockBuilder(MailClient::class)->getMock();
         $this->article = $test->getMockBuilder(ArticleClient::class)->getMock();
-        $this->container = $test->getMockBuilder(ContainerClient::class)->getMock();
         $this->pageInsights = $test->getMockBuilder(PageInsightsClient::class)->getMock();
         $this->relocation = $test->getMockBuilder(RelocationClient::class)->getMock();
         $this->marketplace = $test->getMockBuilder(MarketplaceClient::class)->getMock();
+        $this->misc = $test->getMockBuilder(MiscClient::class)->getMock();
     }
 
     public function project(): ProjectClient
@@ -153,11 +153,6 @@ class MockClient implements Client
         return $this->article;
     }
 
-    public function container(): ContainerClient
-    {
-        return $this->container;
-    }
-
     public function pageInsights(): PageInsightsClient
     {
         return $this->pageInsights;
@@ -171,6 +166,11 @@ class MockClient implements Client
     public function marketplace(): MarketplaceClient
     {
         return $this->marketplace;
+    }
+
+    public function misc(): MiscClient
+    {
+        return $this->misc;
     }
 
 }
