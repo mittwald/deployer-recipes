@@ -99,6 +99,8 @@ class TestFixture
             statusSetAt: new \DateTime(),
             webStorageUsageInBytes: 0,
             webStorageUsageInBytesSetAt: new \DateTime(),
+            backupStorageUsageInBytes: 0,
+            backupStorageUsageInBytesSetAt: new \DateTime(),
         ))
             ->withClusterDomain('project.host')
             ->withClusterID('testing');
