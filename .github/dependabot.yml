@@ -9,6 +9,11 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    groups:
+      league/flysystem:
+        patterns:
+          - "league/flysystem"
+          - "league/flysystem-*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
