@@ -740,16 +740,16 @@
         },
         {
             "name": "mittwald/api-client",
-            "version": "v2.1.87",
+            "version": "v2.1.96",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mittwald/api-client-php.git",
-                "reference": "4dfe22dd72c804ee5ef62e7949a0dcb95e83e29e"
+                "reference": "0ffb3d5f58674ff114cbf2b2d838f3bda7d7d978"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/4dfe22dd72c804ee5ef62e7949a0dcb95e83e29e",
-                "reference": "4dfe22dd72c804ee5ef62e7949a0dcb95e83e29e",
+                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/0ffb3d5f58674ff114cbf2b2d838f3bda7d7d978",
+                "reference": "0ffb3d5f58674ff114cbf2b2d838f3bda7d7d978",
                 "shasum": ""
             },
             "require": {
@@ -783,9 +783,9 @@
             "description": "Client library for the mittwald mStudio v2 API",
             "support": {
                 "issues": "https://github.com/mittwald/api-client-php/issues",
-                "source": "https://github.com/mittwald/api-client-php/tree/v2.1.87"
+                "source": "https://github.com/mittwald/api-client-php/tree/v2.1.96"
             },
-            "time": "2024-12-11T19:10:34+00:00"
+            "time": "2025-01-22T09:22:00+00:00"
         },
         {
             "name": "psr/http-client",
@@ -1010,12 +1010,12 @@
             },
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "3.5-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -4593,5 +4593,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
