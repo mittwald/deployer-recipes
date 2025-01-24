@@ -740,16 +740,16 @@
         },
         {
             "name": "mittwald/api-client",
-            "version": "v2.1.87",
+            "version": "v2.1.97",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mittwald/api-client-php.git",
-                "reference": "4dfe22dd72c804ee5ef62e7949a0dcb95e83e29e"
+                "reference": "34a97958d79f7972e2728151078b6e40e5269449"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/4dfe22dd72c804ee5ef62e7949a0dcb95e83e29e",
-                "reference": "4dfe22dd72c804ee5ef62e7949a0dcb95e83e29e",
+                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/34a97958d79f7972e2728151078b6e40e5269449",
+                "reference": "34a97958d79f7972e2728151078b6e40e5269449",
                 "shasum": ""
             },
             "require": {
@@ -759,10 +759,10 @@
                 "php": "^8.2"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.25",
+                "friendsofphp/php-cs-fixer": "^3.68",
+                "phpstan/phpstan": "^2.1.1",
                 "phpunit/phpunit": "^10.5",
-                "rector/rector": "^0.19.8",
-                "vimeo/psalm": "^5.15"
+                "rector/rector": "^2.0.7"
             },
             "type": "library",
             "autoload": {
@@ -783,9 +783,9 @@
             "description": "Client library for the mittwald mStudio v2 API",
             "support": {
                 "issues": "https://github.com/mittwald/api-client-php/issues",
-                "source": "https://github.com/mittwald/api-client-php/tree/v2.1.87"
+                "source": "https://github.com/mittwald/api-client-php/tree/v2.1.97"
             },
-            "time": "2024-12-11T19:10:34+00:00"
+            "time": "2025-01-24T08:35:03+00:00"
         },
         {
             "name": "psr/http-client",
@@ -1010,12 +1010,12 @@
             },
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "3.5-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "autoload": {
@@ -4593,5 +4593,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
