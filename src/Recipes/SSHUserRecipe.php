@@ -98,14 +98,14 @@ class SSHUserRecipe
     private static function lookupOrCreateSSHUser(): SshUser
     {
         $project = BaseRecipe::getProject();
-        $existingUser = static::findExistingSSHUserByName($project);
+        $existingUser = self::findExistingSSHUserByName($project);
 
         if ($existingUser !== null) {
             info("using existing SSH user <fg=magenta;options=bold>deployer</>");
-            return static::assertSSHUserHasPublicKey($existingUser);
+            return self::assertSSHUserHasPublicKey($existingUser);
         }
 
-        return static::createSSHUser($project);
+        return self::createSSHUser($project);
     }
 
     private static function findExistingSSHUserByName(Project $project): SshUser|null
@@ -129,14 +129,14 @@ class SSHUserRecipe
     {
         $sshPublicKey = SSHPublicKey::fromString(get_str('mittwald_ssh_public_key'));
 
-        if (static::hasSSHUserPublicKey($sshUser, $sshPublicKey)) {
+        if (self::hasSSHUserPublicKey($sshUser, $sshPublicKey)) {
             info("SSH user <fg=magenta;options=bold>deployer</> already has the correct SSH public key");
             return $sshUser;
         }
 
-        static::addPublicKeyToSSHUser($sshUser, $sshPublicKey);
+        self::addPublicKeyToSSHUser($sshUser, $sshPublicKey);
 
-        return static::getSSHUser($sshUser->getId());
+        return self::getSSHUser($sshUser->getId());
     }
 
     private static function hasSSHUserPublicKey(SshUser $sshUser, SSHPublicKey $publicKey): bool
@@ -193,14 +193,14 @@ class SSHUserRecipe
 
     public static function assertSSHConfig(): void
     {
-        static::assertLocalSSHDirectory();
+        self::assertLocalSSHDirectory();
 
-        $sshConfig = static::buildSSHConfigForSelectedHosts();
+        $sshConfig = self::buildSSHConfigForSelectedHosts();
 
         $renderer = new SSHConfigRenderer($sshConfig);
         $renderer->renderToFile(BaseRecipe::getFilesystem());
 
-        static::assertLocalSSHPrivateKey();
+        self::assertLocalSSHPrivateKey();
 
         foreach (selectedHosts() as $host) {
             if ($host->has('mittwald_internal_hostname')) {
@@ -221,7 +221,7 @@ class SSHUserRecipe
             }
 
             $sshHost = new SSHHost(name: $host->getAlias() ?? $host->getHostname() ?? "unknown", hostname: $internal);
-            $sshHost = $sshHost->withIdentityFile(static::determineSSHPrivateKeyForHost($host));
+            $sshHost = $sshHost->withIdentityFile(self::determineSSHPrivateKeyForHost($host));
 
             $sshConfig = $sshConfig->withHost($sshHost);
         }
@@ -254,7 +254,7 @@ class SSHUserRecipe
 
     private static function assertLocalSSHPrivateKey(): void
     {
-        static::assertLocalSSHDirectory();
+        self::assertLocalSSHDirectory();
 
         if (has('mittwald_ssh_private_key')) {
             BaseRecipe::getFilesystem()->write('./.mw-deployer/id_rsa', get_str('mittwald_ssh_private_key'));
