@@ -12,6 +12,7 @@ require __DIR__ . '/vendor/mittwald/deployer-recipes/recipes/deploy.php';
 set('rsync_src', __DIR__);
 set('php_version', '8.2');
 set('domain', getenv("MITTWALD_APP_DOMAIN"));
+set('ssh_copy_id', '~/.ssh/id_rsa.pub');
 
 // Hosts
 
