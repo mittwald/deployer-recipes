@@ -43,8 +43,14 @@ class SSHUserRecipe
                 return BaseRecipe::getFilesystem()->read(parse_home_dir(get_str('mittwald_ssh_public_key_file')));
             }
 
-            // Need to do this in case `ssh_copy_id` contains a tilde that needs to be expanded
-            return runLocally('cat {{ssh_copy_id}}');
+            if (has('ssh_copy_id')) {
+                // Need to do this in case `ssh_copy_id` contains a tilde that needs to be expanded
+                return runLocally('cat {{ssh_copy_id}}');
+            }
+
+            // Fall back to id_rsa.pub if nothing else is configured. Probably not
+            // ideal for every case, but like a reasonable guess.
+            return runLocally('cat ~/.ssh/id_rsa.pub');
         });
 
         task('mittwald:sshconfig', function (): void {
