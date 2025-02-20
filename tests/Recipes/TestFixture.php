@@ -25,6 +25,7 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Project\DeprecatedProjectReadinessSt
 use Mittwald\ApiClient\Generated\V2\Schemas\Project\Project;
 use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectStatus;
 use Mittwald\Deployer\Client\MockClient;
+use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
@@ -46,7 +47,7 @@ class TestFixture
 
     public function __construct(TestCase $test)
     {
-        $this->processRunner = $test->getMockBuilder(ProcessRunner::class)->disableOriginalConstructor()->getMock();
+        $this->processRunner = (new MockBuilder($test, ProcessRunner::class))->disableOriginalConstructor()->getMock();
         $test->registerMockObject($this->processRunner);
 
         $this->client        = new MockClient($test);
@@ -82,6 +83,7 @@ class TestFixture
             id: 'INSTALLATION_ID',
             installationPath: '/foo',
             shortId: 'a-XXXXXX',
+            createdAt: new \DateTime(),
         ))
             ->withProjectId('PROJECT_ID');
 

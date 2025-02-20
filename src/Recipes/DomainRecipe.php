@@ -36,7 +36,7 @@ class DomainRecipe
         $domains = array_map(fn(string $domain): string => parse($domain), $domains);
 
         foreach ($domains as $domain) {
-            static::assertVirtualHost($domain);
+            self::assertVirtualHost($domain);
         }
     }
 

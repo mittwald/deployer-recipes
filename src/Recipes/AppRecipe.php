@@ -176,7 +176,7 @@ class AppRecipe
     {
         $client              = new AppClient(BaseRecipe::getClient()->app());
         $appInstallation     = AppRecipe::getAppInstallation();
-        $desiredDocumentRoot = static::getDesiredDocumentRoot();
+        $desiredDocumentRoot = self::getDesiredDocumentRoot();
 
         if ($appInstallation->getCustomDocumentRoot() === $desiredDocumentRoot) {
             info("document root already set to <fg=magenta;options=bold>{$desiredDocumentRoot}</>");

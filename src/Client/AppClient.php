@@ -70,7 +70,7 @@ class AppClient
      */
     public function resolveSystemSoftwareByConstraint(string $systemSoftwareName, string $systemSoftwareVersionConstraint): array
     {
-        $systemSoftwareVersionConstraint = static::normalizeVersionConstraint($systemSoftwareVersionConstraint);
+        $systemSoftwareVersionConstraint = self::normalizeVersionConstraint($systemSoftwareVersionConstraint);
 
         $systemSoftwareResponse = $this->inner->listSystemsoftwares(new ListSystemsoftwaresRequest());
         $systemSoftware         = (function () use ($systemSoftwareResponse, $systemSoftwareName): SystemSoftware {
