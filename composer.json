@@ -25,9 +25,14 @@
   },
   "require-dev": {
     "deployer/deployer": "^7.3",
-    "phpunit/phpunit": "^10.5",
+    "phpunit/phpunit": "^11.5",
     "league/flysystem-memory": "^3.0",
-    "phpstan/phpstan": "^2.1"
+    "phpstan/phpstan": "^2.1",
+    "symfony/console": "^7.2"
+  },
+  "scripts": {
+    "test": "phpunit --color --testdox",
+    "check": "phpstan analyse"
   },
   "autoload-dev": {
     "psr-4": {

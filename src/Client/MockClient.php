@@ -23,6 +23,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemC
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UserClient;
+use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -51,26 +52,26 @@ class MockClient implements Client
 
     public function __construct(TestCase $test)
     {
-        $this->project = $test->getMockBuilder(ProjectClient::class)->getMock();
-        $this->backup = $test->getMockBuilder(BackupClient::class)->getMock();
-        $this->sshSFTPUser = $test->getMockBuilder(SSHSFTPUserClient::class)->getMock();
-        $this->cronjob = $test->getMockBuilder(CronjobClient::class)->getMock();
-        $this->app = $test->getMockBuilder(AppClient::class)->getMock();
-        $this->projectFileSystem = $test->getMockBuilder(ProjectFileSystemClient::class)->getMock();
-        $this->contract = $test->getMockBuilder(ContractClient::class)->getMock();
-        $this->database = $test->getMockBuilder(DatabaseClient::class)->getMock();
-        $this->domain = $test->getMockBuilder(DomainClient::class)->getMock();
-        $this->conversation = $test->getMockBuilder(ConversationClient::class)->getMock();
-        $this->customer = $test->getMockBuilder(CustomerClient::class)->getMock();
-        $this->user = $test->getMockBuilder(UserClient::class)->getMock();
-        $this->notification = $test->getMockBuilder(NotificationClient::class)->getMock();
-        $this->file = $test->getMockBuilder(FileClient::class)->getMock();
-        $this->mail = $test->getMockBuilder(MailClient::class)->getMock();
-        $this->article = $test->getMockBuilder(ArticleClient::class)->getMock();
-        $this->pageInsights = $test->getMockBuilder(PageInsightsClient::class)->getMock();
-        $this->relocation = $test->getMockBuilder(RelocationClient::class)->getMock();
-        $this->marketplace = $test->getMockBuilder(MarketplaceClient::class)->getMock();
-        $this->misc = $test->getMockBuilder(MiscClient::class)->getMock();
+        $this->project = (new MockBuilder($test, ProjectClient::class))->getMock();
+        $this->backup = (new MockBuilder($test, BackupClient::class))->getMock();
+        $this->sshSFTPUser = (new MockBuilder($test, SSHSFTPUserClient::class))->getMock();
+        $this->cronjob = (new MockBuilder($test, CronjobClient::class))->getMock();
+        $this->app = (new MockBuilder($test, AppClient::class))->getMock();
+        $this->projectFileSystem = (new MockBuilder($test, ProjectFileSystemClient::class))->getMock();
+        $this->contract = (new MockBuilder($test, ContractClient::class))->getMock();
+        $this->database = (new MockBuilder($test, DatabaseClient::class))->getMock();
+        $this->domain = (new MockBuilder($test, DomainClient::class))->getMock();
+        $this->conversation = (new MockBuilder($test, ConversationClient::class))->getMock();
+        $this->customer = (new MockBuilder($test, CustomerClient::class))->getMock();
+        $this->user = (new MockBuilder($test, UserClient::class))->getMock();
+        $this->notification = (new MockBuilder($test, NotificationClient::class))->getMock();
+        $this->file = (new MockBuilder($test, FileClient::class))->getMock();
+        $this->mail = (new MockBuilder($test, MailClient::class))->getMock();
+        $this->article = (new MockBuilder($test, ArticleClient::class))->getMock();
+        $this->pageInsights = (new MockBuilder($test, PageInsightsClient::class))->getMock();
+        $this->relocation = (new MockBuilder($test, RelocationClient::class))->getMock();
+        $this->marketplace = (new MockBuilder($test, MarketplaceClient::class))->getMock();
+        $this->misc = (new MockBuilder($test, MiscClient::class))->getMock();
     }
 
     public function project(): ProjectClient
