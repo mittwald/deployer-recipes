@@ -29,26 +29,26 @@ use PHPUnit\Framework\TestCase;
 
 class MockClient implements Client
 {
-    public ProjectClient&MockObject $project;
-    public BackupClient&MockObject $backup;
-    public SSHSFTPUserClient&MockObject $sshSFTPUser;
-    public CronjobClient&MockObject $cronjob;
-    public AppClient&MockObject $app;
-    public ProjectFileSystemClient&MockObject $projectFileSystem;
-    public ContractClient&MockObject $contract;
-    public DatabaseClient&MockObject $database;
-    public DomainClient&MockObject $domain;
-    public ConversationClient&MockObject $conversation;
-    public CustomerClient&MockObject $customer;
-    public UserClient&MockObject $user;
-    public NotificationClient&MockObject $notification;
-    public FileClient&MockObject $file;
-    public MailClient&MockObject $mail;
-    public ArticleClient&MockObject $article;
-    public PageInsightsClient&MockObject $pageInsights;
-    public RelocationClient&MockObject $relocation;
-    public MarketplaceClient&MockObject $marketplace;
-    public MiscClient&MockObject $misc;
+    public ProjectClient|MockObject $project;
+    public BackupClient|MockObject $backup;
+    public SSHSFTPUserClient|MockObject $sshSFTPUser;
+    public CronjobClient|MockObject $cronjob;
+    public AppClient|MockObject $app;
+    public ProjectFileSystemClient|MockObject $projectFileSystem;
+    public ContractClient|MockObject $contract;
+    public DatabaseClient|MockObject $database;
+    public DomainClient|MockObject $domain;
+    public ConversationClient|MockObject $conversation;
+    public CustomerClient|MockObject $customer;
+    public UserClient|MockObject $user;
+    public NotificationClient|MockObject $notification;
+    public FileClient|MockObject $file;
+    public MailClient|MockObject $mail;
+    public ArticleClient|MockObject $article;
+    public PageInsightsClient|MockObject $pageInsights;
+    public RelocationClient|MockObject $relocation;
+    public MarketplaceClient|MockObject $marketplace;
+    public MiscClient|MockObject $misc;
 
     public function __construct(TestCase $test)
     {
