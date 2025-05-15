@@ -6,6 +6,7 @@ use Mittwald\ApiClient\Generated\V2\Client;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient;
@@ -33,6 +34,7 @@ class MockClient implements Client
     public BackupClient|MockObject $backup;
     public SSHSFTPUserClient|MockObject $sshSFTPUser;
     public CronjobClient|MockObject $cronjob;
+    public ContainerClient|MockObject $container;
     public AppClient|MockObject $app;
     public ProjectFileSystemClient|MockObject $projectFileSystem;
     public ContractClient|MockObject $contract;
@@ -56,6 +58,7 @@ class MockClient implements Client
         $this->backup = (new MockBuilder($test, BackupClient::class))->getMock();
         $this->sshSFTPUser = (new MockBuilder($test, SSHSFTPUserClient::class))->getMock();
         $this->cronjob = (new MockBuilder($test, CronjobClient::class))->getMock();
+        $this->container = (new MockBuilder($test, ContainerClient::class))->getMock();
         $this->app = (new MockBuilder($test, AppClient::class))->getMock();
         $this->projectFileSystem = (new MockBuilder($test, ProjectFileSystemClient::class))->getMock();
         $this->contract = (new MockBuilder($test, ContractClient::class))->getMock();
@@ -92,6 +95,11 @@ class MockClient implements Client
     public function cronjob(): CronjobClient
     {
         return $this->cronjob;
+    }
+
+    public function container(): ContainerClient
+    {
+        return $this->container;
     }
 
     public function app(): AppClient
