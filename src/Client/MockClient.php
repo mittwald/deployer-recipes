@@ -14,6 +14,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\CustomerClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient;
 use Mittwald\ApiClient\Generated\V2\Clients\File\FileClient;
+use Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\LeadFyndrClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient;
@@ -51,6 +52,7 @@ class MockClient implements Client
     public RelocationClient|MockObject $relocation;
     public MarketplaceClient|MockObject $marketplace;
     public MiscClient|MockObject $misc;
+    public LeadFyndrClient|MockObject $leadFyndr;
 
     public function __construct(TestCase $test)
     {
@@ -75,6 +77,7 @@ class MockClient implements Client
         $this->relocation = (new MockBuilder($test, RelocationClient::class))->getMock();
         $this->marketplace = (new MockBuilder($test, MarketplaceClient::class))->getMock();
         $this->misc = (new MockBuilder($test, MiscClient::class))->getMock();
+        $this->leadFyndr = (new MockBuilder($test, LeadFyndrClient::class))->getMock();
     }
 
     public function project(): ProjectClient
@@ -180,6 +183,11 @@ class MockClient implements Client
     public function misc(): MiscClient
     {
         return $this->misc;
+    }
+
+    public function leadFyndr(): LeadFyndrClient
+    {
+        return $this->leadFyndr;
     }
 
 }

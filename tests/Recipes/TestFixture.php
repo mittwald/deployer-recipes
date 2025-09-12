@@ -18,6 +18,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListS
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\Phase;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftware;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\VersionStatus;
@@ -50,7 +52,7 @@ class TestFixture
         $this->processRunner = (new MockBuilder($test, ProcessRunner::class))->disableOriginalConstructor()->getMock();
         $test->registerMockObject($this->processRunner);
 
-        $this->client        = new MockClient($test);
+        $this->client = new MockClient($test);
 
         $this->fs = new Filesystem(new InMemoryFilesystemAdapter());
 
@@ -84,6 +86,12 @@ class TestFixture
             installationPath: '/foo',
             shortId: 'a-XXXXXX',
             createdAt: new \DateTime(),
+            linkedDatabases: [],
+            phase: Phase::ready,
+            projectId: 'PROJECT_ID',
+            systemSoftware: [],
+            updatePolicy: AppUpdatePolicy::none,
+            userInputs: []
         ))
             ->withProjectId('PROJECT_ID');
 
@@ -103,6 +111,7 @@ class TestFixture
             webStorageUsageInBytesSetAt: new \DateTime(),
             backupStorageUsageInBytes: 0,
             backupStorageUsageInBytesSetAt: new \DateTime(),
+            supportedFeatures: []
         ))
             ->withClusterDomain('project.host')
             ->withClusterID('testing');
