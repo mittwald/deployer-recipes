@@ -15,6 +15,10 @@ jobs:
         deployer-version: ['7.3.*', '7.4.*', '7.5.*', '*']
     runs-on: ubuntu-latest
 
+    concurrency:
+      group: "functional"
+      cancel-in-progress: false
+
     steps:
       - uses: actions/checkout@v6
         with:
