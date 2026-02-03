@@ -3,6 +3,7 @@
 namespace Mittwald\Deployer\Client;
 
 use Mittwald\ApiClient\Generated\V2\Client;
+use Mittwald\ApiClient\Generated\V2\Clients\AIHosting\AIHostingClient;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
@@ -53,6 +54,7 @@ class MockClient implements Client
     public MarketplaceClient|MockObject $marketplace;
     public MiscClient|MockObject $misc;
     public LeadFyndrClient|MockObject $leadFyndr;
+    public AIHostingClient|MockObject $aiHosting;
 
     public function __construct(TestCase $test)
     {
@@ -78,6 +80,7 @@ class MockClient implements Client
         $this->marketplace = (new MockBuilder($test, MarketplaceClient::class))->getMock();
         $this->misc = (new MockBuilder($test, MiscClient::class))->getMock();
         $this->leadFyndr = (new MockBuilder($test, LeadFyndrClient::class))->getMock();
+        $this->aiHosting = (new MockBuilder($test, AIHostingClient::class))->getMock();
     }
 
     public function project(): ProjectClient
@@ -188,6 +191,11 @@ class MockClient implements Client
     public function leadFyndr(): LeadFyndrClient
     {
         return $this->leadFyndr;
+    }
+
+    public function aiHosting(): AIHostingClient
+    {
+        return $this->aiHosting;
     }
 
 }
