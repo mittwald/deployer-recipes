@@ -1,5 +1,6 @@
 /vendor/
 /.idea
 /.phpunit.cache
-/.phpunit.result.cachephpstan.phar
+/.phpunit.result.cache
+phpstan.phar
 phpstan_output.txt
