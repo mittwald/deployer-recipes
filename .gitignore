@@ -2,3 +2,5 @@
 /.idea
 /.phpunit.cache
 /.phpunit.result.cache
+phpstan.phar
+phpstan_output.txt
