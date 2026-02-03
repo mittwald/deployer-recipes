@@ -1,0 +1,1568 @@
+Note: Using configuration file /home/runner/work/deployer-recipes/deployer-recipes/phpstan.neon.
+  0/13 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0%
+ 13/13 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+::error file=src/Client/AppClient.php,line=20,col=0::Parameter $inner of method Mittwald\Deployer\Client\AppClient::__construct() has invalid type Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.
+::error file=src/Client/AppClient.php,line=20,col=0::Property Mittwald\Deployer\Client\AppClient::$inner has unknown class Mittwald\ApiClient\Generated\V2\Clients\App\AppClient as its type.
+::error file=src/Client/AppClient.php,line=36,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftware.
+::error file=src/Client/AppClient.php,line=36,col=0::Call to method withSystemSoftwareVersion() on an unknown class Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBodySystemSoftwareItem.
+::error file=src/Client/AppClient.php,line=36,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBodySystemSoftwareItem not found.
+::error file=src/Client/AppClient.php,line=37,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion.
+::error file=src/Client/AppClient.php,line=38,col=0::Access to constant patchLevel on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy.
+::error file=src/Client/AppClient.php,line=41,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest not found.
+::error file=src/Client/AppClient.php,line=43,col=0::Call to method withSystemSoftware() on an unknown class Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody.
+::error file=src/Client/AppClient.php,line=43,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody not found.
+::error file=src/Client/AppClient.php,line=47,col=0::Call to method patchAppinstallation() on an unknown class Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.
+::error file=src/Client/AppClient.php,line=56,col=0::PHPDoc tag `@throws` with type Mittwald\ApiClient\Error\UnexpectedResponseException is not subtype of Throwable
+::error file=src/Client/AppClient.php,line=58,col=0::Call to method patchAppinstallation() on an unknown class Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.
+::error file=src/Client/AppClient.php,line=58,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest not found.
+::error file=src/Client/AppClient.php,line=60,col=0::Call to method withCustomDocumentRoot() on an unknown class Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody.
+::error file=src/Client/AppClient.php,line=60,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody not found.
+::error file=src/Client/AppClient.php,line=71,col=0::Method Mittwald\Deployer\Client\AppClient::resolveSystemSoftwareByConstraint() has invalid return type Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftware.
+::error file=src/Client/AppClient.php,line=71,col=0::Method Mittwald\Deployer\Client\AppClient::resolveSystemSoftwareByConstraint() has invalid return type Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion.
+::error file=src/Client/AppClient.php,line=75,col=0::Call to method listSystemsoftwares() on an unknown class Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.
+::error file=src/Client/AppClient.php,line=75,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwares\ListSystemsoftwaresRequest not found.
+::error file=src/Client/AppClient.php,line=76,col=0::Anonymous function has invalid return type Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftware.
+::error file=src/Client/AppClient.php,line=85,col=0::Call to method listSystemsoftwareversions() on an unknown class Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.
+::error file=src/Client/AppClient.php,line=86,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftware.
+::error file=src/Client/AppClient.php,line=86,col=0::Call to method withVersionRange() on an unknown class Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsRequest.
+::error file=src/Client/AppClient.php,line=86,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsRequest not found.
+::error file=src/Client/AppClient.php,line=93,col=0::Call to static method greaterThan() on an unknown class Composer\Semver\Comparator.
+::error file=src/Client/MockClient.php,line=33,col=0::Class Mittwald\Deployer\Client\MockClient implements unknown interface Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Client/MockClient.php,line=35,col=0::Property Mittwald\Deployer\Client\MockClient::$project has unknown class Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient as its type.
+::error file=src/Client/MockClient.php,line=35,col=0::Property Mittwald\Deployer\Client\MockClient::$project has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=36,col=0::Property Mittwald\Deployer\Client\MockClient::$backup has unknown class Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient as its type.
+::error file=src/Client/MockClient.php,line=36,col=0::Property Mittwald\Deployer\Client\MockClient::$backup has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=37,col=0::Property Mittwald\Deployer\Client\MockClient::$sshSFTPUser has unknown class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient as its type.
+::error file=src/Client/MockClient.php,line=37,col=0::Property Mittwald\Deployer\Client\MockClient::$sshSFTPUser has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=38,col=0::Property Mittwald\Deployer\Client\MockClient::$cronjob has unknown class Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient as its type.
+::error file=src/Client/MockClient.php,line=38,col=0::Property Mittwald\Deployer\Client\MockClient::$cronjob has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=39,col=0::Property Mittwald\Deployer\Client\MockClient::$container has unknown class Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient as its type.
+::error file=src/Client/MockClient.php,line=39,col=0::Property Mittwald\Deployer\Client\MockClient::$container has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=40,col=0::Property Mittwald\Deployer\Client\MockClient::$app has unknown class Mittwald\ApiClient\Generated\V2\Clients\App\AppClient as its type.
+::error file=src/Client/MockClient.php,line=40,col=0::Property Mittwald\Deployer\Client\MockClient::$app has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=41,col=0::Property Mittwald\Deployer\Client\MockClient::$projectFileSystem has unknown class Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient as its type.
+::error file=src/Client/MockClient.php,line=41,col=0::Property Mittwald\Deployer\Client\MockClient::$projectFileSystem has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=42,col=0::Property Mittwald\Deployer\Client\MockClient::$contract has unknown class Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient as its type.
+::error file=src/Client/MockClient.php,line=42,col=0::Property Mittwald\Deployer\Client\MockClient::$contract has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=43,col=0::Property Mittwald\Deployer\Client\MockClient::$database has unknown class Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient as its type.
+::error file=src/Client/MockClient.php,line=43,col=0::Property Mittwald\Deployer\Client\MockClient::$database has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=44,col=0::Property Mittwald\Deployer\Client\MockClient::$domain has unknown class Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient as its type.
+::error file=src/Client/MockClient.php,line=44,col=0::Property Mittwald\Deployer\Client\MockClient::$domain has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=45,col=0::Property Mittwald\Deployer\Client\MockClient::$conversation has unknown class Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient as its type.
+::error file=src/Client/MockClient.php,line=45,col=0::Property Mittwald\Deployer\Client\MockClient::$conversation has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=46,col=0::Property Mittwald\Deployer\Client\MockClient::$customer has unknown class Mittwald\ApiClient\Generated\V2\Clients\Customer\CustomerClient as its type.
+::error file=src/Client/MockClient.php,line=46,col=0::Property Mittwald\Deployer\Client\MockClient::$customer has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=47,col=0::Property Mittwald\Deployer\Client\MockClient::$user has unknown class Mittwald\ApiClient\Generated\V2\Clients\User\UserClient as its type.
+::error file=src/Client/MockClient.php,line=47,col=0::Property Mittwald\Deployer\Client\MockClient::$user has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=48,col=0::Property Mittwald\Deployer\Client\MockClient::$notification has unknown class Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient as its type.
+::error file=src/Client/MockClient.php,line=48,col=0::Property Mittwald\Deployer\Client\MockClient::$notification has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=49,col=0::Property Mittwald\Deployer\Client\MockClient::$file has unknown class Mittwald\ApiClient\Generated\V2\Clients\File\FileClient as its type.
+::error file=src/Client/MockClient.php,line=49,col=0::Property Mittwald\Deployer\Client\MockClient::$file has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=50,col=0::Property Mittwald\Deployer\Client\MockClient::$mail has unknown class Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient as its type.
+::error file=src/Client/MockClient.php,line=50,col=0::Property Mittwald\Deployer\Client\MockClient::$mail has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=51,col=0::Property Mittwald\Deployer\Client\MockClient::$article has unknown class Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient as its type.
+::error file=src/Client/MockClient.php,line=51,col=0::Property Mittwald\Deployer\Client\MockClient::$article has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=52,col=0::Property Mittwald\Deployer\Client\MockClient::$pageInsights has unknown class Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient as its type.
+::error file=src/Client/MockClient.php,line=52,col=0::Property Mittwald\Deployer\Client\MockClient::$pageInsights has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=53,col=0::Property Mittwald\Deployer\Client\MockClient::$relocation has unknown class Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient as its type.
+::error file=src/Client/MockClient.php,line=53,col=0::Property Mittwald\Deployer\Client\MockClient::$relocation has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=54,col=0::Property Mittwald\Deployer\Client\MockClient::$marketplace has unknown class Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient as its type.
+::error file=src/Client/MockClient.php,line=54,col=0::Property Mittwald\Deployer\Client\MockClient::$marketplace has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=55,col=0::Property Mittwald\Deployer\Client\MockClient::$misc has unknown class Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient as its type.
+::error file=src/Client/MockClient.php,line=55,col=0::Property Mittwald\Deployer\Client\MockClient::$misc has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=56,col=0::Property Mittwald\Deployer\Client\MockClient::$leadFyndr has unknown class Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\LeadFyndrClient as its type.
+::error file=src/Client/MockClient.php,line=56,col=0::Property Mittwald\Deployer\Client\MockClient::$leadFyndr has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=57,col=0::Property Mittwald\Deployer\Client\MockClient::$aiHosting has unknown class Mittwald\ApiClient\Generated\V2\Clients\AIHosting\AIHostingClient as its type.
+::error file=src/Client/MockClient.php,line=57,col=0::Property Mittwald\Deployer\Client\MockClient::$aiHosting has unknown class PHPUnit\Framework\MockObject\MockObject as its type.
+::error file=src/Client/MockClient.php,line=59,col=0::Parameter $test of method Mittwald\Deployer\Client\MockClient::__construct() has invalid type PHPUnit\Framework\TestCase.
+::error file=src/Client/MockClient.php,line=61,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=61,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient not found.
+::error file=src/Client/MockClient.php,line=61,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=62,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=62,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient not found.
+::error file=src/Client/MockClient.php,line=62,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=63,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=63,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient not found.
+::error file=src/Client/MockClient.php,line=63,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=64,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=64,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient not found.
+::error file=src/Client/MockClient.php,line=64,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=65,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=65,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient not found.
+::error file=src/Client/MockClient.php,line=65,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=66,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=66,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\App\AppClient not found.
+::error file=src/Client/MockClient.php,line=66,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=67,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=67,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient not found.
+::error file=src/Client/MockClient.php,line=67,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=68,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=68,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient not found.
+::error file=src/Client/MockClient.php,line=68,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=69,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=69,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient not found.
+::error file=src/Client/MockClient.php,line=69,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=70,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=70,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient not found.
+::error file=src/Client/MockClient.php,line=70,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=71,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=71,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient not found.
+::error file=src/Client/MockClient.php,line=71,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=72,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=72,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Customer\CustomerClient not found.
+::error file=src/Client/MockClient.php,line=72,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=73,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=73,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\User\UserClient not found.
+::error file=src/Client/MockClient.php,line=73,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=74,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=74,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient not found.
+::error file=src/Client/MockClient.php,line=74,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=75,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=75,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\File\FileClient not found.
+::error file=src/Client/MockClient.php,line=75,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=76,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=76,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient not found.
+::error file=src/Client/MockClient.php,line=76,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=77,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=77,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient not found.
+::error file=src/Client/MockClient.php,line=77,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=78,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=78,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient not found.
+::error file=src/Client/MockClient.php,line=78,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=79,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=79,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient not found.
+::error file=src/Client/MockClient.php,line=79,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=80,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=80,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient not found.
+::error file=src/Client/MockClient.php,line=80,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=81,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=81,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient not found.
+::error file=src/Client/MockClient.php,line=81,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=82,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=82,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\LeadFyndrClient not found.
+::error file=src/Client/MockClient.php,line=82,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=83,col=0::Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.
+::error file=src/Client/MockClient.php,line=83,col=0::Class Mittwald\ApiClient\Generated\V2\Clients\AIHosting\AIHostingClient not found.
+::error file=src/Client/MockClient.php,line=83,col=0::Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.
+::error file=src/Client/MockClient.php,line=86,col=0::Method Mittwald\Deployer\Client\MockClient::project() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient.
+::error file=src/Client/MockClient.php,line=91,col=0::Method Mittwald\Deployer\Client\MockClient::backup() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient.
+::error file=src/Client/MockClient.php,line=96,col=0::Method Mittwald\Deployer\Client\MockClient::sshSFTPUser() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient.
+::error file=src/Client/MockClient.php,line=101,col=0::Method Mittwald\Deployer\Client\MockClient::cronjob() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient.
+::error file=src/Client/MockClient.php,line=106,col=0::Method Mittwald\Deployer\Client\MockClient::container() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient.
+::error file=src/Client/MockClient.php,line=111,col=0::Method Mittwald\Deployer\Client\MockClient::app() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.
+::error file=src/Client/MockClient.php,line=116,col=0::Method Mittwald\Deployer\Client\MockClient::projectFileSystem() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient.
+::error file=src/Client/MockClient.php,line=121,col=0::Method Mittwald\Deployer\Client\MockClient::contract() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient.
+::error file=src/Client/MockClient.php,line=126,col=0::Method Mittwald\Deployer\Client\MockClient::database() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient.
+::error file=src/Client/MockClient.php,line=131,col=0::Method Mittwald\Deployer\Client\MockClient::domain() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient.
+::error file=src/Client/MockClient.php,line=136,col=0::Method Mittwald\Deployer\Client\MockClient::conversation() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient.
+::error file=src/Client/MockClient.php,line=141,col=0::Method Mittwald\Deployer\Client\MockClient::customer() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Customer\CustomerClient.
+::error file=src/Client/MockClient.php,line=146,col=0::Method Mittwald\Deployer\Client\MockClient::user() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\User\UserClient.
+::error file=src/Client/MockClient.php,line=151,col=0::Method Mittwald\Deployer\Client\MockClient::notification() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient.
+::error file=src/Client/MockClient.php,line=156,col=0::Method Mittwald\Deployer\Client\MockClient::file() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\File\FileClient.
+::error file=src/Client/MockClient.php,line=161,col=0::Method Mittwald\Deployer\Client\MockClient::mail() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient.
+::error file=src/Client/MockClient.php,line=166,col=0::Method Mittwald\Deployer\Client\MockClient::article() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient.
+::error file=src/Client/MockClient.php,line=171,col=0::Method Mittwald\Deployer\Client\MockClient::pageInsights() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient.
+::error file=src/Client/MockClient.php,line=176,col=0::Method Mittwald\Deployer\Client\MockClient::relocation() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient.
+::error file=src/Client/MockClient.php,line=181,col=0::Method Mittwald\Deployer\Client\MockClient::marketplace() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient.
+::error file=src/Client/MockClient.php,line=186,col=0::Method Mittwald\Deployer\Client\MockClient::misc() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient.
+::error file=src/Client/MockClient.php,line=191,col=0::Method Mittwald\Deployer\Client\MockClient::leadFyndr() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\LeadFyndrClient.
+::error file=src/Client/MockClient.php,line=196,col=0::Method Mittwald\Deployer\Client\MockClient::aiHosting() has invalid return type Mittwald\ApiClient\Generated\V2\Clients\AIHosting\AIHostingClient.
+::error file=src/Error/UnexpectedResponseException.php,line=13,col=0::Property Mittwald\Deployer\Error\UnexpectedResponseException::$response has unknown class Psr\Http\Message\ResponseInterface as its type.
+::error file=src/Error/UnexpectedResponseException.php,line=17,col=0::Class Psr\Http\Message\ResponseInterface not found.
+::error file=src/Error/UnexpectedResponseException.php,line=20,col=0::Call to method getBody() on an unknown class Psr\Http\Message\ResponseInterface.
+::error file=src/Error/UnexpectedResponseException.php,line=20,col=0::Call to method getStatusCode() on an unknown class Psr\Http\Message\ResponseInterface.
+::error file=src/Recipes/AppRecipe.php,line=12,col=0::Used function Deployer\Support\starts_with not found.
+::error file=src/Recipes/AppRecipe.php,line=12,col=0::Used function Deployer\after not found.
+::error file=src/Recipes/AppRecipe.php,line=12,col=0::Used function Deployer\currentHost not found.
+::error file=src/Recipes/AppRecipe.php,line=12,col=0::Used function Deployer\get not found.
+::error file=src/Recipes/AppRecipe.php,line=12,col=0::Used function Deployer\info not found.
+::error file=src/Recipes/AppRecipe.php,line=12,col=0::Used function Deployer\parse not found.
+::error file=src/Recipes/AppRecipe.php,line=12,col=0::Used function Deployer\run not found.
+::error file=src/Recipes/AppRecipe.php,line=12,col=0::Used function Deployer\set not found.
+::error file=src/Recipes/AppRecipe.php,line=12,col=0::Used function Deployer\task not found.
+::error file=src/Recipes/AppRecipe.php,line=12,col=0::Used function Deployer\test not found.
+::error file=src/Recipes/AppRecipe.php,line=21,col=0::Function Deployer\set not found.
+::error file=src/Recipes/AppRecipe.php,line=30,col=0::Function Deployer\set not found.
+::error file=src/Recipes/AppRecipe.php,line=31,col=0::Call to method getProjectId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/AppRecipe.php,line=32,col=0::Function Deployer\set not found.
+::error file=src/Recipes/AppRecipe.php,line=39,col=0::Function Deployer\set not found.
+::error file=src/Recipes/AppRecipe.php,line=40,col=0::Call to method project() on an unknown class Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Recipes/AppRecipe.php,line=43,col=0::Function Deployer\Support\starts_with not found.
+::error file=src/Recipes/AppRecipe.php,line=47,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest not found.
+::error file=src/Recipes/AppRecipe.php,line=50,col=0::Function Deployer\get not found.
+::error file=src/Recipes/AppRecipe.php,line=50,col=0::Function Deployer\get not found.
+::error file=src/Recipes/AppRecipe.php,line=58,col=0::Function Deployer\set not found.
+::error file=src/Recipes/AppRecipe.php,line=62,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest not found.
+::error file=src/Recipes/AppRecipe.php,line=63,col=0::Call to method project() on an unknown class Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Recipes/AppRecipe.php,line=68,col=0::Function Deployer\set not found.
+::error file=src/Recipes/AppRecipe.php,line=69,col=0::Call to method app() on an unknown class Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Recipes/AppRecipe.php,line=75,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest not found.
+::error file=src/Recipes/AppRecipe.php,line=83,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/AppRecipe.php,line=83,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsRequest not found.
+::error file=src/Recipes/AppRecipe.php,line=84,col=0::Call to method getDirectories() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/AppRecipe.php,line=98,col=0::Function Deployer\set not found.
+::error file=src/Recipes/AppRecipe.php,line=102,col=0::Function Deployer\set not found.
+::error file=src/Recipes/AppRecipe.php,line=104,col=0::Function Deployer\task not found.
+::error file=src/Recipes/AppRecipe.php,line=109,col=0::Function Deployer\task not found.
+::error file=src/Recipes/AppRecipe.php,line=114,col=0::Function Deployer\task not found.
+::error file=src/Recipes/AppRecipe.php,line=119,col=0::Function Deployer\task not found.
+::error file=src/Recipes/AppRecipe.php,line=124,col=0::Function Deployer\task not found.
+::error file=src/Recipes/AppRecipe.php,line=128,col=0::Function Deployer\after not found.
+::error file=src/Recipes/AppRecipe.php,line=131,col=0::Method Mittwald\Deployer\Recipes\AppRecipe::getAppInstallation() has invalid return type Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/AppRecipe.php,line=133,col=0::Call to static method buildFromInput() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/AppRecipe.php,line=140,col=0::Call to method getDirectories() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/AppRecipe.php,line=140,col=0::Call to method getInstallationPath() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/AppRecipe.php,line=142,col=0::Function Deployer\currentHost not found.
+::error file=src/Recipes/AppRecipe.php,line=143,col=0::Function Deployer\info not found.
+::error file=src/Recipes/AppRecipe.php,line=146,col=0::Call to method getClusterDomain() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/AppRecipe.php,line=146,col=0::Call to method getClusterID() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/AppRecipe.php,line=148,col=0::Function Deployer\currentHost not found.
+::error file=src/Recipes/AppRecipe.php,line=150,col=0::Function Deployer\info not found.
+::error file=src/Recipes/AppRecipe.php,line=153,col=0::Function Deployer\currentHost not found.
+::error file=src/Recipes/AppRecipe.php,line=157,col=0::Call to method getShortId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/AppRecipe.php,line=157,col=0::Function Deployer\currentHost not found.
+::error file=src/Recipes/AppRecipe.php,line=158,col=0::Function Deployer\currentHost not found.
+::error file=src/Recipes/AppRecipe.php,line=177,col=0::Call to method app() on an unknown class Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Recipes/AppRecipe.php,line=181,col=0::Call to method getCustomDocumentRoot() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/AppRecipe.php,line=182,col=0::Function Deployer\info not found.
+::error file=src/Recipes/AppRecipe.php,line=186,col=0::Function Deployer\info not found.
+::error file=src/Recipes/AppRecipe.php,line=187,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/AppRecipe.php,line=194,col=0::Call to method app() on an unknown class Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Recipes/AppRecipe.php,line=197,col=0::Function Deployer\parse not found.
+::error file=src/Recipes/AppRecipe.php,line=198,col=0::Function Deployer\info not found.
+::error file=src/Recipes/AppRecipe.php,line=202,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/AppRecipe.php,line=209,col=0::Function Deployer\test not found.
+::error file=src/Recipes/AppRecipe.php,line=210,col=0::Function Deployer\info not found.
+::error file=src/Recipes/AppRecipe.php,line=212,col=0::Function Deployer\run not found.
+::error file=src/Recipes/AppRecipe.php,line=213,col=0::Function Deployer\run not found.
+::error file=src/Recipes/AppRecipe.php,line=214,col=0::Function Deployer\run not found.
+::error file=src/Recipes/AppRecipe.php,line=217,col=0::Function Deployer\run not found.
+::error file=src/Recipes/AppRecipe.php,line=218,col=0::Function Deployer\info not found.
+::error file=src/Recipes/BaseRecipe.php,line=9,col=0::Used function Deployer\get not found.
+::error file=src/Recipes/BaseRecipe.php,line=10,col=0::Used function Deployer\has not found.
+::error file=src/Recipes/BaseRecipe.php,line=16,col=0::Method Mittwald\Deployer\Recipes\BaseRecipe::getClient() has invalid return type Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Recipes/BaseRecipe.php,line=18,col=0::Function Deployer\has not found.
+::error file=src/Recipes/BaseRecipe.php,line=19,col=0::Function Deployer\get not found.
+::error file=src/Recipes/BaseRecipe.php,line=20,col=0::Class Mittwald\ApiClient\Generated\V2\Client not found.
+::error file=src/Recipes/BaseRecipe.php,line=24,col=0::Call to static method newWithToken() on an unknown class Mittwald\ApiClient\MittwaldAPIV2Client.
+::error file=src/Recipes/BaseRecipe.php,line=27,col=0::Method Mittwald\Deployer\Recipes\BaseRecipe::getFilesystem() has invalid return type League\Flysystem\Filesystem.
+::error file=src/Recipes/BaseRecipe.php,line=29,col=0::Function Deployer\has not found.
+::error file=src/Recipes/BaseRecipe.php,line=30,col=0::Function Deployer\get not found.
+::error file=src/Recipes/BaseRecipe.php,line=31,col=0::Class League\Flysystem\Filesystem not found.
+::error file=src/Recipes/BaseRecipe.php,line=35,col=0::Instantiated class League\Flysystem\Filesystem not found.
+::error file=src/Recipes/BaseRecipe.php,line=35,col=0::Instantiated class League\Flysystem\Local\LocalFilesystemAdapter not found.
+::error file=src/Recipes/BaseRecipe.php,line=38,col=0::Method Mittwald\Deployer\Recipes\BaseRecipe::getProject() has invalid return type Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/BaseRecipe.php,line=40,col=0::Call to static method buildFromInput() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/DomainRecipe.php,line=11,col=0::Used function Deployer\info not found.
+::error file=src/Recipes/DomainRecipe.php,line=12,col=0::Used function Deployer\parse not found.
+::error file=src/Recipes/DomainRecipe.php,line=13,col=0::Used function Deployer\set not found.
+::error file=src/Recipes/DomainRecipe.php,line=14,col=0::Used function Deployer\task not found.
+::error file=src/Recipes/DomainRecipe.php,line=25,col=0::Function Deployer\set not found.
+::error file=src/Recipes/DomainRecipe.php,line=26,col=0::Function Deployer\set not found.
+::error file=src/Recipes/DomainRecipe.php,line=28,col=0::Function Deployer\task not found.
+::error file=src/Recipes/DomainRecipe.php,line=36,col=0::Function Deployer\parse not found.
+::error file=src/Recipes/DomainRecipe.php,line=46,col=0::Call to method domain() on an unknown class Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Recipes/DomainRecipe.php,line=50,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/DomainRecipe.php,line=50,col=0::Call to method withProjectId() on an unknown class Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesRequest.
+::error file=src/Recipes/DomainRecipe.php,line=50,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesRequest not found.
+::error file=src/Recipes/DomainRecipe.php,line=61,col=0::Function Deployer\info not found.
+::error file=src/Recipes/DomainRecipe.php,line=63,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressRequest not found.
+::error file=src/Recipes/DomainRecipe.php,line=63,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressRequestBody not found.
+::error file=src/Recipes/DomainRecipe.php,line=65,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/DomainRecipe.php,line=65,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path not found.
+::error file=src/Recipes/DomainRecipe.php,line=65,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation not found.
+::error file=src/Recipes/DomainRecipe.php,line=66,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/DomainRecipe.php,line=80,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/DomainRecipe.php,line=80,col=0::Call to method getInstallationId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation.
+::error file=src/Recipes/DomainRecipe.php,line=80,col=0::Class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation not found.
+::error file=src/Recipes/DomainRecipe.php,line=81,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/DomainRecipe.php,line=81,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation not found.
+::error file=src/Recipes/DomainRecipe.php,line=88,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/DomainRecipe.php,line=88,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path not found.
+::error file=src/Recipes/DomainRecipe.php,line=88,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation not found.
+::error file=src/Recipes/DomainRecipe.php,line=93,col=0::Function Deployer\info not found.
+::error file=src/Recipes/DomainRecipe.php,line=95,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest not found.
+::error file=src/Recipes/DomainRecipe.php,line=99,col=0::Function Deployer\info not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=22,col=0::Used function Deployer\after not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=23,col=0::Used function Deployer\currentHost not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=24,col=0::Used function Deployer\has not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=25,col=0::Used function Deployer\info not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=26,col=0::Used function Deployer\run not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=27,col=0::Used function Deployer\runLocally not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=28,col=0::Used function Deployer\selectedHosts not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=29,col=0::Used function Deployer\set not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=30,col=0::Used function Deployer\Support\parse_home_dir not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=31,col=0::Used function Deployer\task not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=39,col=0::Function Deployer\set not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=41,col=0::Function Deployer\set not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=42,col=0::Function Deployer\has not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=43,col=0::Call to method read() on an unknown class League\Flysystem\Filesystem.
+::error file=src/Recipes/SSHUserRecipe.php,line=43,col=0::Function Deployer\Support\parse_home_dir not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=46,col=0::Function Deployer\has not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=48,col=0::Function Deployer\runLocally not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=53,col=0::Function Deployer\runLocally not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=56,col=0::Function Deployer\task not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=62,col=0::Function Deployer\task not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=67,col=0::Function Deployer\task not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=72,col=0::Function Deployer\after not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=73,col=0::Function Deployer\after not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=81,col=0::Call to method getShortId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.
+::error file=src/Recipes/SSHUserRecipe.php,line=81,col=0::Call to method getUserName() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=83,col=0::Function Deployer\info not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=85,col=0::Function Deployer\currentHost not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=95,col=0::Function Deployer\run not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=98,col=0::Function Deployer\info not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=104,col=0::Method Mittwald\Deployer\Recipes\SSHUserRecipe::lookupOrCreateSSHUser() has invalid return type Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=110,col=0::Function Deployer\info not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=117,col=0::Method Mittwald\Deployer\Recipes\SSHUserRecipe::findExistingSSHUserByName() has invalid return type Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=117,col=0::Parameter $project of method Mittwald\Deployer\Recipes\SSHUserRecipe::findExistingSSHUserByName() has invalid type Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/SSHUserRecipe.php,line=119,col=0::Call to method sSHSFTPUser() on an unknown class Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Recipes/SSHUserRecipe.php,line=122,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/SSHUserRecipe.php,line=122,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersRequest not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=134,col=0::Method Mittwald\Deployer\Recipes\SSHUserRecipe::assertSSHUserHasPublicKey() has invalid return type Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=134,col=0::Parameter $sshUser of method Mittwald\Deployer\Recipes\SSHUserRecipe::assertSSHUserHasPublicKey() has invalid type Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=139,col=0::Function Deployer\info not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=145,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=148,col=0::Parameter $sshUser of method Mittwald\Deployer\Recipes\SSHUserRecipe::hasSSHUserPublicKey() has invalid type Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=150,col=0::Call to method getPublicKeys() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=160,col=0::Parameter $sshUser of method Mittwald\Deployer\Recipes\SSHUserRecipe::addPublicKeyToSSHUser() has invalid type Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=162,col=0::Call to method sSHSFTPUser() on an unknown class Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Recipes/SSHUserRecipe.php,line=164,col=0::Call to method getPublicKeys() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=165,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=168,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequest not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=169,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=170,col=0::Call to method withPublicKeys() on an unknown class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequestBody.
+::error file=src/Recipes/SSHUserRecipe.php,line=170,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequestBody not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=175,col=0::Method Mittwald\Deployer\Recipes\SSHUserRecipe::getSSHUser() has invalid return type Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=177,col=0::Call to method sSHSFTPUser() on an unknown class Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Recipes/SSHUserRecipe.php,line=179,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserRequest not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=182,col=0::Method Mittwald\Deployer\Recipes\SSHUserRecipe::createSSHUser() has invalid return type Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.
+::error file=src/Recipes/SSHUserRecipe.php,line=182,col=0::Parameter $project of method Mittwald\Deployer\Recipes\SSHUserRecipe::createSSHUser() has invalid type Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/SSHUserRecipe.php,line=184,col=0::Call to method sSHSFTPUser() on an unknown class Mittwald\ApiClient\Generated\V2\Client.
+::error file=src/Recipes/SSHUserRecipe.php,line=188,col=0::Function Deployer\info not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=189,col=0::Function Deployer\info not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=191,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2 not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=192,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=195,col=0::Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.
+::error file=src/Recipes/SSHUserRecipe.php,line=195,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequest not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=195,col=0::Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequestBody not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=211,col=0::Function Deployer\selectedHosts not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=222,col=0::Function Deployer\selectedHosts not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=238,col=0::Parameter $host of method Mittwald\Deployer\Recipes\SSHUserRecipe::determineSSHPrivateKeyForHost() has invalid type Deployer\Host\Host.
+::error file=src/Recipes/SSHUserRecipe.php,line=265,col=0::Function Deployer\has not found.
+::error file=src/Recipes/SSHUserRecipe.php,line=266,col=0::Call to method write() on an unknown class League\Flysystem\Filesystem.
+::error file=src/Recipes/SSHUserRecipe.php,line=273,col=0::Call to method createDirectory() on an unknown class League\Flysystem\Filesystem.
+::error file=src/Util/SSH/SSHConfigRenderer.php,line=33,col=0::Parameter $fs of method Mittwald\Deployer\Util\SSH\SSHConfigRenderer::renderToFile() has invalid type League\Flysystem\Filesystem.
+::error file=src/Util/SSH/SSHConfigRenderer.php,line=35,col=0::Call to method write() on an unknown class League\Flysystem\Filesystem.
+::error file=src/Util/functions.php,line=5,col=0::Used function Deployer\get not found.
+::error file=src/Util/functions.php,line=17,col=0::Function Deployer\get not found.
+::error file=src/Util/functions.php,line=35,col=0::Function Deployer\get not found.
+::error file=src/Util/functions.php,line=54,col=0::Function Deployer\get not found.
+ ------ --------------------------------------------------------------------------------------------------------------- 
+  Line   Client/AppClient.php                                                                                           
+ ------ --------------------------------------------------------------------------------------------------------------- 
+  20     Parameter $inner of method Mittwald\Deployer\Client\AppClient::__construct() has invalid type                  
+         Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.                                                         
+         🪪  class.notFound                                                                                             
+  20     Property Mittwald\Deployer\Client\AppClient::$inner has unknown class                                          
+         Mittwald\ApiClient\Generated\V2\Clients\App\AppClient as its type.                                             
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  36     Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftware.         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  36     Call to method withSystemSoftwareVersion() on an unknown class                                                 
+         Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBodySystemSoftwar  
+         eItem.                                                                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  36     Instantiated class                                                                                             
+         Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBodySystemSoftwar  
+         eItem not found.                                                                                               
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  37     Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion.  
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  38     Access to constant patchLevel on an unknown class                                                              
+         Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy.                                        
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  41     Instantiated class                                                                                             
+         Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest not found.        
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  43     Call to method withSystemSoftware() on an unknown class                                                        
+         Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody.              
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  43     Instantiated class                                                                                             
+         Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody not found.    
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  47     Call to method patchAppinstallation() on an unknown class                                                      
+         Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  56     PHPDoc tag @throws with type Mittwald\ApiClient\Error\UnexpectedResponseException is not subtype of Throwable  
+         🪪  throws.notThrowable                                                                                        
+  58     Call to method patchAppinstallation() on an unknown class                                                      
+         Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  58     Instantiated class                                                                                             
+         Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest not found.        
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  60     Call to method withCustomDocumentRoot() on an unknown class                                                    
+         Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody.              
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  60     Instantiated class                                                                                             
+         Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody not found.    
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  71     Method Mittwald\Deployer\Client\AppClient::resolveSystemSoftwareByConstraint() has invalid return type         
+         Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftware.                                                    
+         🪪  class.notFound                                                                                             
+  71     Method Mittwald\Deployer\Client\AppClient::resolveSystemSoftwareByConstraint() has invalid return type         
+         Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion.                                             
+         🪪  class.notFound                                                                                             
+  75     Call to method listSystemsoftwares() on an unknown class                                                       
+         Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  75     Instantiated class Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwares\ListSystemsoftwaresRequest  
+         not found.                                                                                                     
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  76     Anonymous function has invalid return type Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftware.         
+         🪪  class.notFound                                                                                             
+  85     Call to method listSystemsoftwareversions() on an unknown class                                                
+         Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  86     Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftware.         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  86     Call to method withVersionRange() on an unknown class                                                          
+         Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsRequest.      
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  86     Instantiated class                                                                                             
+         Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsRequest not   
+         found.                                                                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  93     Call to static method greaterThan() on an unknown class Composer\Semver\Comparator.                            
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+ ------ --------------------------------------------------------------------------------------------------------------- 
+
+ ------ --------------------------------------------------------------------------------------------------------------- 
+  Line   Client/MockClient.php                                                                                          
+ ------ --------------------------------------------------------------------------------------------------------------- 
+  33     Class Mittwald\Deployer\Client\MockClient implements unknown interface                                         
+         Mittwald\ApiClient\Generated\V2\Client.                                                                        
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  35     Property Mittwald\Deployer\Client\MockClient::$project has unknown class                                       
+         Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient as its type.                                     
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  35     Property Mittwald\Deployer\Client\MockClient::$project has unknown class                                       
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  36     Property Mittwald\Deployer\Client\MockClient::$backup has unknown class                                        
+         Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient as its type.                                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  36     Property Mittwald\Deployer\Client\MockClient::$backup has unknown class                                        
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  37     Property Mittwald\Deployer\Client\MockClient::$sshSFTPUser has unknown class                                   
+         Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient as its type.                             
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  37     Property Mittwald\Deployer\Client\MockClient::$sshSFTPUser has unknown class                                   
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  38     Property Mittwald\Deployer\Client\MockClient::$cronjob has unknown class                                       
+         Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient as its type.                                     
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  38     Property Mittwald\Deployer\Client\MockClient::$cronjob has unknown class                                       
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  39     Property Mittwald\Deployer\Client\MockClient::$container has unknown class                                     
+         Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient as its type.                                 
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  39     Property Mittwald\Deployer\Client\MockClient::$container has unknown class                                     
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  40     Property Mittwald\Deployer\Client\MockClient::$app has unknown class                                           
+         Mittwald\ApiClient\Generated\V2\Clients\App\AppClient as its type.                                             
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  40     Property Mittwald\Deployer\Client\MockClient::$app has unknown class PHPUnit\Framework\MockObject\MockObject   
+         as its type.                                                                                                   
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  41     Property Mittwald\Deployer\Client\MockClient::$projectFileSystem has unknown class                             
+         Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient as its type.                 
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  41     Property Mittwald\Deployer\Client\MockClient::$projectFileSystem has unknown class                             
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  42     Property Mittwald\Deployer\Client\MockClient::$contract has unknown class                                      
+         Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient as its type.                                   
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  42     Property Mittwald\Deployer\Client\MockClient::$contract has unknown class                                      
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  43     Property Mittwald\Deployer\Client\MockClient::$database has unknown class                                      
+         Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient as its type.                                   
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  43     Property Mittwald\Deployer\Client\MockClient::$database has unknown class                                      
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  44     Property Mittwald\Deployer\Client\MockClient::$domain has unknown class                                        
+         Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient as its type.                                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  44     Property Mittwald\Deployer\Client\MockClient::$domain has unknown class                                        
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  45     Property Mittwald\Deployer\Client\MockClient::$conversation has unknown class                                  
+         Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient as its type.                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  45     Property Mittwald\Deployer\Client\MockClient::$conversation has unknown class                                  
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  46     Property Mittwald\Deployer\Client\MockClient::$customer has unknown class                                      
+         Mittwald\ApiClient\Generated\V2\Clients\Customer\CustomerClient as its type.                                   
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  46     Property Mittwald\Deployer\Client\MockClient::$customer has unknown class                                      
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  47     Property Mittwald\Deployer\Client\MockClient::$user has unknown class                                          
+         Mittwald\ApiClient\Generated\V2\Clients\User\UserClient as its type.                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  47     Property Mittwald\Deployer\Client\MockClient::$user has unknown class PHPUnit\Framework\MockObject\MockObject  
+         as its type.                                                                                                   
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  48     Property Mittwald\Deployer\Client\MockClient::$notification has unknown class                                  
+         Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient as its type.                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  48     Property Mittwald\Deployer\Client\MockClient::$notification has unknown class                                  
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  49     Property Mittwald\Deployer\Client\MockClient::$file has unknown class                                          
+         Mittwald\ApiClient\Generated\V2\Clients\File\FileClient as its type.                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  49     Property Mittwald\Deployer\Client\MockClient::$file has unknown class PHPUnit\Framework\MockObject\MockObject  
+         as its type.                                                                                                   
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  50     Property Mittwald\Deployer\Client\MockClient::$mail has unknown class                                          
+         Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient as its type.                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  50     Property Mittwald\Deployer\Client\MockClient::$mail has unknown class PHPUnit\Framework\MockObject\MockObject  
+         as its type.                                                                                                   
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  51     Property Mittwald\Deployer\Client\MockClient::$article has unknown class                                       
+         Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient as its type.                                     
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  51     Property Mittwald\Deployer\Client\MockClient::$article has unknown class                                       
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  52     Property Mittwald\Deployer\Client\MockClient::$pageInsights has unknown class                                  
+         Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient as its type.                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  52     Property Mittwald\Deployer\Client\MockClient::$pageInsights has unknown class                                  
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  53     Property Mittwald\Deployer\Client\MockClient::$relocation has unknown class                                    
+         Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient as its type.                               
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  53     Property Mittwald\Deployer\Client\MockClient::$relocation has unknown class                                    
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  54     Property Mittwald\Deployer\Client\MockClient::$marketplace has unknown class                                   
+         Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient as its type.                             
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  54     Property Mittwald\Deployer\Client\MockClient::$marketplace has unknown class                                   
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  55     Property Mittwald\Deployer\Client\MockClient::$misc has unknown class                                          
+         Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient as its type.                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  55     Property Mittwald\Deployer\Client\MockClient::$misc has unknown class PHPUnit\Framework\MockObject\MockObject  
+         as its type.                                                                                                   
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  56     Property Mittwald\Deployer\Client\MockClient::$leadFyndr has unknown class                                     
+         Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\LeadFyndrClient as its type.                                 
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  56     Property Mittwald\Deployer\Client\MockClient::$leadFyndr has unknown class                                     
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  57     Property Mittwald\Deployer\Client\MockClient::$aiHosting has unknown class                                     
+         Mittwald\ApiClient\Generated\V2\Clients\AIHosting\AIHostingClient as its type.                                 
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  57     Property Mittwald\Deployer\Client\MockClient::$aiHosting has unknown class                                     
+         PHPUnit\Framework\MockObject\MockObject as its type.                                                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  59     Parameter $test of method Mittwald\Deployer\Client\MockClient::__construct() has invalid type                  
+         PHPUnit\Framework\TestCase.                                                                                    
+         🪪  class.notFound                                                                                             
+  61     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  61     Class Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient not found.                                 
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  61     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  62     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  62     Class Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient not found.                                   
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  62     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  63     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  63     Class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient not found.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  63     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  64     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  64     Class Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient not found.                                 
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  64     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  65     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  65     Class Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient not found.                             
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  65     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  66     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  66     Class Mittwald\ApiClient\Generated\V2\Clients\App\AppClient not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  66     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  67     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  67     Class Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient not found.             
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  67     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  68     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  68     Class Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient not found.                               
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  68     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  69     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  69     Class Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient not found.                               
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  69     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  70     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  70     Class Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient not found.                                   
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  70     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  71     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  71     Class Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient not found.                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  71     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  72     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  72     Class Mittwald\ApiClient\Generated\V2\Clients\Customer\CustomerClient not found.                               
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  72     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  73     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  73     Class Mittwald\ApiClient\Generated\V2\Clients\User\UserClient not found.                                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  73     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  74     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  74     Class Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient not found.                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  74     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  75     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  75     Class Mittwald\ApiClient\Generated\V2\Clients\File\FileClient not found.                                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  75     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  76     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  76     Class Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient not found.                                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  76     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  77     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  77     Class Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient not found.                                 
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  77     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  78     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  78     Class Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient not found.                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  78     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  79     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  79     Class Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient not found.                           
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  79     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  80     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  80     Class Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient not found.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  80     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  81     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  81     Class Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient not found.                                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  81     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  82     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  82     Class Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\LeadFyndrClient not found.                             
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  82     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  83     Call to method getMock() on an unknown class PHPUnit\Framework\MockObject\MockBuilder.                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  83     Class Mittwald\ApiClient\Generated\V2\Clients\AIHosting\AIHostingClient not found.                             
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  83     Instantiated class PHPUnit\Framework\MockObject\MockBuilder not found.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  86     Method Mittwald\Deployer\Client\MockClient::project() has invalid return type                                  
+         Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient.                                                 
+         🪪  class.notFound                                                                                             
+  91     Method Mittwald\Deployer\Client\MockClient::backup() has invalid return type                                   
+         Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient.                                                   
+         🪪  class.notFound                                                                                             
+  96     Method Mittwald\Deployer\Client\MockClient::sshSFTPUser() has invalid return type                              
+         Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient.                                         
+         🪪  class.notFound                                                                                             
+  101    Method Mittwald\Deployer\Client\MockClient::cronjob() has invalid return type                                  
+         Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient.                                                 
+         🪪  class.notFound                                                                                             
+  106    Method Mittwald\Deployer\Client\MockClient::container() has invalid return type                                
+         Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient.                                             
+         🪪  class.notFound                                                                                             
+  111    Method Mittwald\Deployer\Client\MockClient::app() has invalid return type                                      
+         Mittwald\ApiClient\Generated\V2\Clients\App\AppClient.                                                         
+         🪪  class.notFound                                                                                             
+  116    Method Mittwald\Deployer\Client\MockClient::projectFileSystem() has invalid return type                        
+         Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient.                             
+         🪪  class.notFound                                                                                             
+  121    Method Mittwald\Deployer\Client\MockClient::contract() has invalid return type                                 
+         Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient.                                               
+         🪪  class.notFound                                                                                             
+  126    Method Mittwald\Deployer\Client\MockClient::database() has invalid return type                                 
+         Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient.                                               
+         🪪  class.notFound                                                                                             
+  131    Method Mittwald\Deployer\Client\MockClient::domain() has invalid return type                                   
+         Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient.                                                   
+         🪪  class.notFound                                                                                             
+  136    Method Mittwald\Deployer\Client\MockClient::conversation() has invalid return type                             
+         Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient.                                       
+         🪪  class.notFound                                                                                             
+  141    Method Mittwald\Deployer\Client\MockClient::customer() has invalid return type                                 
+         Mittwald\ApiClient\Generated\V2\Clients\Customer\CustomerClient.                                               
+         🪪  class.notFound                                                                                             
+  146    Method Mittwald\Deployer\Client\MockClient::user() has invalid return type                                     
+         Mittwald\ApiClient\Generated\V2\Clients\User\UserClient.                                                       
+         🪪  class.notFound                                                                                             
+  151    Method Mittwald\Deployer\Client\MockClient::notification() has invalid return type                             
+         Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient.                                       
+         🪪  class.notFound                                                                                             
+  156    Method Mittwald\Deployer\Client\MockClient::file() has invalid return type                                     
+         Mittwald\ApiClient\Generated\V2\Clients\File\FileClient.                                                       
+         🪪  class.notFound                                                                                             
+  161    Method Mittwald\Deployer\Client\MockClient::mail() has invalid return type                                     
+         Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient.                                                       
+         🪪  class.notFound                                                                                             
+  166    Method Mittwald\Deployer\Client\MockClient::article() has invalid return type                                  
+         Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient.                                                 
+         🪪  class.notFound                                                                                             
+  171    Method Mittwald\Deployer\Client\MockClient::pageInsights() has invalid return type                             
+         Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient.                                       
+         🪪  class.notFound                                                                                             
+  176    Method Mittwald\Deployer\Client\MockClient::relocation() has invalid return type                               
+         Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient.                                           
+         🪪  class.notFound                                                                                             
+  181    Method Mittwald\Deployer\Client\MockClient::marketplace() has invalid return type                              
+         Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient.                                         
+         🪪  class.notFound                                                                                             
+  186    Method Mittwald\Deployer\Client\MockClient::misc() has invalid return type                                     
+         Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient.                                                       
+         🪪  class.notFound                                                                                             
+  191    Method Mittwald\Deployer\Client\MockClient::leadFyndr() has invalid return type                                
+         Mittwald\ApiClient\Generated\V2\Clients\LeadFyndr\LeadFyndrClient.                                             
+         🪪  class.notFound                                                                                             
+  196    Method Mittwald\Deployer\Client\MockClient::aiHosting() has invalid return type                                
+         Mittwald\ApiClient\Generated\V2\Clients\AIHosting\AIHostingClient.                                             
+         🪪  class.notFound                                                                                             
+ ------ --------------------------------------------------------------------------------------------------------------- 
+
+ ------ ------------------------------------------------------------------------------------------- 
+  Line   Error/UnexpectedResponseException.php                                                      
+ ------ ------------------------------------------------------------------------------------------- 
+  13     Property Mittwald\Deployer\Error\UnexpectedResponseException::$response has unknown class  
+         Psr\Http\Message\ResponseInterface as its type.                                            
+         🪪  class.notFound                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                       
+  17     Class Psr\Http\Message\ResponseInterface not found.                                        
+         🪪  class.notFound                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                       
+  20     Call to method getBody() on an unknown class Psr\Http\Message\ResponseInterface.           
+         🪪  class.notFound                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                       
+  20     Call to method getStatusCode() on an unknown class Psr\Http\Message\ResponseInterface.     
+         🪪  class.notFound                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                       
+ ------ ------------------------------------------------------------------------------------------- 
+
+ ------ -------------------------------------------------------------------------------------------------------------- 
+  Line   Recipes/AppRecipe.php                                                                                         
+ ------ -------------------------------------------------------------------------------------------------------------- 
+  12     Used function Deployer\Support\starts_with not found.                                                         
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  12     Used function Deployer\after not found.                                                                       
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  12     Used function Deployer\currentHost not found.                                                                 
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  12     Used function Deployer\get not found.                                                                         
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  12     Used function Deployer\info not found.                                                                        
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  12     Used function Deployer\parse not found.                                                                       
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  12     Used function Deployer\run not found.                                                                         
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  12     Used function Deployer\set not found.                                                                         
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  12     Used function Deployer\task not found.                                                                        
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  12     Used function Deployer\test not found.                                                                        
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  21     Function Deployer\set not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  30     Function Deployer\set not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  31     Call to method getProjectId() on an unknown class                                                             
+         Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.                                                  
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  32     Function Deployer\set not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  39     Function Deployer\set not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  40     Call to method project() on an unknown class Mittwald\ApiClient\Generated\V2\Client.                          
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  43     Function Deployer\Support\starts_with not found.                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  47     Instantiated class Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest not       
+         found.                                                                                                        
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  50     Function Deployer\get not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  50     Function Deployer\get not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  58     Function Deployer\set not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  62     Instantiated class Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest not found.    
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  63     Call to method project() on an unknown class Mittwald\ApiClient\Generated\V2\Client.                          
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  68     Function Deployer\set not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  69     Call to method app() on an unknown class Mittwald\ApiClient\Generated\V2\Client.                              
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  75     Instantiated class Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest   
+         not found.                                                                                                    
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  83     Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.           
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  83     Instantiated class                                                                                            
+         Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsRequest not found.       
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  84     Call to method getDirectories() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.  
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  98     Function Deployer\set not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  102    Function Deployer\set not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  104    Function Deployer\task not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  109    Function Deployer\task not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  114    Function Deployer\task not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  119    Function Deployer\task not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  124    Function Deployer\task not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  128    Function Deployer\after not found.                                                                            
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  131    Method Mittwald\Deployer\Recipes\AppRecipe::getAppInstallation() has invalid return type                      
+         Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.                                                  
+         🪪  class.notFound                                                                                            
+  133    Call to static method buildFromInput() on an unknown class                                                    
+         Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.                                                  
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  140    Call to method getDirectories() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.  
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  140    Call to method getInstallationPath() on an unknown class                                                      
+         Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.                                                  
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  142    Function Deployer\currentHost not found.                                                                      
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  143    Function Deployer\info not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  146    Call to method getClusterDomain() on an unknown class                                                         
+         Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.                                                      
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  146    Call to method getClusterID() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.    
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  148    Function Deployer\currentHost not found.                                                                      
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  150    Function Deployer\info not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  153    Function Deployer\currentHost not found.                                                                      
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  157    Call to method getShortId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.      
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  157    Function Deployer\currentHost not found.                                                                      
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  158    Function Deployer\currentHost not found.                                                                      
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  177    Call to method app() on an unknown class Mittwald\ApiClient\Generated\V2\Client.                              
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  181    Call to method getCustomDocumentRoot() on an unknown class                                                    
+         Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.                                                  
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  182    Function Deployer\info not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  186    Function Deployer\info not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  187    Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.       
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  194    Call to method app() on an unknown class Mittwald\ApiClient\Generated\V2\Client.                              
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  197    Function Deployer\parse not found.                                                                            
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  198    Function Deployer\info not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  202    Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.       
+         🪪  class.notFound                                                                                            
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  209    Function Deployer\test not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  210    Function Deployer\info not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  212    Function Deployer\run not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  213    Function Deployer\run not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  214    Function Deployer\run not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  217    Function Deployer\run not found.                                                                              
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+  218    Function Deployer\info not found.                                                                             
+         🪪  function.notFound                                                                                         
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                          
+ ------ -------------------------------------------------------------------------------------------------------------- 
+
+ ------ -------------------------------------------------------------------------------------------------- 
+  Line   Recipes/BaseRecipe.php                                                                            
+ ------ -------------------------------------------------------------------------------------------------- 
+  9      Used function Deployer\get not found.                                                             
+         🪪  function.notFound                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+  10     Used function Deployer\has not found.                                                             
+         🪪  function.notFound                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+  16     Method Mittwald\Deployer\Recipes\BaseRecipe::getClient() has invalid return type                  
+         Mittwald\ApiClient\Generated\V2\Client.                                                           
+         🪪  class.notFound                                                                                
+  18     Function Deployer\has not found.                                                                  
+         🪪  function.notFound                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+  19     Function Deployer\get not found.                                                                  
+         🪪  function.notFound                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+  20     Class Mittwald\ApiClient\Generated\V2\Client not found.                                           
+         🪪  class.notFound                                                                                
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+  24     Call to static method newWithToken() on an unknown class Mittwald\ApiClient\MittwaldAPIV2Client.  
+         🪪  class.notFound                                                                                
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+  27     Method Mittwald\Deployer\Recipes\BaseRecipe::getFilesystem() has invalid return type              
+         League\Flysystem\Filesystem.                                                                      
+         🪪  class.notFound                                                                                
+  29     Function Deployer\has not found.                                                                  
+         🪪  function.notFound                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+  30     Function Deployer\get not found.                                                                  
+         🪪  function.notFound                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+  31     Class League\Flysystem\Filesystem not found.                                                      
+         🪪  class.notFound                                                                                
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+  35     Instantiated class League\Flysystem\Filesystem not found.                                         
+         🪪  class.notFound                                                                                
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+  35     Instantiated class League\Flysystem\Local\LocalFilesystemAdapter not found.                       
+         🪪  class.notFound                                                                                
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+  38     Method Mittwald\Deployer\Recipes\BaseRecipe::getProject() has invalid return type                 
+         Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.                                          
+         🪪  class.notFound                                                                                
+  40     Call to static method buildFromInput() on an unknown class                                        
+         Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.                                          
+         🪪  class.notFound                                                                                
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                              
+ ------ -------------------------------------------------------------------------------------------------- 
+
+ ------ --------------------------------------------------------------------------------------------------------------- 
+  Line   Recipes/DomainRecipe.php                                                                                       
+ ------ --------------------------------------------------------------------------------------------------------------- 
+  11     Used function Deployer\info not found.                                                                         
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  12     Used function Deployer\parse not found.                                                                        
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  13     Used function Deployer\set not found.                                                                          
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  14     Used function Deployer\task not found.                                                                         
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  25     Function Deployer\set not found.                                                                               
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  26     Function Deployer\set not found.                                                                               
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  28     Function Deployer\task not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  36     Function Deployer\parse not found.                                                                             
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  46     Call to method domain() on an unknown class Mittwald\ApiClient\Generated\V2\Client.                            
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  50     Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.            
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  50     Call to method withProjectId() on an unknown class                                                             
+         Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesRequest.               
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  50     Instantiated class                                                                                             
+         Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesRequest not found.     
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  61     Function Deployer\info not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  63     Instantiated class                                                                                             
+         Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressRequest not found.     
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  63     Instantiated class                                                                                             
+         Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressRequestBody not        
+         found.                                                                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  65     Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.        
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  65     Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path not found.                             
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  65     Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation not found.               
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  66     Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.            
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  80     Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.        
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  80     Call to method getInstallationId() on an unknown class                                                         
+         Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation.                                            
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  80     Class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation not found.                            
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  81     Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.        
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  81     Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation not found.               
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  88     Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.        
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  88     Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path not found.                             
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  88     Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TargetInstallation not found.               
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  93     Function Deployer\info not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  95     Instantiated class                                                                                             
+         Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest not  
+         found.                                                                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  99     Function Deployer\info not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+ ------ --------------------------------------------------------------------------------------------------------------- 
+
+ ------ --------------------------------------------------------------------------------------------------------------- 
+  Line   Recipes/SSHUserRecipe.php                                                                                      
+ ------ --------------------------------------------------------------------------------------------------------------- 
+  22     Used function Deployer\after not found.                                                                        
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  23     Used function Deployer\currentHost not found.                                                                  
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  24     Used function Deployer\has not found.                                                                          
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  25     Used function Deployer\info not found.                                                                         
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  26     Used function Deployer\run not found.                                                                          
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  27     Used function Deployer\runLocally not found.                                                                   
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  28     Used function Deployer\selectedHosts not found.                                                                
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  29     Used function Deployer\set not found.                                                                          
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  30     Used function Deployer\Support\parse_home_dir not found.                                                       
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  31     Used function Deployer\task not found.                                                                         
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  39     Function Deployer\set not found.                                                                               
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  41     Function Deployer\set not found.                                                                               
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  42     Function Deployer\has not found.                                                                               
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  43     Call to method read() on an unknown class League\Flysystem\Filesystem.                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  43     Function Deployer\Support\parse_home_dir not found.                                                            
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  46     Function Deployer\has not found.                                                                               
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  48     Function Deployer\runLocally not found.                                                                        
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  53     Function Deployer\runLocally not found.                                                                        
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  56     Function Deployer\task not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  62     Function Deployer\task not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  67     Function Deployer\task not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  72     Function Deployer\after not found.                                                                             
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  73     Function Deployer\after not found.                                                                             
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  81     Call to method getShortId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation.   
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  81     Call to method getUserName() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.      
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  83     Function Deployer\info not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  85     Function Deployer\currentHost not found.                                                                       
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  95     Function Deployer\run not found.                                                                               
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  98     Function Deployer\info not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  104    Method Mittwald\Deployer\Recipes\SSHUserRecipe::lookupOrCreateSSHUser() has invalid return type                
+         Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.                                                       
+         🪪  class.notFound                                                                                             
+  110    Function Deployer\info not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  117    Method Mittwald\Deployer\Recipes\SSHUserRecipe::findExistingSSHUserByName() has invalid return type            
+         Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.                                                       
+         🪪  class.notFound                                                                                             
+  117    Parameter $project of method Mittwald\Deployer\Recipes\SSHUserRecipe::findExistingSSHUserByName() has invalid  
+         type Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.                                                  
+         🪪  class.notFound                                                                                             
+  119    Call to method sSHSFTPUser() on an unknown class Mittwald\ApiClient\Generated\V2\Client.                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  122    Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.            
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  122    Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersRequest not    
+         found.                                                                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  134    Method Mittwald\Deployer\Recipes\SSHUserRecipe::assertSSHUserHasPublicKey() has invalid return type            
+         Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.                                                       
+         🪪  class.notFound                                                                                             
+  134    Parameter $sshUser of method Mittwald\Deployer\Recipes\SSHUserRecipe::assertSSHUserHasPublicKey() has invalid  
+         type Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.                                                  
+         🪪  class.notFound                                                                                             
+  139    Function Deployer\info not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  145    Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.            
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  148    Parameter $sshUser of method Mittwald\Deployer\Recipes\SSHUserRecipe::hasSSHUserPublicKey() has invalid type   
+         Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.                                                       
+         🪪  class.notFound                                                                                             
+  150    Call to method getPublicKeys() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.    
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  160    Parameter $sshUser of method Mittwald\Deployer\Recipes\SSHUserRecipe::addPublicKeyToSSHUser() has invalid      
+         type Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.                                                  
+         🪪  class.notFound                                                                                             
+  162    Call to method sSHSFTPUser() on an unknown class Mittwald\ApiClient\Generated\V2\Client.                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  164    Call to method getPublicKeys() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.    
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  165    Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey not found.                        
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  168    Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequest not  
+         found.                                                                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  169    Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.            
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  170    Call to method withPublicKeys() on an unknown class                                                            
+         Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequestBody.                    
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  170    Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequestBody  
+         not found.                                                                                                     
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  175    Method Mittwald\Deployer\Recipes\SSHUserRecipe::getSSHUser() has invalid return type                           
+         Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.                                                       
+         🪪  class.notFound                                                                                             
+  177    Call to method sSHSFTPUser() on an unknown class Mittwald\ApiClient\Generated\V2\Client.                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  179    Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserRequest not        
+         found.                                                                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  182    Method Mittwald\Deployer\Recipes\SSHUserRecipe::createSSHUser() has invalid return type                        
+         Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser.                                                       
+         🪪  class.notFound                                                                                             
+  182    Parameter $project of method Mittwald\Deployer\Recipes\SSHUserRecipe::createSSHUser() has invalid type         
+         Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.                                                       
+         🪪  class.notFound                                                                                             
+  184    Call to method sSHSFTPUser() on an unknown class Mittwald\ApiClient\Generated\V2\Client.                       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  188    Function Deployer\info not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  189    Function Deployer\info not found.                                                                              
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  191    Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2 not found.       
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  192    Instantiated class Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey not found.                        
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  195    Call to method getId() on an unknown class Mittwald\ApiClient\Generated\V2\Schemas\Project\Project.            
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  195    Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequest not  
+         found.                                                                                                         
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  195    Instantiated class Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequestBody  
+         not found.                                                                                                     
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  211    Function Deployer\selectedHosts not found.                                                                     
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  222    Function Deployer\selectedHosts not found.                                                                     
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  238    Parameter $host of method Mittwald\Deployer\Recipes\SSHUserRecipe::determineSSHPrivateKeyForHost() has         
+         invalid type Deployer\Host\Host.                                                                               
+         🪪  class.notFound                                                                                             
+  265    Function Deployer\has not found.                                                                               
+         🪪  function.notFound                                                                                          
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  266    Call to method write() on an unknown class League\Flysystem\Filesystem.                                        
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+  273    Call to method createDirectory() on an unknown class League\Flysystem\Filesystem.                              
+         🪪  class.notFound                                                                                             
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                           
+ ------ --------------------------------------------------------------------------------------------------------------- 
+
+ ------ ------------------------------------------------------------------------------------------------------- 
+  Line   Util/SSH/SSHConfigRenderer.php                                                                         
+ ------ ------------------------------------------------------------------------------------------------------- 
+  33     Parameter $fs of method Mittwald\Deployer\Util\SSH\SSHConfigRenderer::renderToFile() has invalid type  
+         League\Flysystem\Filesystem.                                                                           
+         🪪  class.notFound                                                                                     
+  35     Call to method write() on an unknown class League\Flysystem\Filesystem.                                
+         🪪  class.notFound                                                                                     
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols                                   
+ ------ ------------------------------------------------------------------------------------------------------- 
+
+ ------ ---------------------------------------------------------------------- 
+  Line   Util/functions.php                                                    
+ ------ ---------------------------------------------------------------------- 
+  5      Used function Deployer\get not found.                                 
+         🪪  function.notFound                                                 
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols  
+  17     Function Deployer\get not found.                                      
+         🪪  function.notFound                                                 
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols  
+  35     Function Deployer\get not found.                                      
+         🪪  function.notFound                                                 
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols  
+  54     Function Deployer\get not found.                                      
+         🪪  function.notFound                                                 
+         💡  Learn more at https://phpstan.org/user-guide/discovering-symbols  
+ ------ ---------------------------------------------------------------------- 
+
+ [ERROR] Found 357 errors                                                                                               
+
