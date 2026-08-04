@@ -79,16 +79,19 @@ class TestFixture
         $this->depl->config->set('current_path', 'current');
 
         $this->appInstallation = (new AppInstallation(
+            appExternalVersion: '1.0.0',
             appId: 'APP_ID',
+            appName: 'PHP',
             appVersion: new VersionStatus('1.0.0'),
+            createdAt: new \DateTime(),
             description: 'description',
             id: 'INSTALLATION_ID',
             installationPath: '/foo',
-            shortId: 'a-XXXXXX',
-            createdAt: new \DateTime(),
             linkedDatabases: [],
             phase: Phase::ready,
+            projectDescription: 'Test Project',
             projectId: 'PROJECT_ID',
+            shortId: 'a-XXXXXX',
             systemSoftware: [],
             updatePolicy: AppUpdatePolicy::none,
             userInputs: []
@@ -96,6 +99,8 @@ class TestFixture
             ->withProjectId('PROJECT_ID');
 
         $this->project = (new Project(
+            backupStorageUsageInBytes: 0,
+            backupStorageUsageInBytesSetAt: new \DateTime(),
             createdAt: new \DateTime(),
             customerId: 'CUSTOMER_ID',
             description: 'Description',
@@ -104,14 +109,13 @@ class TestFixture
             id: 'PROJECT_ID',
             isReady: true,
             readiness: DeprecatedProjectReadinessStatus::ready,
+            serverGroupId: 'SERVER_GROUP_ID',
             shortId: 'p-XXXXXX',
             status: ProjectStatus::ready,
             statusSetAt: new \DateTime(),
+            supportedFeatures: [],
             webStorageUsageInBytes: 0,
             webStorageUsageInBytesSetAt: new \DateTime(),
-            backupStorageUsageInBytes: 0,
-            backupStorageUsageInBytesSetAt: new \DateTime(),
-            supportedFeatures: []
         ))
             ->withClusterDomain('project.host')
             ->withClusterID('testing');
