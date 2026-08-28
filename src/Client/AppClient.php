@@ -9,7 +9,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwares\ListSystemso
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBody;
-use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequestBodySystemSoftwareItem;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\DesiredSystemSoftware;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftware;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion;
@@ -33,7 +33,7 @@ class AppClient
 
         foreach ($systemSoftwareConstraints as $name => $constraint) {
             [$systemSoftware, $version] = $this->resolveSystemSoftwareByConstraint($name, $constraint);
-            $systemSoftwareSpec[$systemSoftware->getId()] = (new PatchAppinstallationRequestBodySystemSoftwareItem())
+            $systemSoftwareSpec[$systemSoftware->getId()] = (new DesiredSystemSoftware())
                 ->withSystemSoftwareVersion($version->getId())
                 ->withUpdatePolicy(SystemSoftwareUpdatePolicy::patchLevel);
         }

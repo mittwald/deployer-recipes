@@ -79,7 +79,9 @@ class TestFixture
         $this->depl->config->set('current_path', 'current');
 
         $this->appInstallation = (new AppInstallation(
+            appExternalVersion: '1.0.0',
             appId: 'APP_ID',
+            appName: 'APP_NAME',
             appVersion: new VersionStatus('1.0.0'),
             description: 'description',
             id: 'INSTALLATION_ID',
@@ -88,6 +90,7 @@ class TestFixture
             createdAt: new \DateTime(),
             linkedDatabases: [],
             phase: Phase::ready,
+            projectDescription: 'Description',
             projectId: 'PROJECT_ID',
             systemSoftware: [],
             updatePolicy: AppUpdatePolicy::none,
@@ -104,6 +107,7 @@ class TestFixture
             id: 'PROJECT_ID',
             isReady: true,
             readiness: DeprecatedProjectReadinessStatus::ready,
+            serverGroupId: 'SERVER_GROUP_ID',
             shortId: 'p-XXXXXX',
             status: ProjectStatus::ready,
             statusSetAt: new \DateTime(),

@@ -19,7 +19,7 @@
   ],
   "require": {
     "php": "^8.2",
-    "mittwald/api-client": "^2.0",
+    "mittwald/api-client": "^2.1.210",
     "composer/semver": "^3.4",
     "league/flysystem": "^3.0"
   },
