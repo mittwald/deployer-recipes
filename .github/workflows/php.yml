@@ -10,6 +10,7 @@ jobs:
     strategy:
       matrix:
         php-versions: ['8.2', '8.3', '8.4', '8.5']
+        deployer-version: ['7.*', '8.*']
     runs-on: ubuntu-latest
 
     steps:
@@ -27,6 +28,9 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Install Deployer ${{ matrix.deployer-version }}
+        run: composer require --dev --with-all-dependencies --no-progress 'deployer/deployer:${{ matrix.deployer-version }}'
 
       - name: Run type checker
         run: ./vendor/bin/phpstan

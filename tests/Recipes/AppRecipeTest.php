@@ -6,10 +6,16 @@ namespace Mittwald\Deployer\Recipes;
 use GuzzleHttp\Psr7\Response;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\DeprecatedProjectReadinessStatus;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectListItem;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectListItemCustomerMeta;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectStatus;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
+use function Deployer\get;
 use function Deployer\set;
 use function PHPUnit\Framework\arrayHasKey;
 use function PHPUnit\Framework\assertThat;
@@ -153,5 +159,68 @@ class AppRecipeTest extends TestCase
             ->willReturn(new EmptyResponse(new Response()));
 
         AppRecipe::assertDependencies();
+    }
+
+    public function testProjectUUIDIsReturnedAsIsWhenProjectIDIsNotAShortID(): void
+    {
+        set('mittwald_project_id', 'PROJECT_ID');
+
+        $this->fixture->client->project->expects(never())
+            ->method('listProjects');
+
+        assertThat(get('mittwald_project_uuid'), equalTo('PROJECT_ID'));
+    }
+
+    public function testProjectUUIDIsResolvedFromShortID(): void
+    {
+        set('mittwald_project_id', 'p-XXXXXX');
+
+        $this->fixture->client->project->expects(once())
+            ->method('listProjects')
+            ->willReturn(new ListProjectsOKResponse([
+                $this->buildProjectListItem('OTHER_PROJECT_ID', 'p-YYYYYY'),
+                $this->buildProjectListItem('PROJECT_ID', 'p-XXXXXX'),
+            ]));
+
+        assertThat(get('mittwald_project_uuid'), equalTo('PROJECT_ID'));
+    }
+
+    public function testProjectUUIDResolutionFailsWhenShortIDIsUnknown(): void
+    {
+        set('mittwald_project_id', 'p-ZZZZZZ');
+
+        $this->fixture->client->project->expects(once())
+            ->method('listProjects')
+            ->willReturn(new ListProjectsOKResponse([
+                $this->buildProjectListItem('PROJECT_ID', 'p-XXXXXX'),
+            ]));
+
+        $this->expectExceptionMessage('Could not find project with id p-ZZZZZZ');
+
+        get('mittwald_project_uuid');
+    }
+
+    private function buildProjectListItem(string $id, string $shortId): ProjectListItem
+    {
+        return new ProjectListItem(
+            backupStorageUsageInBytes: 0,
+            backupStorageUsageInBytesSetAt: new \DateTime(),
+            createdAt: new \DateTime(),
+            customerId: 'CUSTOMER_ID',
+            customerMeta: new ProjectListItemCustomerMeta('CUSTOMER_ID'),
+            deletionRequested: false,
+            description: 'Description',
+            enabled: true,
+            id: $id,
+            isReady: true,
+            readiness: DeprecatedProjectReadinessStatus::ready,
+            serverGroupId: 'SERVER_GROUP_ID',
+            shortId: $shortId,
+            status: ProjectStatus::ready,
+            statusSetAt: new \DateTime(),
+            supportedFeatures: [],
+            webStorageUsageInBytes: 0,
+            webStorageUsageInBytesSetAt: new \DateTime(),
+        );
     }
 }
