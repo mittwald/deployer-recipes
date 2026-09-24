@@ -29,7 +29,7 @@ before('deploy:info', 'mittwald:setup');
  * @param ?string $hostname An optional hostname to use instead of the default one
  * @return Host|ObjectProxy
  */
-function mittwald_app(string $appId = null, ?string $hostname = null): Host|ObjectProxy {
+function mittwald_app(?string $appId = null, ?string $hostname = null): Host|ObjectProxy {
     return host($hostname ?? 'mittwald')
         ->set('mittwald_app_id', $appId ?? getenv("MITTWALD_APP_ID"));
 }
