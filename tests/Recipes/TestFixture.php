@@ -3,7 +3,6 @@
 namespace Mittwald\Deployer\Recipes;
 
 use Composer\Semver\Semver;
-use Deployer\Component\ProcessRunner\ProcessRunner;
 use Deployer\Deployer;
 use Deployer\Host\Host;
 use Deployer\Support\ObjectProxy;
@@ -38,7 +37,7 @@ use function PHPUnit\Framework\any;
 
 class TestFixture
 {
-    public ProcessRunner&MockObject $processRunner;
+    public MockObject $processRunner;
     public MockClient $client;
     public Deployer $depl;
     public Filesystem $fs;
@@ -49,7 +48,12 @@ class TestFixture
 
     public function __construct(TestCase $test)
     {
-        $this->processRunner = (new MockBuilder($test, ProcessRunner::class))->disableOriginalConstructor()->getMock();
+        // The ProcessRunner class was moved to a different namespace in Deployer 8.
+        $processRunnerClass = class_exists(\Deployer\ProcessRunner\ProcessRunner::class)
+            ? \Deployer\ProcessRunner\ProcessRunner::class
+            : \Deployer\Component\ProcessRunner\ProcessRunner::class;
+
+        $this->processRunner = (new MockBuilder($test, $processRunnerClass))->disableOriginalConstructor()->getMock();
         $test->registerMockObject($this->processRunner);
 
         $this->client = new MockClient($test);

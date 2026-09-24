@@ -9,7 +9,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsReq
 use Mittwald\ApiClient\Generated\V2\Schemas\App\AppInstallation;
 use Mittwald\Deployer\Client\AppClient;
 use Mittwald\Deployer\Util\SanityCheck;
-use function Deployer\{after, currentHost, get, info, parse, run, set, Support\starts_with, task, test};
+use function Deployer\{after, currentHost, get, info, parse, run, set, task, test};
 use function Mittwald\Deployer\get_array;
 use function Mittwald\Deployer\get_str;
 use function Mittwald\Deployer\get_str_nullable;
@@ -40,7 +40,7 @@ class AppRecipe
             $client    = BaseRecipe::getClient()->project();
             $projectId = get_str('mittwald_project_id');
 
-            if (!starts_with($projectId, "p-")) {
+            if (!str_starts_with($projectId, "p-")) {
                 return $projectId;
             }
 
