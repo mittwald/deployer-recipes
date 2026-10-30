@@ -815,16 +815,16 @@
         },
         {
             "name": "mittwald/api-client",
-            "version": "v2.2.18",
+            "version": "v2.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mittwald/api-client-php.git",
-                "reference": "609893a2da69258a00305d6b341b681eae1aec1a"
+                "reference": "274b7f2af4faf6cfe1e34f61cbf34d729a25bbe7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/609893a2da69258a00305d6b341b681eae1aec1a",
-                "reference": "609893a2da69258a00305d6b341b681eae1aec1a",
+                "url": "https://api.github.com/repos/mittwald/api-client-php/zipball/274b7f2af4faf6cfe1e34f61cbf34d729a25bbe7",
+                "reference": "274b7f2af4faf6cfe1e34f61cbf34d729a25bbe7",
                 "shasum": ""
             },
             "require": {
@@ -858,9 +858,9 @@
             "description": "Client library for the mittwald mStudio v2 API",
             "support": {
                 "issues": "https://github.com/mittwald/api-client-php/issues",
-                "source": "https://github.com/mittwald/api-client-php/tree/v2.2.18"
+                "source": "https://github.com/mittwald/api-client-php/tree/v2.2.19"
             },
-            "time": "2026-10-23T19:19:02+00:00"
+            "time": "2026-10-26T19:17:24+00:00"
         },
         {
             "name": "psr/http-client",
@@ -3419,16 +3419,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.43.0",
+            "version": "v1.43.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "4d5d331bf731e0aedbc6b2f5e61135b7b7996a72"
+                "reference": "122889ed24dc000165bcbfd77ec412f15cbdfc6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/4d5d331bf731e0aedbc6b2f5e61135b7b7996a72",
-                "reference": "4d5d331bf731e0aedbc6b2f5e61135b7b7996a72",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/122889ed24dc000165bcbfd77ec412f15cbdfc6a",
+                "reference": "122889ed24dc000165bcbfd77ec412f15cbdfc6a",
                 "shasum": ""
             },
             "require": {
@@ -3480,7 +3480,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.43.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.43.3"
             },
             "funding": [
                 {
@@ -3500,7 +3500,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-24T15:19:04+00:00"
+            "time": "2026-10-28T09:35:49+00:00"
         },
         {
             "name": "symfony/service-contracts",
